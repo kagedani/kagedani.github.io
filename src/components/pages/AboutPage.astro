@@ -1,0 +1,100 @@
+---
+import { SITE, type Lang } from '../../config';
+import { t } from '../../i18n/ui';
+import { about, experience, skills, interests, leadership, leadershipVoice } from '../../data/content';
+import Todo from '../Todo.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <h1>{tr('page.about.title')}</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="kicker">{tr('kicker.about')}</h2>
+    <div class="prose">
+      {about.map((p) => <p>{p[lang]}</p>)}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="leadership">
+  <div class="wrap">
+    <h2 class="kicker">{tr('kicker.leadership')}</h2>
+    <p class="voice">{leadershipVoice[lang]}</p>
+    <div class="lead-grid">
+      {
+        leadership.map((c) => (
+          <div class="lead-cell">
+            {c.num !== '—' && <div class="lead-num">{c.num}</div>}
+            <div class="lead-head">{c.head[lang]}</div>
+            <p class="lead-body">{c.body[lang]}</p>
+            <Todo note={c.todo} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="kicker">{tr('kicker.experience')}</h2>
+    <div class="timeline">
+      {
+        experience.map((j) => (
+          <div class="tl-item">
+            <div class="tl-date">{j.period[lang]}</div>
+            <h3 class="tl-role">{j.role[lang]}</h3>
+            <div class="tl-company">{j.company[lang]}</div>
+            <p class="tl-desc">{j.desc[lang]}</p>
+            <Todo note={j.todo} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="kicker">{tr('kicker.skills')}</h2>
+    {
+      skills.map((g) => (
+        <div class="skill-group">
+          <div class="skill-label">{g.group[lang]}</div>
+          <div class="skill-items">
+            {g.items.map((i) => (
+              <span>{i}</span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="kicker">{tr('kicker.interests')}</h2>
+    <div class="interests">
+      {
+        interests.map((i) => (
+          <div>
+            <div class="interest-name">{i.name[lang]}</div>
+            <p class="interest-body">{i.body[lang]}</p>
+            <Todo note={i.todo} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

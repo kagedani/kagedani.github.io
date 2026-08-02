@@ -1,0 +1,39 @@
+---
+import type { Lang } from '../../config';
+import { t } from '../../i18n/ui';
+import { writing } from '../../data/content';
+import Todo from '../Todo.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <h1>{tr('page.writing.title')}</h1>
+    <p class="lede">{tr('page.writing.lede')}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    {
+      writing.map((w) => {
+        const Tag = w.href ? 'a' : 'div';
+        return (
+          <>
+            <Tag class="w-row" href={w.href} target={w.href ? '_blank' : undefined} rel={w.href ? 'noopener' : undefined}>
+              <span class="w-kind">{w.kind[lang]}</span>
+              <span class="w-title">{w.title[lang]}</span>
+              <span class="w-year">{w.year}</span>
+            </Tag>
+            <Todo note={w.todo} />
+          </>
+        );
+      })
+    }
+  </div>
+</section>

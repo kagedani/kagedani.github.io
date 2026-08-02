@@ -1,0 +1,82 @@
+---
+import { SITE, BLOG_ENABLED, type Lang } from '../config';
+import { t, localePath, otherLangPath } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+const { lang, path } = Astro.props;
+const tr = t(lang);
+
+const links = [
+  { href: '/work/', key: 'nav.work' as const },
+  { href: '/writing/', key: 'nav.writing' as const },
+  { href: '/about/', key: 'nav.about' as const },
+  ...(BLOG_ENABLED ? [{ href: '/blog/', key: 'nav.blog' as const }] : []),
+  { href: '/#contact', key: 'nav.contact' as const },
+];
+
+const isCurrent = (href: string) => href === path;
+---
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href={localePath(lang, '/')} class="logo">
+      <b>{SITE.initials}</b>{SITE.name}
+    </a>
+
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        {
+          links.map((l) => (
+            <li>
+              <a href={localePath(lang, l.href)} aria-current={isCurrent(l.href) ? 'page' : undefined}>
+                {tr(l.key)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="nav-tools">
+      <div class="lang">
+        {
+          lang === 'en' ? (
+            <>
+              <span class="on">EN</span>
+              <a href={otherLangPath(lang, path)} hreflang="it">IT</a>
+            </>
+          ) : (
+            <>
+              <a href={otherLangPath(lang, path)} hreflang="en">EN</a>
+              <span class="on">IT</span>
+            </>
+          )
+        }
+      </div>
+
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label={tr('nav.theme')}>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+        </svg>
+      </button>
+
+      <button class="icon-btn burger" id="burger" type="button" aria-label={tr('nav.menu')} aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" data-open="false">
+  <div class="wrap">
+    <ul>
+      {links.map((l) => <li><a href={localePath(lang, l.href)}>{tr(l.key)}</a></li>)}
+      <li><a href={SITE.cv} download>{tr('cta.cv')}</a></li>
+    </ul>
+  </div>
+</div>
