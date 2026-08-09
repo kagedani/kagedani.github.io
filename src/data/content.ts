@@ -88,21 +88,23 @@ export const projects: Project[] = [
   },
   {
     slug: 'ml-blackbox-migration',
-    title: { en: 'ML Blackbox Migration', it: 'Migrazione ML blackbox' },
+    title: {
+      en: 'From black box to shared knowledge',
+      it: 'Dalla black box alla conoscenza condivisa',
+    },
     sector: { en: 'Banking', it: 'Banking' },
-    role: { en: 'Technical lead', it: 'Guida tecnica' },
+    role: { en: 'Data Architect & technical lead', it: 'Data Architect e guida tecnica' },
     period: '2022 — 2023',
     summary: {
-      en: 'Replaced a proprietary ML product with an open-source stack. 45 FTE of manual work automated and reallocated to higher-value activities.',
-      it: 'Sostituzione di una soluzione ML proprietaria con uno stack open source. 45 FTE di lavoro manuale automatizzati e riallocati su attività a maggior valore.',
+      en: 'Four AI use cases were sealed inside a vendor’s black box: no explainability towards risk or the regulator, no knowledge left in-house, and a per-use-case licence that grew with usage instead of value. We rebuilt all four on an open, reproducible platform the bank owns — four out of four migrated with zero downtime, model performance in line with the vendor’s, and the manual work now automated put by the bank itself at 45 FTE.',
+      it: 'Quattro use case AI erano sigillati dentro la black box di un vendor: nessuna explainability verso risk e regolatore, nessuna competenza che restasse in casa, e una licenza per use case che cresceva con l’utilizzo invece che con il valore. Li abbiamo ricostruiti tutti e quattro su una piattaforma aperta e riproducibile che la banca possiede — quattro su quattro migrati senza downtime, performance dei modelli in linea con quelle del vendor, e il lavoro manuale ora automatizzato quantificato dalla banca stessa in 45 FTE.',
     },
-    stack: ['Python', 'Open source', 'Apache Spark', 'MLflow'],
+    stack: ['Kubernetes', 'GitLab CI/CD', 'MLflow', 'Jupyter', 'Python', 'SQL Server'],
     featured: true,
-    todo: 'BLOCCANTE: chiarire il nesso dei 45 FTE. L’automazione è stata ABILITATA dalla migrazione (scala, licenze, customizzabilità) o sarebbe avvenuta comunque? Il claim va riformulato di conseguenza.',
   },
   {
-    slug: 'cicd-haier',
-    title: { en: 'CI/CD Architecture — Haier Europe', it: 'Architettura CI/CD — Haier Europe' },
+    slug: 'cicd-appliances',
+    title: { en: 'CI/CD Architecture', it: 'Architettura CI/CD' },
     sector: { en: 'Appliances', it: 'Appliances' },
     role: { en: 'DevOps architecture', it: 'Architettura DevOps' },
     summary: {
@@ -111,7 +113,7 @@ export const projects: Project[] = [
     },
     stack: [],
     featured: false,
-    todo: 'Testo breve (2 paragrafi) e stack. Haier Europe è citabile: compare fra le Success Stories pubbliche di Quantyca.',
+    todo: 'Testo breve (2 paragrafi) e stack. Nessun nome cliente: solo il settore.',
   },
   {
     slug: 'brewery-us',
