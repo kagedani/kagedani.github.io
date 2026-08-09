@@ -514,6 +514,17 @@ h1 em {
   content: ' ·';
   color: var(--faint);
 }
+.card-more {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.25rem;
+}
 .pill-ongoing {
   font-family: var(--mono);
   font-size: 0.6rem;
@@ -721,6 +732,155 @@ h1 em {
   letter-spacing: -0.02em;
   margin: 2.5rem 0 1rem;
   color: var(--text);
+}
+.prose > h2:first-child {
+  margin-top: 0;
+}
+.prose h3 {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin: 2.25rem 0 0.85rem;
+}
+.prose ul {
+  margin: 0 0 1.35rem 0;
+  padding-left: 1.1rem;
+  list-style: none;
+}
+.prose li {
+  position: relative;
+  color: var(--muted);
+  font-size: 1.01rem;
+  margin-bottom: 0.7rem;
+}
+.prose li::before {
+  content: '';
+  position: absolute;
+  left: -1.1rem;
+  top: 0.62em;
+  width: 5px;
+  height: 1px;
+  background: var(--accent);
+}
+.prose li strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* The trade-off callout. A decision with no admitted cost is a press release,
+   so it gets its own visual weight rather than hiding inside a paragraph. */
+.prose blockquote {
+  margin: 1.35rem 0 2rem;
+  padding: 0.9rem 1.15rem;
+  border-left: 2px solid var(--accent);
+  background: var(--accent-bg);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.prose blockquote p {
+  margin: 0;
+  font-size: 0.94rem;
+  color: var(--text);
+}
+.prose blockquote strong {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Section headings inside a case study read as chapters, so they get a rule. */
+.study h2 {
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ------------------------------------------------------------- diagrams */
+
+/* Inline SVG so the diagram reads CSS variables and works in both themes.
+   Wide content scrolls inside its own box; the page never scrolls sideways. */
+.diagram {
+  margin: 1.75rem 0 2.5rem;
+  max-width: none;
+  overflow-x: auto;
+}
+.diagram svg {
+  display: block;
+  width: 100%;
+  min-width: 620px;
+  height: auto;
+}
+.diagram figcaption {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  line-height: 1.6;
+  color: var(--faint);
+  margin-top: 0.9rem;
+  padding-left: 0.1rem;
+}
+/* A case study's prose column is narrow; a diagram may use the full width. */
+.study .diagram {
+  width: min(100%, 62rem);
+}
+
+.dg-band {
+  fill: var(--surface-2);
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.dg-box {
+  fill: var(--surface);
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+.dg-box-a {
+  fill: var(--accent-bg);
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+.dg-l {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.11em;
+  fill: var(--faint);
+  text-anchor: end;
+}
+.dg-s {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  fill: var(--faint);
+}
+.dg-t {
+  font-family: var(--sans);
+  font-size: 11px;
+  fill: var(--text);
+  text-anchor: middle;
+}
+.dg-t2 {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  fill: var(--text);
+}
+.dg-p {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.09em;
+  fill: var(--accent);
+}
+.dg-arrow {
+  stroke: var(--accent);
+  stroke-width: 1.2;
+  fill: none;
+}
+.dg-head {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.4;
 }
 
 /* -------------------------------------------------------------- contact */
