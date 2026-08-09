@@ -18,4 +18,15 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+/**
+ * Long-form case study bodies, one file per project per language:
+ *   src/content/case-studies/<project-slug>.<lang>.md
+ * Card metadata stays in src/data/content.ts; only the narrative lives here,
+ * because long prose is miserable to author inside a TypeScript string.
+ * A project with no file here simply has no detail page and no card link.
+ */
+const caseStudies = defineCollection({
+  loader: glob({ pattern: ['**/*.md', '!**/README.md'], base: './src/content/case-studies' }),
+});
+
+export const collections = { blog, caseStudies };

@@ -1,8 +1,9 @@
 ---
 import type { Lang } from '../../config';
-import { t } from '../../i18n/ui';
+import { t, localePath } from '../../i18n/ui';
 import { projects } from '../../data/content';
 import ProjectCard from '../ProjectCard.astro';
+import { slugsWithStudy } from '../../lib/studies';
 
 interface Props {
   lang: Lang;
@@ -12,6 +13,10 @@ const tr = t(lang);
 
 const featured = projects.filter((p) => p.featured);
 const others = projects.filter((p) => !p.featured);
+
+const withStudy = await slugsWithStudy(lang);
+const studyHref = (slug: string) =>
+  withStudy.has(slug) ? localePath(lang, `/work/${slug}/`) : undefined;
 ---
 
 <section class="page-head">
@@ -25,7 +30,7 @@ const others = projects.filter((p) => !p.featured);
   <div class="wrap">
     <h2 class="kicker">{tr('kicker.work')}</h2>
     <div class="grid">
-      {featured.map((p) => <ProjectCard project={p} lang={lang} wide />)}
+      {featured.map((p) => <ProjectCard project={p} lang={lang} wide href={studyHref(p.slug)} />)}
     </div>
   </div>
 </section>
@@ -34,7 +39,7 @@ const others = projects.filter((p) => !p.featured);
   <div class="wrap">
     <h2 class="kicker">{lang === 'it' ? 'Anche' : 'Also'}</h2>
     <div class="grid">
-      {others.map((p) => <ProjectCard project={p} lang={lang} />)}
+      {others.map((p) => <ProjectCard project={p} lang={lang} href={studyHref(p.slug)} />)}
     </div>
   </div>
 </section>

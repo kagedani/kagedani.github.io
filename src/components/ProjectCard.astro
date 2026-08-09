@@ -8,12 +8,17 @@ interface Props {
   project: Project;
   lang: Lang;
   wide?: boolean;
+  /** Set only when a case study exists for this project in this language. */
+  href?: string;
 }
-const { project: p, lang, wide = false } = Astro.props;
+const { project: p, lang, wide = false, href } = Astro.props;
 const tr = t(lang);
+
+// A card is only clickable when there is something to click through to.
+const Tag = href ? 'a' : 'article';
 ---
 
-<article class:list={['card', wide && 'wide']}>
+<Tag class:list={['card', wide && 'wide']} href={href}>
   <div class="card-meta">
     <span>{p.sector[lang]}</span>·<span>{p.role[lang]}</span>
     {p.period && <>·<span>{p.period}</span></>}
@@ -22,6 +27,17 @@ const tr = t(lang);
 
   <h3 class="card-title">{p.title[lang]}</h3>
   <p class="card-desc">{p.summary[lang]}</p>
+
+  {
+    href && (
+      <span class="card-more">
+        {tr('cta.more')}
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </span>
+    )
+  }
 
   {
     p.stack.length > 0 && (
@@ -34,4 +50,4 @@ const tr = t(lang);
   }
 
   <Todo note={p.todo} />
-</article>
+</Tag>
