@@ -6,6 +6,6 @@ dist/
 .env
 .env.production
 
-# Planning documents are scaffolding for the work, not part of what ships.
-# Kept on disk, deliberately out of the repository.
-docs/redesign-plan.md
+# docs/ is versioned but never published: Astro only builds src/, so a file here
+# ships nothing. "Must not be published" and "must not be versioned" are not the
+# same thing — a site touched three times a year needs the record of *why*.
