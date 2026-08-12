@@ -85,10 +85,10 @@ const studyHref = (slug: string) =>
       topWriting.map((w) => {
         const Tag = w.href ? 'a' : 'div';
         return (
-          <Tag class="w-row" href={w.href} target={w.href ? '_blank' : undefined} rel={w.href ? 'noopener' : undefined}>
-            <span class="w-kind">{w.kind[lang]}</span>
-            <span class="w-title">{w.title[lang]}</span>
-            <span class="w-year">{w.year}</span>
+          <Tag class="wc-row" href={w.href} target={w.href ? '_blank' : undefined} rel={w.href ? 'noopener' : undefined}>
+            <span class="wc-kind">{w.kind[lang]}</span>
+            <span class="wc-title">{w.title[lang]}</span>
+            <span class="wc-meta">{w.year}</span>
           </Tag>
         );
       })

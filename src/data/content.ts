@@ -65,26 +65,25 @@ export const projects: Project[] = [
     role: { en: 'Architecture lead', it: 'Referente architetturale' },
     period: '2025 — now',
     summary: {
-      en: 'Architecture lead for Data Mesh adoption at a European energy utility, with 100+ users on the Experience Plane. Data product discovery, observability and control plane — and the 3–5 year data strategy that decides what gets built next.',
-      it: 'Referente architetturale per l’adozione del Data Mesh in una utility energetica europea, con oltre 100 utenti sull’Experience Plane. Discovery dei data product, observability e control plane — e la data strategy a 3–5 anni che decide cosa costruire dopo.',
+      en: 'Architecture lead for Data Mesh adoption at a European energy utility, with 100+ users on the Experience Plane. Data product discovery, observability and control plane — and, since 2026, three AI agents in production that query the information estate, draft business ontology and propose data quality controls over MCP.',
+      it: 'Referente architetturale per l’adozione del Data Mesh in una utility energetica europea, con oltre 100 utenti sull’Experience Plane. Discovery dei data product, observability e control plane — e, dal 2026, tre agenti AI in produzione che interrogano il patrimonio informativo, redigono l’ontologia di business e propongono controlli di data quality via MCP.',
     },
-    stack: ['Azure', 'ADLS Gen2', 'AKS', 'PostgreSQL', 'OpenDataMesh', 'Azure Purview', 'Great Expectations', 'OpenTelemetry', 'Grafana', 'Blindata'],
+    stack: ['Azure', 'ADLS Gen2', 'AKS', 'PostgreSQL', 'OpenDataMesh', 'Azure Purview', 'Blindata', 'Great Expectations', 'OpenTelemetry', 'Grafana', 'MCP', 'A2A'],
     featured: true,
-    todo: 'Case study lungo: contesto, problema, UNA decisione architetturale con il suo trade-off, ruolo ed esito.',
   },
   {
     slug: 'mlops-banking',
     title: { en: 'MLOps Platform', it: 'Piattaforma MLOps' },
     sector: { en: 'Banking', it: 'Banking' },
-    role: { en: 'Founding architect', it: 'Architetto fondatore' },
+    role: { en: 'Platform architect', it: 'Architetto di piattaforma' },
     period: '2022 — 2025',
     summary: {
-      en: 'Founded and grew a platform that lets 100+ data scientists build and ship advanced analytics models on their own.',
-      it: 'Fondazione ed evoluzione di una piattaforma che permette a oltre 100 data scientist di sviluppare e rilasciare modelli di analytics avanzata in autonomia.',
+      en: 'Took over a data science platform serving 100+ data scientists and made it survivable: HTTPS everywhere, a test environment that did not exist, four major versions of unpatched GitLab, high-availability hardening and online model serving.',
+      it: 'Presa in carico di una piattaforma di data science usata da oltre 100 data scientist e resa sostenibile: HTTPS ovunque, un ambiente di test che non c’era, quattro major di GitLab non aggiornate, hardening in alta disponibilità e model serving online.',
     },
-    stack: ['Kubernetes', 'Docker', 'MLflow', 'JupyterHub', 'AWS', 'Apache Spark'],
+    stack: ['Kubernetes', 'JupyterHub', 'MLflow', 'GitLab', 'ELK', 'Docker'],
     featured: true,
-    todo: 'Case study lungo. Verificare se il cliente è citabile: Quantyca cita pubblicamente BNL con un "Data Science Lab".',
+    todo: 'Case study lungo. NON fondata da lui: il CV dice "maintained and evolved". Vedi inventario progetti.',
   },
   {
     slug: 'ml-blackbox-migration',
@@ -180,14 +179,70 @@ export const leadership: LeaderCell[] = [
 
 /* --------------------------------------------------------------- writing */
 
-export type WritingItem = { kind: L; title: L; year: string; href?: string; todo?: Todo };
+/**
+ * A published artifact. `venue` and `year` are separate fields on purpose: the
+ * old single `year: string` held '2023', 'Medium', 'Wanter' and '—' by turns,
+ * so the column read as noise rather than as information.
+ *
+ * Titles are NOT translated — a citation reproduces what was published, so the
+ * Italian talk title stays Italian on the English page. The `venue` carries the
+ * signal for an international reader, and that one is written in English.
+ *
+ * Client names are allowed here and nowhere else: inside the citation of an
+ * artifact that is already public, the name is the publisher's act, not ours.
+ * See docs/redesign-plan.md — "Naming clienti".
+ */
+export type WritingItem = {
+  kind: L;
+  title: L;
+  /** Where it was published. Omitted when the year alone says enough. */
+  venue?: L;
+  year: string;
+  /** One line. Without it the row is three fields and no substance. */
+  description: L;
+  href?: string;
+  /** Extra platforms, rendered after the row. The podcast lives in two places. */
+  links?: { label: string; href: string }[];
+  /** Exactly one item should carry this — it gets the block treatment on top. */
+  featured?: boolean;
+  todo?: Todo;
+};
 
 export const writing: WritingItem[] = [
   {
+    kind: { en: 'Talk', it: 'Talk' },
+    title: {
+      en: 'Mainframe offloading e stream processing a supporto dei canali digitali di BNL',
+      it: 'Mainframe offloading e stream processing a supporto dei canali digitali di BNL',
+    },
+    venue: {
+      en: 'Confluent Data in Motion · Milan',
+      it: 'Confluent Data in Motion · Milano',
+    },
+    year: '2023',
+    description: {
+      en: 'With Giampiero Santesarti, BNL BNP Paribas. How a bank moves digital-channel data off the mainframe in real time — change data capture into Confluent Kafka — without stopping the mainframe.',
+      it: 'Con Giampiero Santesarti, BNL BNP Paribas. Come una banca porta fuori dal mainframe i dati dei canali digitali in tempo reale — change data capture verso Confluent Kafka — senza fermare il mainframe.',
+    },
+    href: 'https://www.quantyca.it/event/quantyca-at-data-in-motion-2023/',
+    featured: true,
+  },
+  {
     kind: { en: 'Podcast', it: 'Podcast' },
-    title: { en: 'Quantyca podcast — YouTube & Spotify', it: 'Podcast Quantyca — YouTube e Spotify' },
-    year: '—',
-    todo: 'Link YouTube e Spotify, titolo reale dell’episodio, data.',
+    title: {
+      en: 'Data Quality: tra Intelligenza Artificiale ed Errori Reali',
+      it: 'Data Quality: tra Intelligenza Artificiale ed Errori Reali',
+    },
+    venue: { en: 'Quantyca', it: 'Quantyca' },
+    year: '2025',
+    description: {
+      en: 'What breaks when data quality meets machine learning, and why the errors that matter are rarely the ones the model reports.',
+      it: 'Cosa si rompe quando la data quality incontra il machine learning, e perché gli errori che contano raramente sono quelli che il modello segnala.',
+    },
+    href: 'https://www.youtube.com/watch?v=P8KBWfO05U4&list=PLySTv8bXDGW73UOatnq6fDMczI-wg9sVL&index=8',
+    links: [
+      { label: 'Spotify', href: 'https://open.spotify.com/episode/6zJdfuZI4EHXnGXXq10mWd' },
+    ],
   },
   {
     kind: { en: 'Article', it: 'Articolo' },
@@ -195,32 +250,41 @@ export const writing: WritingItem[] = [
       en: "Govern your data: it's a tough job, but someone has to do it",
       it: "Govern your data: it's a tough job, but someone has to do it",
     },
-    year: 'Medium',
+    venue: { en: 'Medium — Quantyca', it: 'Medium — Quantyca' },
+    year: '2020',
+    description: {
+      en: 'Where data governance actually starts: business glossary, data catalog, and a prototype that populates the catalog automatically. Written six years and one job title ago.',
+      it: 'Da dove comincia davvero la data governance: business glossary, data catalog, e un prototipo che popola il catalogo in automatico. Scritto sei anni e un ruolo fa.',
+    },
     href: 'https://medium.com/quantyca/govern-your-data-its-a-tough-job-but-someone-has-to-do-it-8f4256d22b96',
   },
   {
-    kind: { en: 'Course', it: 'Formazione' },
-    title: {
-      en: 'Path to Data Architect — Automation & Infrastructure',
-      it: 'Path to Data Architect — Automation & Infrastructure',
-    },
-    year: '2025',
-    href: 'https://github.com/kagedani/path-to-data-architect-ep-automation-and-infrastructure',
-  },
-  {
     kind: { en: 'Interview', it: 'Intervista' },
-    title: { en: 'What a Data Engineer actually does', it: 'Che cosa fa davvero un Data Engineer' },
-    year: 'Wanter',
+    title: {
+      en: 'What a Data Engineer actually does',
+      it: 'Che cosa fa davvero un Data Engineer',
+    },
+    venue: { en: 'Wanter — a Valore D project', it: 'Wanter — progetto di Valore D' },
+    year: '2022',
+    description: {
+      en: 'Video interview on the Data Engineer profession, for a career-guidance platform aimed at people choosing what to study.',
+      it: 'Intervista video sul mestiere di Data Engineer, per una piattaforma di orientamento rivolta a chi deve scegliere cosa studiare.',
+    },
     href: 'https://wanter.valored.it/it/professioni/data-engineer',
   },
   {
     kind: { en: 'Thesis', it: 'Tesi' },
     title: {
-      en: 'A multi-sensor approach to people counting and flow estimation in Smart Campus',
-      it: 'A multi-sensor approach to people counting and flow estimation in Smart Campus',
+      en: 'A multi-sensor approach to people counting and flow estimation in smart campus',
+      it: 'A multi-sensor approach to people counting and flow estimation in smart campus',
     },
-    year: '2019',
-    todo: 'Link al PDF o alla scheda POLITesi, se pubblica.',
+    venue: { en: 'Politecnico di Milano', it: 'Politecnico di Milano' },
+    year: '2018',
+    description: {
+      en: 'With Andrea Ganassa, advisor Alessandro Redondi. A multi-sensor IoT device for people counting, 95–97% accurate, plus origin–destination flow estimation across a campus.',
+      it: 'Con Andrea Ganassa, relatore Alessandro Redondi. Un dispositivo IoT multi-sensore per il conteggio delle persone, accurato al 95–97%, più la stima dei flussi origine–destinazione su un campus.',
+    },
+    href: 'https://hdl.handle.net/10589/144682',
   },
 ];
 
@@ -234,10 +298,9 @@ export const experience: Job[] = [
     role: { en: 'Solutions Architect', it: 'Solutions Architect' },
     company: { en: 'Quantyca — Data@Core, Monza', it: 'Quantyca — Data@Core, Monza' },
     desc: {
-      en: 'Architecture lead for Data Mesh adoption in Energy (100+ users on the Experience Plane): data product discovery, observability, control plane. Owner of the client’s data strategy on a 3–5 year horizon. Head of Quantyca’s international team.',
-      it: 'Referente architetturale per l’adozione del Data Mesh in ambito Energy (oltre 100 utenti sull’Experience Plane): discovery dei data product, observability, control plane. Responsabile della data strategy del cliente su orizzonte 3–5 anni. Responsabile del team internazionale di Quantyca.',
+      en: 'Architecture lead for Data Mesh adoption in Energy (100+ users on the Experience Plane): data product discovery, observability, control plane. Owner of the client’s data strategy on a 3–5 year horizon. Since March 2026, also head of Quantyca’s international team, alongside the architecture work rather than in place of it.',
+      it: 'Referente architetturale per l’adozione del Data Mesh in ambito Energy (oltre 100 utenti sull’Experience Plane): discovery dei data product, observability, control plane. Responsabile della data strategy del cliente su orizzonte 3–5 anni. Da marzo 2026 anche responsabile del team internazionale di Quantyca, in parallelo al lavoro architetturale e non al suo posto.',
     },
-    todo: 'Verificare la data di inizio come responsabile del team internazionale — va separata dal ruolo di Solutions Architect se è successiva.',
   },
   {
     period: { en: 'March 2023 — June 2025', it: 'Marzo 2023 — Giugno 2025' },
@@ -309,7 +372,7 @@ export const about: L[] = [
 export const skills: { group: L; items: string[] }[] = [
   {
     group: { en: 'Data architecture', it: 'Architettura dati' },
-    items: ['Data Mesh', 'Data Products', 'Data Strategy', 'Data Governance', 'Data Catalog', 'OpenDataMesh', 'Blindata', 'Azure Purview'],
+    items: ['Data Mesh', 'Data Products', 'Data Strategy', 'Data Governance', 'Data Catalog', 'OpenDataMesh', 'Blindata', 'Azure Purview', 'Lean Value Tree', 'EDGE'],
   },
   {
     group: { en: 'Cloud & infrastructure', it: 'Cloud e infrastruttura' },
@@ -335,10 +398,9 @@ export const interests: { name: L; body: L; todo?: Todo }[] = [
   {
     name: { en: 'Basketball', it: 'Basket' },
     body: {
-      en: 'Nine years on court, from 11 to 19 — then one more season as an adult, cut short by covid.',
-      it: 'Nove anni in campo, dagli 11 ai 19 — poi un’altra stagione da adulto, interrotta dal covid.',
+      en: 'Nine years on court, from 11 to 19 — then one more season as an adult, in 2019/20, which covid ended early.',
+      it: 'Nove anni in campo, dagli 11 ai 19 — poi un’altra stagione da adulto, la 2019/20, chiusa in anticipo dal covid.',
     },
-    todo: 'Verificare l’annata: il covid ha fermato i campionati nella 2019/20, non nella 2018/19.',
   },
   {
     name: { en: 'Inter', it: 'Inter' },

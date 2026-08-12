@@ -37,9 +37,9 @@ export const ui = {
     'label.todo': 'to be written',
 
     'page.work.title': 'Work',
-    'page.work.lede': 'Five engagements worth writing about. Client names appear only where Quantyca already names them publicly.',
+    'page.work.lede': 'Five engagements worth writing about. No client is named — the sector is as specific as it gets, and that is deliberate.',
     'page.writing.title': 'Writing & Talks',
-    'page.writing.lede': 'Articles, a podcast, an interview, teaching material.',
+    'page.writing.lede': 'A conference talk, a podcast, an article, an interview, a thesis.',
     'page.about.title': 'About',
 
     'footer.built': 'Built with Astro',
@@ -79,9 +79,9 @@ export const ui = {
     'label.todo': 'da scrivere',
 
     'page.work.title': 'Progetti',
-    'page.work.lede': 'Cinque progetti che vale la pena raccontare. I nomi dei clienti compaiono solo dove Quantyca li cita già pubblicamente.',
+    'page.work.lede': 'Cinque progetti che vale la pena raccontare. Nessun cliente è nominato — il settore è il massimo del dettaglio, ed è una scelta.',
     'page.writing.title': 'Pubblicazioni e talk',
-    'page.writing.lede': 'Articoli, un podcast, un’intervista, materiale didattico.',
+    'page.writing.lede': 'Un talk a conferenza, un podcast, un articolo, un’intervista, una tesi.',
     'page.about.title': 'Chi sono',
 
     'footer.built': 'Costruito con Astro',
