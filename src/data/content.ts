@@ -121,12 +121,12 @@ export const projects: Project[] = [
     sector: { en: 'Appliances', it: 'Appliances' },
     role: { en: 'DevOps architecture', it: 'Architettura DevOps' },
     summary: {
-      en: 'CI/CD and DevOps architecture designed and set up from scratch.',
-      it: 'Architettura CI/CD e DevOps progettata e messa in piedi da zero.',
+      en: 'An AWS data platform founded on CI/CD and infrastructure as code, with access centralised through Lake Formation and tag-based access control. The interesting constraint was that several suppliers build on it: you cannot code-review everyone, so the standards have to be enforced by something other than attention. Development guidelines went out to every supplier, and a data quality framework closed the loop with deployment gates — a release does not pass unless it meets the requirements, naming standards included. I was the technical reference across the workstreams, on integration patterns for legacy offloading and data modelling.',
+      it: 'Una piattaforma dati su AWS fondata su CI/CD e infrastructure as code, con gli accessi centralizzati tramite Lake Formation e controllo basato su tag. Il vincolo interessante è che a costruirci sopra sono più fornitori: non puoi fare la review del codice di tutti, quindi gli standard vanno fatti rispettare da qualcosa che non sia l’attenzione. Le linee guida di sviluppo sono andate a ogni fornitore del cliente, e un framework di data quality ha chiuso il cerchio con dei deployment gate — un rilascio non passa se non soddisfa i requisiti, nomenclatura compresa. Ero il riferimento tecnico sui filoni progettuali, sui pattern di integrazione per l’off-loading da sistemi legacy e sulla modellazione dei dati.',
     },
-    stack: [],
+    stack: ['AWS', 'AWS Lake Formation'],
     featured: false,
-    todo: 'Testo breve (2 paragrafi) e stack. Nessun nome cliente: solo il settore.',
+    todo: 'Stack incompleto: con quali strumenti CI/CD e IaC su AWS.',
   },
   {
     slug: 'brewery-us',
@@ -321,8 +321,8 @@ export const experience: Job[] = [
     role: { en: 'Solutions Architect', it: 'Solutions Architect' },
     company: { en: 'Quantyca — Data@Core, Monza', it: 'Quantyca — Data@Core, Monza' },
     desc: {
-      en: 'Architecture lead for Data Mesh adoption in Energy (100+ users on the Experience Plane): data product discovery, observability, control plane. Owner of the client’s data strategy on a 3–5 year horizon. Since March 2026, also head of Quantyca’s international team, alongside the architecture work rather than in place of it.',
-      it: 'Referente architetturale per l’adozione del Data Mesh in ambito Energy (oltre 100 utenti sull’Experience Plane): discovery dei data product, observability, control plane. Responsabile della data strategy del cliente su orizzonte 3–5 anni. Da marzo 2026 anche responsabile del team internazionale di Quantyca, in parallelo al lavoro architetturale e non al suo posto.',
+      en: 'Architecture lead for Data Mesh adoption in Energy (100+ users on the Experience Plane): data product discovery, observability, control plane. Owner of the client’s data strategy on a 3–5 year horizon. In Insurance, data strategy advisor: the Lean Value Tree, the metrics of success it is measured against, and the federated governance body that keeps it moving — plus technical coordination of two teams, ten developers between them. Since March 2026, also head of Quantyca’s international team, alongside the architecture work rather than in place of it.',
+      it: 'Referente architetturale per l’adozione del Data Mesh in ambito Energy (oltre 100 utenti sull’Experience Plane): discovery dei data product, observability, control plane. Responsabile della data strategy del cliente su orizzonte 3–5 anni. In ambito Insurance, advisor di data strategy: il Lean Value Tree, le metriche di successo con cui si misura, e la Federated Governance Community che lo tiene in movimento — più il coordinamento tecnico di due team, dieci sviluppatori in tutto. Da marzo 2026 anche responsabile del team internazionale di Quantyca, in parallelo al lavoro architetturale e non al suo posto.',
     },
   },
   {
@@ -357,8 +357,8 @@ export const experience: Job[] = [
     role: { en: 'Junior Data Engineer', it: 'Junior Data Engineer' },
     company: { en: 'Quantyca — Data@Core', it: 'Quantyca — Data@Core' },
     desc: {
-      en: 'Full-stack development on a SaaS platform (Spring Boot + React).',
-      it: 'Sviluppo fullstack su piattaforma SaaS (Spring Boot + React).',
+      en: 'Full-stack development on a SaaS data governance platform (Spring Boot + React). Before that, ETL flows and data models in Retail, and a Python crawler that filled a data catalog in Online Travel.',
+      it: 'Sviluppo fullstack su una piattaforma SaaS di data governance (Spring Boot + React). Prima ancora, flussi ETL e data model in ambito Retail, e un crawler Python che popolava un data catalog in ambito Online Travel.',
     },
   },
   {
@@ -366,8 +366,8 @@ export const experience: Job[] = [
     role: { en: 'Research Fellow', it: 'Assegnista di ricerca' },
     company: { en: 'IoTLab, DEIB — Politecnico di Milano', it: 'IoTLab, DEIB — Politecnico di Milano' },
     desc: {
-      en: 'IoT research applied to Smart Campus.',
-      it: 'Ricerca sull’IoT applicato agli Smart Campus.',
+      en: 'Applied IoT research at the DEIB lab, on industrial and consumer devices.',
+      it: 'Ricerca applicata sull’IoT al laboratorio DEIB, su dispositivi industriali e di consumo.',
     },
   },
 ];
