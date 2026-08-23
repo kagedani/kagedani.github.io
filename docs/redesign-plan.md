@@ -280,6 +280,46 @@ Poi il mentoring junior, che dichiarano tutti.
 Forma: 3–4 blocchi in prosa breve, ognuno con un numero dentro. Non bullet, non card.
 Più una riga sola in home.
 
+**Numeri chiusi il 2026-08-23.** Tre celle su quattro stampavano un trattino in
+produzione. Le quattro cifre vigenti, e il ragionamento dietro ognuna, perché la
+scelta del numero è stata più delicata della sua raccolta:
+
+| Cella | Numero | Perché quello |
+|---|---|---|
+| Colloqui tecnici | **30** | Da luglio 2024: 9 + 9 + 6 + 6 su quattro finestre. Circa metà non passa (16 su 30). Il tasso vale più del totale: dice che il colloquio è un filtro, non una formalità. Composizione: 7 con esperienza, il resto neolaureati |
+| Architetti in formazione | **5** | È il numero del percorso aziendale, non di persone cresciute da lui |
+| Punto di riferimento | **20** | Picco simultaneo su progetti in parallelo. Oggi 8, su due clienti |
+| Valutazioni | **23** | Persone **diverse** dal 2022, non la somma dei cicli |
+
+Due correzioni di merito, entrambe dell'autore, entrambe migliori della premessa:
+
+- **La cella "Architetti cresciuti" affermava una cosa mai dichiarata.** Il materiale
+  reale è un altro: Quantyca sta formando cinque persone per il ruolo di data
+  architect e lui è tra chi ha **progettato il percorso** (sessione teorica +
+  pratica); inoltre da due anni è **uno dei tre architetti** — con tre delivery
+  manager — che tengono la formazione interna delle figure junior. "Uno dei tre in
+  azienda" è più raro e più verificabile di "ho fatto mentoring". Cella
+  riformulata in *Architects in training*, che non promette persone già arrivate.
+- **"20+ team guidati" non era mai stato detto.** Il fatto è: essere arrivato a
+  fare da riferimento a 20 persone **contemporaneamente**, distribuite su progetti
+  diversi. Corretto anche nella bio, che diceva "ho guidato team fino a 20 persone".
+
+**La somma dei cicli di valutazione non si usa.** 6 + 3 + 4 + 6 + 14 + 10 + 10 = 53
+sarebbe falso: sono in gran parte le stesse persone che tornano ciclo dopo ciclo. Il
+numero pubblicato è quello delle persone distinte, **23**, dato dall'autore.
+Cronologia dei cicli, semestrali fino al 2024 e poi annuali: giu 2022 = 6, gen 2023 = 3,
+giu 2023 = 4, gen 2024 = 6, giu 2024 = 14, giu 2025 = 10, giu 2026 = 10.
+
+**L'episodio di promozione** vive in prosa sotto la griglia (`leadershipStory`),
+**solo su `/about`**: non entra in una cella 2×2, e la home resta un'anteprima da
+40 secondi. Una persona passata per anni di progetto in progetto arriva nel suo team
+sul programma data mesh in ambito energia, si prende responsabilità crescenti e si
+presenta al comitato di promozione, che la promuove a Senior Data Engineer. Il merito
+resta alla persona — "con un percorso suo" — perché l'autore non ha dichiarato di
+aver messo la faccia al comitato, e non glielo attribuiamo noi. Il nome del cliente
+sta fuori dalla prosa: la regola sui nomi vale anche quando è l'autore a scriverlo
+in chat.
+
 ### Tech skills
 
 - **Restano** come superficie keyword densa (recruiter e agenti matchano su "Python",
@@ -491,9 +531,9 @@ l'id diventa `data-mesh-energyen` e le rotte non vengono generate — silenziosa
       piattaforma **non è stata fondata da lui** (il CV dice "maintained and
       evolved"), e il testo della card è già stato riscritto di conseguenza
 - [ ] 2 case study brevi: CI/CD Appliances, Brewery US
-- [ ] Numeri leadership: colloqui condotti, persone seguite, architetti cresciuti,
-      persone valutate
-- [ ] L'episodio di promozione specifico
+- [x] Numeri leadership: colloqui condotti, persone seguite, architetti cresciuti,
+      persone valutate — chiusi il 2026-08-23, vedi sotto
+- [x] L'episodio di promozione specifico
 - [ ] CV, a sito quasi pronto → poi tradotto e caricato in EN
 
 Da chiedere sempre, su ogni case study: **cosa è andato male.** Non viene mai
