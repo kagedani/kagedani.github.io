@@ -430,7 +430,7 @@ se lo modifichi, modificalo in due posti.
 | Data Mesh / Energy | ✅ | ✅ | — | ✅ |
 | ML Blackbox / Banking | ✅ | ✅ | ✅ | ✅ |
 | MLOps / Banking | ✅ | ✅ | — | ✅ |
-| CI/CD Appliances (breve) | — | — | — | n/a |
+| CI/CD Appliances (breve) | ✅ | ✅ | — | n/a |
 | Brewery US (breve) | — | — | — | n/a |
 
 Lo **scheletro reale è a 7 sezioni**, non 5: `Context`, `The problem`,
@@ -534,9 +534,8 @@ card. Corrette le voci in `taking over` / `presa in carico` e
 `upkeep and evolution` / `manutenzione ed evoluzione`, allineate al CV, **riviste
 riga per riga con l'autore prima di toccarle**, su sua richiesta esplicita.
 
-Rimane da verificare **cosa dice LinkedIn**: se lì c'è ancora "fondazione", la
-correzione va fatta anche lì, altrimenti si chiude una discrepanza aprendone una
-nuova. Domanda posta, non ancora risposta.
+**LinkedIn era già corretto** — verificato dall'autore. La discrepanza era solo
+fra il sito e sé stesso.
 
 ### Cosa aveva ereditato
 
@@ -618,11 +617,45 @@ I case study stanno in `src/content/case-studies/<lang>/<slug>.md`, una cartella
 lingua. **Mai** `<slug>.<lang>.md`: Astro slugifica gli id e si mangia il punto,
 l'id diventa `data-mesh-energyen` e le rotte non vengono generate — silenziosamente.
 
+## Riscontro col CV dettagliato — 2026-08-23
+
+L'autore ha fornito l'estratto dettagliato del CV aziendale (una voce per
+coinvolgimento e ruolo). **Serve a verificare, non ad arricchire**, e la regola
+esce rafforzata: una timeline che diventa un curriculum toglie peso alle tre
+righe che contano, e `/about` come biglietto da visita è l'obiettivo che il piano
+esclude esplicitamente. Il grosso del CV resta fuori dal sito, per scelta.
+
+Tre interventi soli, tutti approvati dall'autore:
+
+- **Insurance aggiunto alla voce corrente.** Mancava del tutto: advisor di data
+  strategy, Lean Value Tree, metriche di successo, Federated Governance Community,
+  coordinamento tecnico di due team per dieci sviluppatori. Lavoro di livello
+  portfolio e in corso adesso.
+- **Voce Junior allargata**: diceva solo "sviluppo fullstack su piattaforma SaaS",
+  che è la fetta meno rappresentativa di quei diciotto mesi. Aggiunti ETL e data
+  model in Retail e il crawler Python per il data catalog in Online Travel.
+- **Politecnico**: la voce dichiarava *"ricerca sull'IoT applicato agli Smart
+  Campus"* e **Smart Campus non compare da nessuna parte nel CV**. L'autore ha
+  deciso di **non ampliare** quella voce, quindi non è stata ampliata: è stata resa
+  vera invece che specifica e sbagliata. Il materiale non usato — protocollo di
+  comunicazione per distributori automatici, raccolta dati industriale, progetto
+  Smart Home con gli otto principali vendor italiani presentato ai media — resta
+  qui se un giorno si decidesse di raccontarlo.
+
+**Date e titoli: restano quelli del sito.** Il CV riporta 02/2023 per l'inizio da
+Data Architect, 01/2023 per la fine da Senior Data Engineer e 12/2019 per la fine
+dell'assegno di ricerca, contro 03/2023, 02/2023 e 11/2019 sul sito. Sottoposte
+all'autore una per una: **tenere quelle del sito**. Anche la dicitura
+*Senior Data Engineer & Team Leader*, che sul CV non c'è, **resta**. Non
+ricontrollarle a ogni sessione: sono state decise.
+
 ## Materiale da procurare
 
 - [x] Link podcast Quantyca (YouTube + Spotify) — episodio 8, 2 dicembre 2025
 - [x] **Case study MLOps / Banking** — scritto il 2026-08-23, EN e IT. Vedi sotto
-- [ ] 2 case study brevi: CI/CD Appliances, Brewery US
+- [x] Case study breve **CI/CD Appliances** — scritto il 2026-08-23. Materiale
+      già presente nel CV dettagliato, non serviva chiederlo
+- [ ] Case study breve **Brewery US** — aspetta degli esiti, resta `ongoing`
 - [x] Numeri leadership: colloqui condotti, persone seguite, architetti cresciuti,
       persone valutate — chiusi il 2026-08-23, vedi sotto
 - [x] L'episodio di promozione specifico

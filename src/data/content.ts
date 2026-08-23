@@ -124,9 +124,11 @@ export const projects: Project[] = [
       en: 'An AWS data platform founded on CI/CD and infrastructure as code, with access centralised through Lake Formation and tag-based access control. The interesting constraint was that several suppliers build on it: you cannot code-review everyone, so the standards have to be enforced by something other than attention. Development guidelines went out to every supplier, and a data quality framework closed the loop with deployment gates — a release does not pass unless it meets the requirements, naming standards included. I was the technical reference across the workstreams, on integration patterns for legacy offloading and data modelling.',
       it: 'Una piattaforma dati su AWS fondata su CI/CD e infrastructure as code, con gli accessi centralizzati tramite Lake Formation e controllo basato su tag. Il vincolo interessante è che a costruirci sopra sono più fornitori: non puoi fare la review del codice di tutti, quindi gli standard vanno fatti rispettare da qualcosa che non sia l’attenzione. Le linee guida di sviluppo sono andate a ogni fornitore del cliente, e un framework di data quality ha chiuso il cerchio con dei deployment gate — un rilascio non passa se non soddisfa i requisiti, nomenclatura compresa. Ero il riferimento tecnico sui filoni progettuali, sui pattern di integrazione per l’off-loading da sistemi legacy e sulla modellazione dei dati.',
     },
-    stack: ['AWS', 'AWS Lake Formation'],
+    stack: [
+      'AWS', 'CloudFormation', 'AWS CDK', 'CodeCommit', 'CodeBuild', 'CodePipeline',
+      'Lake Formation', 'IAM', 'S3', 'Glue', 'Athena', 'Lambda', 'Step Functions', 'Redshift',
+    ],
     featured: false,
-    todo: 'Stack incompleto: con quali strumenti CI/CD e IaC su AWS.',
   },
   {
     slug: 'brewery-us',
