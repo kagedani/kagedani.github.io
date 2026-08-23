@@ -96,9 +96,8 @@ export const projects: Project[] = [
       en: 'Took over a data science platform serving 100+ data scientists and made it survivable: HTTPS everywhere, a test environment that did not exist, four major versions of unpatched GitLab, high-availability hardening and online model serving.',
       it: 'Presa in carico di una piattaforma di data science usata da oltre 100 data scientist e resa sostenibile: HTTPS ovunque, un ambiente di test che non c’era, quattro major di GitLab non aggiornate, hardening in alta disponibilità e model serving online.',
     },
-    stack: ['Kubernetes', 'JupyterHub', 'MLflow', 'GitLab', 'ELK', 'Docker'],
+    stack: ['Kubernetes', 'JupyterHub', 'MLflow', 'GitLab', 'ELK', 'Docker', 'Flask', 'Python'],
     featured: true,
-    todo: 'Case study lungo. NON fondata da lui: il CV dice "maintained and evolved". Vedi inventario progetti.',
   },
   {
     slug: 'ml-blackbox-migration',
@@ -331,8 +330,8 @@ export const experience: Job[] = [
     role: { en: 'Data Architect', it: 'Data Architect' },
     company: { en: 'Quantyca — Data@Core, Monza', it: 'Quantyca — Data@Core, Monza' },
     desc: {
-      en: 'Technical reference for 19 developers across three clients (Appliances, Banking). Guidelines for a multi-supplier AWS platform, technical direction for CI/CD on AWS, and the founding and upkeep of an MLOps platform used by 100+ data scientists.',
-      it: 'Referente tecnico per 19 sviluppatori su tre clienti (Appliances, Banking). Linee guida per una piattaforma AWS multi-fornitore, guida tecnica per la CI/CD su AWS, fondazione e manutenzione di una piattaforma MLOps usata da oltre 100 data scientist.',
+      en: 'Technical reference for 19 developers across three clients (Appliances, Banking). Guidelines for a multi-supplier AWS platform, technical direction for CI/CD on AWS, and the upkeep and evolution of an MLOps platform used by 100+ data scientists.',
+      it: 'Referente tecnico per 19 sviluppatori su tre clienti (Appliances, Banking). Linee guida per una piattaforma AWS multi-fornitore, guida tecnica per la CI/CD su AWS, manutenzione ed evoluzione di una piattaforma MLOps usata da oltre 100 data scientist.',
     },
   },
   {
@@ -340,8 +339,8 @@ export const experience: Job[] = [
     role: { en: 'Senior Data Engineer & Team Leader', it: 'Senior Data Engineer e Team Leader' },
     company: { en: 'Quantyca — Data@Core', it: 'Quantyca — Data@Core' },
     desc: {
-      en: 'Led a team of 7 across three Banking projects: founding an MLOps platform, building a web app (React + Spring Boot), and migrating a blackbox ML solution to open source. Plus a data lake on AWS in Sport.',
-      it: 'Guida di un team di 7 persone su tre progetti in ambito Banking: fondazione della piattaforma MLOps, sviluppo di una web app (React + Spring Boot), migrazione di una soluzione ML blackbox verso open source. Più un datalake su AWS in ambito Sport.',
+      en: 'Led a team of 7 across three Banking projects: taking over an MLOps platform used by 100+ data scientists, building a web app (React + Spring Boot), and migrating a blackbox ML solution to open source. Plus a data lake on AWS in Sport.',
+      it: 'Guida di un team di 7 persone su tre progetti in ambito Banking: presa in carico di una piattaforma MLOps usata da oltre 100 data scientist, sviluppo di una web app (React + Spring Boot), migrazione di una soluzione ML blackbox verso open source. Più un datalake su AWS in ambito Sport.',
     },
   },
   {

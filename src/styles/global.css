@@ -912,6 +912,47 @@ h1 em {
   font-weight: 500;
 }
 
+/* Before/after tables in a case study. Same hairline vocabulary as the
+   leadership grid: 1px rules, mono for the head row, no zebra striping and no
+   rounded corners. Wide tables scroll inside their own box — the page body
+   never scrolls sideways. */
+.prose table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0 2rem;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.prose th,
+.prose td {
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.prose th {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  border-bottom-color: var(--border-strong);
+  white-space: nowrap;
+}
+/* The first column is the label, the last is where the story ends up. */
+.prose td:first-child {
+  color: var(--muted);
+}
+.prose td:last-child {
+  color: var(--text);
+}
+.prose tr:last-child td {
+  border-bottom: 0;
+}
+
 /* Section headings inside a case study read as chapters, so they get a rule. */
 .study h2 {
   padding-bottom: 0.6rem;
