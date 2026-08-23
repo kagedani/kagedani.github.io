@@ -568,6 +568,16 @@ h1 em {
   font-size: 0.9rem;
   color: var(--muted);
 }
+/* The episode below the grid. Same hairline vocabulary as the cells, so it
+   reads as part of the block rather than as a stray paragraph. */
+.lead-story {
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+  max-width: 62ch;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
 
 /* -------------------------------------------------------------- writing */
 

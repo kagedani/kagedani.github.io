@@ -156,22 +156,20 @@ export const leadershipVoice: L = {
 
 export const leadership: LeaderCell[] = [
   {
-    num: '—',
+    num: '30',
     head: { en: 'Technical hiring', it: 'Colloqui tecnici' },
     body: {
-      en: "I run the technical interviews for Quantyca's data roles. Deciding who comes in shapes what the company can take on two years later.",
-      it: 'Conduco i colloqui tecnici per i profili data di Quantyca. Decidere chi entra determina cosa l’azienda potrà prendersi in carico due anni dopo.',
+      en: "Technical interviews I have run for Quantyca's data roles since July 2024. About half of the candidates do not pass. Deciding who comes in shapes what the company can take on two years later.",
+      it: 'Colloqui tecnici che ho condotto per i profili data di Quantyca da luglio 2024. Circa metà dei candidati non passa. Decidere chi entra determina cosa l’azienda potrà prendersi in carico due anni dopo.',
     },
-    todo: 'Numero di candidati valutati e da che anno.',
   },
   {
-    num: '—',
-    head: { en: 'Architects grown', it: 'Architetti cresciuti' },
+    num: '5',
+    head: { en: 'Architects in training', it: 'Architetti in formazione' },
     body: {
-      en: 'People I mentored who now work as architects in their own right.',
-      it: 'Persone che ho seguito e che oggi lavorano come architetti a pieno titolo.',
+      en: 'People Quantyca is building into data architects. I am one of the architects who designed the programme — a theory session and a hands-on one — and, for two years now, one of the three architects who, alongside three delivery managers, run the internal training for junior staff.',
+      it: 'Persone che Quantyca sta formando per il ruolo di data architect. Sono tra gli architetti che hanno progettato il percorso — una sessione teorica e una pratica — e da due anni uno dei tre architetti che, insieme a tre delivery manager, tengono la formazione interna delle figure junior.',
     },
-    todo: 'Numero, più l’episodio di promozione specifico da raccontare.',
   },
   {
     num: '20+',
@@ -182,15 +180,23 @@ export const leadership: LeaderCell[] = [
     },
   },
   {
-    num: '—',
+    num: '23',
     head: { en: 'Career reviews', it: 'Valutazioni' },
     body: {
-      en: 'People whose annual review and growth path I contribute to.',
-      it: 'Persone di cui seguo la valutazione annuale e il percorso di crescita.',
+      en: 'People whose review and growth path I have prepared since 2022, ahead of their one-to-one — seven cycles, ten of them in the latest one.',
+      it: 'Persone di cui ho preparato valutazione e percorso di crescita dal 2022, in vista del loro 1:1 — sette cicli, dieci persone nell’ultimo.',
     },
-    todo: 'Numero di persone valutate.',
   },
 ];
+
+/**
+ * One episode under the grid, on /about only. A number says how many people
+ * went through a review; it cannot show one of them moving.
+ */
+export const leadershipStory: L = {
+  en: 'One of them, because a count cannot show this. Someone who had moved from project to project for years joined my team on the energy data mesh programme. Over the engagement they took on more and more of it, until they went in front of the promotion committee on a record of their own and came out a Senior Data Engineer.',
+  it: 'Una di loro, perché un numero non lo mostra. Una persona che per anni era passata di progetto in progetto è arrivata nel mio team sul programma data mesh in ambito energia. Nel corso del progetto se n’è presa pezzi sempre più grandi, fino a presentarsi al comitato di promozione con un percorso suo e uscirne Senior Data Engineer.',
+};
 
 /* --------------------------------------------------------------- writing */
 

@@ -1,7 +1,7 @@
 ---
 import { SITE, type Lang } from '../../config';
 import { t } from '../../i18n/ui';
-import { about, experience, skills, interests, leadership, leadershipVoice } from '../../data/content';
+import { about, experience, skills, interests, leadership, leadershipVoice, leadershipStory } from '../../data/content';
 import Todo from '../Todo.astro';
 
 interface Props {
@@ -42,6 +42,7 @@ const tr = t(lang);
         ))
       }
     </div>
+    <p class="lead-story">{leadershipStory[lang]}</p>
   </div>
 </section>
 
