@@ -11,32 +11,47 @@ export type Todo = string | undefined;
 /* ------------------------------------------------------------------ hero */
 
 export const hero = {
+  /**
+   * "Data Architect", not the formal Quantyca title. Outside the company
+   * "Solutions Architect" reads as a much broader pre-sales perimeter than the
+   * actual one, so it is wrong in the only place it is read: the market.
+   * The formal title survives where it belongs — the employment record in
+   * `experience`, which is what a recruiter cross-checks against LinkedIn.
+   */
   role: {
-    en: 'Solutions Architect at',
-    it: 'Solutions Architect in',
+    en: 'Data Architect at',
+    it: 'Data Architect in',
   } satisfies L,
   headline: {
-    en: 'I make complicated data architectures',
-    it: 'Rendo usabili le architetture dati',
+    en: 'I design data',
+    it: 'Progetto piattaforme',
   } satisfies L,
   headlineEm: {
-    en: 'usable',
-    it: 'complesse',
+    en: 'platforms',
+    it: 'dati',
   } satisfies L,
+  /**
+   * The claim used to be "I make complicated data architectures usable" — an
+   * unfalsifiable statement about one's effect on the world, and one that
+   * implies everyone else does the complicating. The headline now says the job
+   * and lets the case studies argue. Data Mesh / MLOps / cloud left the hero on
+   * purpose: they still carry the keyword load from metaDescription, the JSON-LD
+   * knowsAbout, the skills block and every project's stack.
+   */
   lede: {
-    en: "I'm Daniele. I design data platforms — <strong>Data Mesh, MLOps, cloud</strong> — for companies where hundreds of people depend on them.",
-    it: 'Sono Daniele. Progetto piattaforme dati — <strong>Data Mesh, MLOps, cloud</strong> — per aziende dove centinaia di persone ci lavorano ogni giorno.',
+    en: "I'm Daniele. Almost seven years in data, three and a half of them drawing the architectures, and trying to keep the rain out.",
+    it: 'Sono Daniele. Da quasi sette anni lavoro nel mondo dei dati, da tre e mezzo ne disegno le architetture, cercando di non farci piovere dentro.',
   } satisfies L,
   aside: {
-    en: 'When I’m not doing that: basketball, Inter, and a manga backlog I will never finish.',
-    it: 'Quando non lo faccio: basket, Inter, e una pila di manga che non finirò mai.',
+    en: 'When I’m not doing that: basketball, Inter, a manga backlog I will never finish, and bread.',
+    it: 'Quando non lo faccio: basket, Inter, una pila di manga che non finirò mai, e il pane.',
   } satisfies L,
 };
 
 /* ----------------------------------------------------------------- stats */
 
 export const stats: { num: string; label: L }[] = [
-  { num: '6+', label: { en: 'Years in data', it: 'Anni nei dati' } },
+  { num: '7+', label: { en: 'Years in data', it: 'Anni nei dati' } },
   { num: '20+', label: { en: 'People led', it: 'Persone guidate' } },
   { num: '100+', label: { en: 'Platform users', it: 'Utenti sulle piattaforme' } },
   { num: '5', label: { en: 'Industries', it: 'Settori' } },
@@ -253,8 +268,8 @@ export const writing: WritingItem[] = [
     venue: { en: 'Medium — Quantyca', it: 'Medium — Quantyca' },
     year: '2020',
     description: {
-      en: 'Where data governance actually starts: business glossary, data catalog, and a prototype that populates the catalog automatically. Written six years and one job title ago.',
-      it: 'Da dove comincia davvero la data governance: business glossary, data catalog, e un prototipo che popola il catalogo in automatico. Scritto sei anni e un ruolo fa.',
+      en: 'Where data governance actually starts: business glossary, data catalog, and a prototype that populates the catalog automatically.',
+      it: 'Da dove comincia davvero la data governance: business glossary, data catalog, e un prototipo che popola il catalogo in automatico.',
     },
     href: 'https://medium.com/quantyca/govern-your-data-its-a-tough-job-but-someone-has-to-do-it-8f4256d22b96',
   },
@@ -295,6 +310,9 @@ export type Job = { period: L; role: L; company: L; desc: L; todo?: Todo };
 export const experience: Job[] = [
   {
     period: { en: 'July 2025 — now', it: 'Luglio 2025 — presente' },
+    // The formal Quantyca title, kept verbatim here and only here: this is the
+    // employment record, and it has to match LinkedIn and the CV. Everywhere
+    // else the site says "Data Architect" — see the note on hero.role.
     role: { en: 'Solutions Architect', it: 'Solutions Architect' },
     company: { en: 'Quantyca — Data@Core, Monza', it: 'Quantyca — Data@Core, Monza' },
     desc: {
@@ -353,8 +371,8 @@ export const experience: Job[] = [
 
 export const about: L[] = [
   {
-    en: 'I’m a Solutions Architect with more than six years in data, all of them at Quantyca, where I went from Junior Data Engineer to my current role. I’ve worked on large-scale programmes in Energy, Banking, Retail, Appliances and Sport.',
-    it: 'Sono un Solutions Architect con più di sei anni di esperienza nel mondo dei dati, tutti in Quantyca, dove sono passato da Junior Data Engineer al ruolo attuale. Ho lavorato su programmi di grande scala in ambito Energy, Banking, Retail, Appliances e Sport.',
+    en: 'I’m a Data Architect with almost seven years in data, all of them at Quantyca, where I went from Junior Data Engineer to my current role. I’ve worked on large-scale programmes in Energy, Banking, Retail, Appliances and Sport.',
+    it: 'Sono un Data Architect con quasi sette anni di esperienza nel mondo dei dati, tutti in Quantyca, dove sono passato da Junior Data Engineer al ruolo attuale. Ho lavorato su programmi di grande scala in ambito Energy, Banking, Retail, Appliances e Sport.',
   },
   {
     en: 'My work sits on Data Mesh, data strategy, MLOps and data governance: helping clients adopt modern architectures and set a direction on a 3–5 year horizon. I’ve led teams of up to 20 people in multi-supplier programmes, and today I head Quantyca’s international team.',
@@ -410,6 +428,13 @@ export const interests: { name: L; body: L; todo?: Todo }[] = [
     },
   },
   {
+    name: { en: 'Bread', it: 'Il pane' },
+    body: {
+      en: 'Cooking in general, bread in particular. Long proofs, few variables, and a result that tells you plainly whether you got the process right — which is more feedback than most architectures give you.',
+      it: 'La cucina in generale, il pane in particolare. Lievitazioni lunghe, poche variabili, e un risultato che ti dice senza girarci intorno se il processo era giusto — che è più di quanto ti restituisca la maggior parte delle architetture.',
+    },
+  },
+  {
     name: { en: 'Manga', it: 'Manga' },
     body: {
       en: 'Tokyo Ghoul and One Piece, mostly. The handle you see everywhere — kagedani — comes from there.',
@@ -426,6 +451,6 @@ export const contactCopy: L = {
 };
 
 export const metaDescription: L = {
-  en: 'Daniele Uboldi — Solutions Architect at Quantyca. I design data platforms — Data Mesh, MLOps, cloud — for companies where hundreds of people depend on them.',
-  it: 'Daniele Uboldi — Solutions Architect in Quantyca. Progetto piattaforme dati — Data Mesh, MLOps, cloud — per aziende dove centinaia di persone ci lavorano ogni giorno.',
+  en: 'Daniele Uboldi — Data Architect at Quantyca. I design data platforms — Data Mesh, MLOps, cloud — for companies where hundreds of people depend on them.',
+  it: 'Daniele Uboldi — Data Architect in Quantyca. Progetto piattaforme dati — Data Mesh, MLOps, cloud — per aziende dove centinaia di persone ci lavorano ogni giorno.',
 };

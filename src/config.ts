@@ -12,7 +12,7 @@ export const SITE = {
   url: 'https://kagedani.github.io',
   name: 'Daniele Uboldi',
   initials: 'DU',
-  role: 'Solutions Architect',
+  role: 'Data Architect',
   company: 'Quantyca',
   location: 'Monza, Italy',
   email: 'daniele.uboldi.job@gmail.com',

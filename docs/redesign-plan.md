@@ -108,6 +108,52 @@ Versione scelta (C): claim professionale in H1, nome nella seconda riga,
 personalità in coda. Non "Hi, I'm Daniele": per un lettore internazionale il nome
 non è un'informazione, ed è già nel logo, nel title e nell'URL.
 
+**Revisione del 2026-08-23.** La struttura regge, il claim no. *"Rendo usabili le
+architetture dati complesse"* è stato giudicato altezzoso dall'autore, e a ragione:
+è un'affermazione non verificabile sul proprio effetto sul mondo, e "complesse"
+implica che gli altri complicano e lui sistema. L'H1 dice ora il mestiere e basta
+— *"Progetto piattaforme dati"* — e lascia argomentare i case study.
+
+La battuta sta nella lede, non nel titolo: **il titolo imposta, la lede paga**, e
+mettere in H1 la frase che comincia con "Sono Daniele" avrebbe riaperto proprio la
+decisione che la versione C aveva chiuso. Testo vigente:
+
+> Sono Daniele. Da quasi sette anni lavoro nel mondo dei dati, da tre e mezzo ne
+> disegno le architetture, cercando di non farci piovere dentro.
+
+`Data Mesh, MLOps, cloud` sono **usciti dall'hero** su richiesta dell'autore. Non è
+una perdita di keyword: restano in `metaDescription`, nel `knowsAbout` del JSON-LD,
+nel blocco skill e nello stack di ogni progetto.
+
+Numeri allineati sulla timeline reale: dicembre 2019 → agosto 2026 sono 6 anni e 8
+mesi, quindi "quasi sette"; da Data Architect (marzo 2023) sono 3 anni e 5 mesi,
+quindi "tre e mezzo". La statistica in hero è passata da `6+` a `7+`, altrimenti si
+contraddiceva con la lede nella stessa schermata.
+
+### Nomenclatura del ruolo — deciso il 2026-08-23
+
+Il sito si presenta come **Data Architect**, non come Solutions Architect. Fuori da
+Quantyca "Solutions Architect" evoca un perimetro pre-sales molto più ampio di
+quello reale, quindi è sbagliato nell'unico posto in cui viene letto: il mercato.
+
+**Unica eccezione: `experience[0]`**, dove resta *Solutions Architect* perché quello
+è il record di impiego e deve reggere il confronto con LinkedIn e con il CV. Un
+lettore vede la qualifica aziendale nel percorso e la pratica reale nel
+posizionamento — normale ai livelli senior, e verificabile.
+
+### Frasi ritirate il 2026-08-23
+
+Criterio: **niente giudizi su di sé, niente difese preventive, niente ammiccamenti.**
+
+- `page.work.lede` — *"Cinque progetti che vale la pena raccontare. Nessun cliente è
+  nominato…"*: il primo pezzo è un giudizio che spetta al lettore, il secondo ti
+  difende da un'accusa che nessuno ha mosso. La chiave è stata **eliminata**, non
+  riscritta: il titolo "Progetti" basta.
+- `cta.allWriting` — *"Tutto quello che ho pubblicato"* per cinque item → *"Tutte le
+  pubblicazioni"*.
+- Descrizione dell'articolo Medium — via la chiusa *"Scritto sei anni e un ruolo fa"*,
+  ammiccante. L'anno in colonna dice già la stessa cosa senza strizzare l'occhio.
+
 ### `/work` — 3 approfonditi + 2 brevi
 
 | Progetto | Formato |
@@ -248,6 +294,14 @@ Più una riga sola in home.
 Salvati, ma su `/about` e **specifici**. Materiale: basket giocato 9 anni dagli 11 ai 19
 più il ritorno da adulto, Inter di padre in figlio, Tokyo Ghoul e One Piece.
 "Film di ogni genere" non torna.
+
+**2026-08-23** — aggiunti **cucina e pane**, che è il migliore dei cinque: concreto,
+artigianale, con tempi lunghi e un processo che restituisce un verdetto. Sta accanto
+al mestiere senza bisogno di forzare il parallelo.
+
+**I film restano fuori**, richiesti e poi ritirati dall'autore nella stessa sessione:
+senza un aggancio specifico — un genere, un regista, un'abitudine — è l'unica voce
+che potrebbe aver scritto chiunque, ed è esattamente ciò che la regola vieta.
 
 Nota: `kagedani` = *kage* + *Dani*. L'interesse per manga e Giappone è già nel brand
 da anni; il sito lo rende coerente invece che casuale.
