@@ -429,7 +429,7 @@ se lo modifichi, modificalo in due posti.
 |---|---|---|---|---|
 | Data Mesh / Energy | ✅ | ✅ | — | ✅ |
 | ML Blackbox / Banking | ✅ | ✅ | ✅ | ✅ |
-| MLOps / Banking | — | — | — | — |
+| MLOps / Banking | ✅ | ✅ | — | ✅ |
 | CI/CD Appliances (breve) | — | — | — | n/a |
 | Brewery US (breve) | — | — | — | n/a |
 
@@ -518,7 +518,101 @@ blog è gated a due pezzi e non ha senso accenderlo per uno.
   livello portfolio, più raro delle decisioni tecniche che la pagina racconta, ed è
   stato aggiunto alla sezione `My role` e alle skill.
 
-### Trappola tecnica da non ripetere
+## Case study MLOps / Banking — scritto il 2026-08-23
+
+Materiale estratto con `/grilling`, non dal CV. Il metodo ha retto una terza
+volta: la sezione *Cosa è andato male* è arrivata solo alla **terza domanda**, e
+solo dopo aver rifiutato due risposte che descrivevano il metodo invece del guasto.
+
+### La contraddizione trovata in produzione
+
+Il sito affermava due cose incompatibili, ed è stata la prima domanda della
+sessione, non un dettaglio: la card su `/work` diceva *"took over"*, mentre **due
+voci del percorso su `/about`** dicevano *"founding an MLOps platform"* e
+*"the founding and upkeep"*, stesso periodo e stessa piattaforma. Aveva ragione la
+card. Corrette le voci in `taking over` / `presa in carico` e
+`upkeep and evolution` / `manutenzione ed evoluzione`, allineate al CV, **riviste
+riga per riga con l'autore prima di toccarle**, su sua richiesta esplicita.
+
+Rimane da verificare **cosa dice LinkedIn**: se lì c'è ancora "fondazione", la
+correzione va fatta anche lì, altrimenti si chiude una discrepanza aprendone una
+nuova. Domanda posta, non ancora risposta.
+
+### Cosa aveva ereditato
+
+La piattaforma era stata **installata da colleghi Quantyca usciti dal progetto,
+senza documentazione**. Non debito tecnico: una piattaforma di cui si era persa la
+ricetta, mentre cento persone ci lavoravano sopra.
+
+**Decisione sull'attribuzione, presa dall'autore:** il testo **non dice chi l'aveva
+installata**. Né la versione sfumata ("un team che aveva lasciato il progetto"),
+che scaricherebbe la colpa su un terzo anonimo lasciando intendere il cliente o un
+altro fornitore, né quella esplicita. Motivazione dell'autore: non spostare colpe
+internamente a Quantyca e non far risaltare che si fosse lavorato male. Quello che
+regge la pagina è comunque un altro fatto — **la conoscenza persa**, che è poi lo
+stesso tema del case study ML Blackbox.
+
+### Le decisioni, e quali trade-off sono veri
+
+Cinque decisioni. **Due non hanno trade-off, deliberatamente:**
+
+- **Ricostruire la ricetta**, in **timebox di due mesi**. Il costo che avevo
+  proposto — "mesi in cui non si produce niente di visibile" — è stato **rifiutato
+  dall'autore**: il timebox era di due mesi e non lo presenterebbe come un costo.
+  Chiesto allora cosa fosse rimasto non capito alla scadenza: **niente**. Quindi la
+  decisione va **senza blockquote**, e non se ne inventa uno per riempire il format.
+- **Hardening per l'alta disponibilità**: iniziativa loro, non richiesta da nessuno.
+  Movente reale: crescita di utenti e applicazioni su un on-premise a nodi finiti, e
+  **alcuni carichi a QoS Kubernetes bassa**, primi a essere sfrattati e con bisogno
+  di rispawnare in fretta altrove. La mia versione — "nodi che costano soldi per un
+  beneficio invisibile" — è stata corretta dall'autore: *"scritta così sembra una
+  cosa negativa"*. Aveva ragione, era un movente travestito da costo.
+
+Le altre tre, con trade-off confermati:
+
+| Decisione | Trade-off |
+|---|---|
+| Cluster di disaccoppiamento fra dati e applicazioni aziendali — **linea guida del cliente, non sua scelta** | un secondo ambiente (Kubernetes + GitLab dedicati) con la stessa disciplina di manutenzione del primo, sulle stesse tre persone |
+| Definire cosa significa "senza interrompere il lavoro" | **affidabilità** per gli utenti comprata con manutenzione più lenta — correzione dell'autore: affidabilità, non "prevedibilità" come avevo scritto |
+| Servizi centrali su **repository aperti**, con i data scientist che propongono evolutive | **tutto passava dalla sua revisione del codice.** Il costo che avevo proposto — "diventi tu la dipendenza" — è stato smontato: i repo erano aperti al contributo |
+
+La quinta è il **model serving**: scheletro applicativo Flask **sopra MLflow**, che
+promuove e sostituisce il modello senza downtime. Da non riscrivere come "Flask
+invece di KServe": l'autore non ha dichiarato di aver valutato un framework di
+serving alternativo, quindi il testo dichiara il **costo di possesso** del layer,
+non una scelta comparativa mai fatta.
+
+### Cosa è andato male
+
+Manutenzione ordinaria, nodo isolato con le label perché JupyterHub non ci facesse
+nascere pod — e su quel nodo **c'erano già due data scientist**. Due ticket, uno a
+testa, entrambi a segnalare la piattaforma rotta. **La piattaforma stava benissimo:
+il guasto erano loro.** Il punto che vale la pagina: dal lato utente una manutenzione
+non annunciata è indistinguibile da un bug, e il conto lo paga in analisi la stessa
+squadra che stava cercando di ridurre l'analisi. Da lì il criterio della decisione 3.
+
+### Numeri
+
+Perimetro: **tre persone** — lui più una figura junior, poi due — per **oltre cento
+utenti**. Progettazione tutta sua; con le mani: ambiente di disaccoppiamento, primi
+servizi centrali e lo scheletro dei successivi, revisione del codice di tutti.
+
+| | All'arrivo | 2025 |
+|---|---|---|
+| Versioni | indietro, GitLab di quattro major | tutte corrette |
+| Servizi centrali | nessuno | **9** |
+| Applicazioni in produzione | meno di 5 | **oltre 30** (batch schedulati + online long running) |
+| Traffico | non cifrato | HTTPS ovunque — **su segnalazione del team di sicurezza del cliente**, non per iniziativa loro |
+| Un ticket | giorni di analisi | **meno di un'ora** |
+
+### Conseguenza tecnica
+
+È la **prima tabella del sito**, e non esisteva una riga di CSS per `<table>`.
+Aggiunto in `.prose`: filetti da 1px, riga di intestazione in mono, nessuna zebratura.
+La tabella **scrolla dentro sé stessa** (`display: block; width: max-content`) perché
+il markdown non genera un contenitore e senza quello su mobile scorrerebbe la pagina.
+
+## Trappola tecnica da non ripetere
 
 I case study stanno in `src/content/case-studies/<lang>/<slug>.md`, una cartella per
 lingua. **Mai** `<slug>.<lang>.md`: Astro slugifica gli id e si mangia il punto,
@@ -527,9 +621,7 @@ l'id diventa `data-mesh-energyen` e le rotte non vengono generate — silenziosa
 ## Materiale da procurare
 
 - [x] Link podcast Quantyca (YouTube + Spotify) — episodio 8, 2 dicembre 2025
-- [ ] **Case study MLOps / Banking** — il buco più grosso rimasto. Nota: la
-      piattaforma **non è stata fondata da lui** (il CV dice "maintained and
-      evolved"), e il testo della card è già stato riscritto di conseguenza
+- [x] **Case study MLOps / Banking** — scritto il 2026-08-23, EN e IT. Vedi sotto
 - [ ] 2 case study brevi: CI/CD Appliances, Brewery US
 - [x] Numeri leadership: colloqui condotti, persone seguite, architetti cresciuti,
       persone valutate — chiusi il 2026-08-23, vedi sotto
