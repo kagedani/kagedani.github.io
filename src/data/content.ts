@@ -172,11 +172,11 @@ export const leadership: LeaderCell[] = [
     },
   },
   {
-    num: '20+',
-    head: { en: 'Teams led', it: 'Team guidati' },
+    num: '20',
+    head: { en: 'Point of reference', it: 'Punto di riferimento' },
     body: {
-      en: "Across multi-supplier programmes — and today, Quantyca's international team.",
-      it: 'In programmi multi-fornitore — e oggi il team internazionale di Quantyca.',
+      en: 'People who had me as their point of reference at the same time, at the busiest, spread across concurrent multi-supplier programmes. Today it is eight, across two clients.',
+      it: 'Persone che nello stesso periodo hanno avuto me come punto di riferimento, nel momento di massimo carico, distribuite su progetti multi-fornitore in parallelo. Oggi sono otto, su due clienti.',
     },
   },
   {
@@ -381,8 +381,8 @@ export const about: L[] = [
     it: 'Sono un Data Architect con quasi sette anni di esperienza nel mondo dei dati, tutti in Quantyca, dove sono passato da Junior Data Engineer al ruolo attuale. Ho lavorato su programmi di grande scala in ambito Energy, Banking, Retail, Appliances e Sport.',
   },
   {
-    en: 'My work sits on Data Mesh, data strategy, MLOps and data governance: helping clients adopt modern architectures and set a direction on a 3–5 year horizon. I’ve led teams of up to 20 people in multi-supplier programmes, and today I head Quantyca’s international team.',
-    it: 'Mi occupo di Data Mesh, data strategy, MLOps e data governance: supporto i clienti nell’adozione di architetture moderne e nella definizione di una direzione su orizzonti di 3–5 anni. Ho guidato team fino a 20 persone in contesti multi-fornitore, e oggi sono responsabile del team internazionale di Quantyca.',
+    en: 'My work sits on Data Mesh, data strategy, MLOps and data governance: helping clients adopt modern architectures and set a direction on a 3–5 year horizon. I’ve been the point of reference for as many as 20 people at once in multi-supplier programmes, and today I head Quantyca’s international team.',
+    it: 'Mi occupo di Data Mesh, data strategy, MLOps e data governance: supporto i clienti nell’adozione di architetture moderne e nella definizione di una direzione su orizzonti di 3–5 anni. Sono stato il punto di riferimento di fino a 20 persone contemporaneamente in contesti multi-fornitore, e oggi sono responsabile del team internazionale di Quantyca.',
   },
   {
     en: 'I hold a summa cum laude degree in Telecommunications Engineering from Politecnico di Milano, and I’m a Certified Kubernetes Administrator (CKA).',
