@@ -20,7 +20,7 @@ export const SITE = {
   github: 'https://github.com/kagedani',
   githubHandle: '@kagedani',
   cv: '/assets/cv.pdf',
-  photo: '/assets/foto.webp',
+  photo: '/assets/foto.jpg',
 } as const;
 
 export const LOCALES = ['en', 'it'] as const;

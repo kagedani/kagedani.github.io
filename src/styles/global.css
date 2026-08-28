@@ -334,6 +334,45 @@ button {
   padding: clamp(4rem, 10vw, 7.5rem) 0 clamp(3rem, 6vw, 4.5rem);
   border-bottom: 1px solid var(--border);
 }
+/* Two columns from 900px: copy on the left, the portrait as its own block
+   on the right. Below that it stacks and the portrait caps its width so it
+   does not become a billboard on a phone. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+.hero-copy { min-width: 0; }
+.portrait {
+  margin: 0;
+  max-width: 240px;
+}
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) clamp(200px, 22vw, 280px);
+    align-items: start;
+  }
+  .portrait { max-width: none; }
+}
+
+/* The stats were inside the hero, which made the opening a six-part stack.
+   They are a band of their own now, directly below. */
+.stats-band {
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+.stats-band .stats {
+  margin-top: 0;
+  padding-top: clamp(1.5rem, 3vw, 2.25rem);
+  border-top: 0;
+}
+
 .hero-role {
   font-family: var(--mono);
   font-size: 0.72rem;
@@ -465,7 +504,10 @@ h1 em {
 .card:hover {
   border-color: var(--accent);
 }
-.card:hover .card-title {
+.card:hover /* A date, not a third list item, so it sits at the far end of the line. */
+.card-period { margin-left: auto; }
+
+.card-title {
   color: var(--accent);
 }
 .card.wide {

@@ -17,7 +17,7 @@ export const ui = {
     'mg.tones': 'tones',
     'mg.letters': 'letters',
     'mg.ready': 'page ready',
-    'mg.toBoring': 'Back to boring version',
+    'mg.toBoring': 'Boring version',
     'mg.toManga': 'Back to the manga',
 
     'kicker.work': 'Selected work',
@@ -66,7 +66,7 @@ export const ui = {
     'mg.tones': 'retini',
     'mg.letters': 'lettering',
     'mg.ready': 'tavola pronta',
-    'mg.toBoring': 'Torna alla versione noiosa',
+    'mg.toBoring': 'Versione noiosa',
     'mg.toManga': 'Torna al manga',
 
     'kicker.work': 'Progetti selezionati',

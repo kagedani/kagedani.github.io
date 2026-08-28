@@ -22,18 +22,28 @@ const studyHref = (slug: string) =>
 ---
 
 <section class="hero">
-  <div class="wrap">
-    <p class="hero-role">{hero.role[lang]} <b>{SITE.company}</b></p>
-    <h1>{hero.headline[lang]} <em>{hero.headlineEm[lang]}</em>.</h1>
-    <p class="lede" set:html={hero.lede[lang]} />
-    <p class="hero-aside">{hero.aside[lang]}</p>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-role">{hero.role[lang]} <b>{SITE.company}</b></p>
+      <h1>{hero.headline[lang]} <em>{hero.headlineEm[lang]}</em>.</h1>
+      <p class="lede" set:html={hero.lede[lang]} />
+      <p class="hero-aside">{hero.aside[lang]}</p>
 
-    <div class="cta">
-      <a href={localePath(lang, '/work/')} class="btn btn-primary">{tr('cta.work')}</a>
-      <a href="#contact" class="btn">{tr('cta.contact')}</a>
-      <a href={SITE.cv} class="btn" download>{tr('cta.cv')}</a>
+      <div class="cta">
+        <a href={localePath(lang, '/work/')} class="btn btn-primary">{tr('cta.work')}</a>
+        <a href="#contact" class="btn">{tr('cta.contact')}</a>
+        <a href={SITE.cv} class="btn" download>{tr('cta.cv')}</a>
+      </div>
     </div>
 
+    <figure class="portrait">
+      <img src={SITE.photo} alt={SITE.name} width="389" height="389" fetchpriority="high" />
+    </figure>
+  </div>
+</section>
+
+<section class="stats-band">
+  <div class="wrap">
     <div class="stats">
       {
         stats.map((s) => (

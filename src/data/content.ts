@@ -144,7 +144,7 @@ export const projects: Project[] = [
     slug: 'brewery-us',
     sfx: { latin: 'Fuwa', jp: 'フワ' },
     title: { en: 'Brewery platform', it: 'Piattaforma brewery' },
-    sector: { en: 'Beverage · US', it: 'Beverage · USA' },
+    sector: { en: 'Beverage, US', it: 'Beverage, USA' },
     role: { en: 'Assessment → pre-sales → technical lead', it: 'Assessment → pre-sales → guida tecnica' },
     summary: {
       en: "First engagement led end to end as head of Quantyca's international team — from assessment through pre-sales to technical leadership.",

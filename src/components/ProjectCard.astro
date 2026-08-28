@@ -21,8 +21,8 @@ const Tag = href ? 'a' : 'article';
 <Tag class:list={['card', wide && 'wide']} href={href} data-sfx={p.sfx?.latin} data-sfx-jp={p.sfx?.jp}>
   <div class="card-meta">
     <span>{p.sector[lang]}</span>·<span>{p.role[lang]}</span>
-    {p.period && <>·<span>{p.period}</span></>}
     {p.ongoing && <span class="pill-ongoing">{tr('label.ongoing')}</span>}
+    {p.period && <span class="card-period">{p.period}</span>}
   </div>
 
   <h3 class="card-title">{p.title[lang]}</h3>
