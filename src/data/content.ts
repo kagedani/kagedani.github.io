@@ -87,8 +87,8 @@ export const projects: Project[] = [
     role: { en: 'Architecture lead', it: 'Referente architetturale' },
     period: '2025 - now',
     summary: {
-      en: 'Architecture lead for Data Mesh adoption at a European energy utility, with 100+ users on the Experience Plane. Data product discovery, observability and control plane. Since 2026 there are also three AI agents in production, which query the information estate, draft business ontology and propose data quality controls over MCP.',
-      it: 'Referente architetturale per l’adozione del Data Mesh in una utility energetica europea, con oltre 100 utenti sull’Experience Plane. Discovery dei data product, observability e control plane. Dal 2026 ci sono anche tre agenti AI in produzione, che interrogano il patrimonio informativo, redigono l’ontologia di business e propongono controlli di data quality via MCP.',
+      en: 'Architecture lead for Data Mesh adoption at a European energy utility, with 100+ users on the Experience Plane: data product discovery, observability and control plane. Since 2026, three AI agents are also in production, querying the estate, drafting business ontology and proposing data quality controls over MCP.',
+      it: 'Referente architetturale per l’adozione del Data Mesh in una utility energetica europea, con oltre 100 utenti sull’Experience Plane: discovery dei data product, observability e control plane. Dal 2026 anche tre agenti AI in produzione, che interrogano il patrimonio informativo, redigono l’ontologia di business e propongono controlli di data quality via MCP.',
     },
     stack: ['Azure', 'ADLS Gen2', 'AKS', 'PostgreSQL', 'OpenDataMesh', 'Azure Purview', 'Blindata', 'Great Expectations', 'OpenTelemetry', 'Grafana', 'MCP', 'A2A'],
     featured: true,
@@ -118,8 +118,8 @@ export const projects: Project[] = [
     role: { en: 'Data Architect & technical lead', it: 'Data Architect e guida tecnica' },
     period: '2022 - 2023',
     summary: {
-      en: 'Four AI use cases were sealed inside a vendor’s black box: no explainability towards risk or the regulator, no knowledge left in-house, and a per-use-case licence that grew with usage instead of value. We rebuilt all four on an open, reproducible platform the bank owns. Four out of four migrated with zero downtime, model performance in line with the vendor’s, and the manual work now automated put by the bank itself at 45 FTE.',
-      it: 'Quattro use case AI erano sigillati dentro la black box di un vendor: nessuna explainability verso risk e regolatore, nessuna competenza che restasse in casa, e una licenza per use case che cresceva con l’utilizzo invece che con il valore. Li abbiamo ricostruiti tutti e quattro su una piattaforma aperta e riproducibile che la banca possiede. Quattro su quattro migrati senza downtime, performance dei modelli in linea con quelle del vendor, e il lavoro manuale ora automatizzato quantificato dalla banca stessa in 45 FTE.',
+      en: 'Four AI use cases were sealed inside a vendor’s black box: no explainability for risk or the regulator, no knowledge staying in-house. We rebuilt all four on an open, reproducible platform the bank owns: zero downtime, model performance in line with the vendor’s, and manual work now automated that the bank itself put at 45 FTE.',
+      it: 'Quattro use case AI erano sigillati dentro la black box di un vendor: nessuna explainability verso risk e regolatore, nessuna competenza che restasse in casa. Li abbiamo ricostruiti tutti e quattro su una piattaforma aperta e riproducibile che la banca possiede: zero downtime, performance dei modelli in linea con quelle del vendor, e il lavoro manuale ora automatizzato quantificato dalla banca stessa in 45 FTE.',
     },
     stack: ['Kubernetes', 'GitLab CI/CD', 'MLflow', 'Jupyter', 'Python', 'SQL Server'],
     featured: true,
@@ -131,8 +131,8 @@ export const projects: Project[] = [
     sector: { en: 'Appliances', it: 'Appliances' },
     role: { en: 'DevOps architecture', it: 'Architettura DevOps' },
     summary: {
-      en: 'An AWS data platform founded on CI/CD and infrastructure as code, with access centralised through Lake Formation and tag-based access control. The interesting constraint was that several suppliers build on it: you cannot code-review everyone, so the standards have to be enforced by something other than attention. Development guidelines went out to every supplier, and a data quality framework closed the loop with deployment gates: a release does not pass unless it meets the requirements, naming standards included. I was the technical reference across the workstreams, on integration patterns for legacy offloading and data modelling.',
-      it: 'Una piattaforma dati su AWS fondata su CI/CD e infrastructure as code, con gli accessi centralizzati tramite Lake Formation e controllo basato su tag. Il vincolo interessante è che a costruirci sopra sono più fornitori: non puoi fare la review del codice di tutti, quindi gli standard vanno fatti rispettare da qualcosa che non sia l’attenzione. Le linee guida di sviluppo sono andate a ogni fornitore del cliente, e un framework di data quality ha chiuso il cerchio con dei deployment gate: un rilascio non passa se non soddisfa i requisiti, nomenclatura compresa. Ero il riferimento tecnico sui filoni progettuali, sui pattern di integrazione per l’off-loading da sistemi legacy e sulla modellazione dei dati.',
+      en: 'An AWS data platform built on CI/CD and infrastructure as code, with access centralised through Lake Formation. Several suppliers built on it, so standards had to be enforced by deployment gates rather than by review: development guidelines and a data quality framework, not attention.',
+      it: 'Una piattaforma dati su AWS fondata su CI/CD e infrastructure as code, con accessi centralizzati tramite Lake Formation. A costruirci sopra erano più fornitori, quindi gli standard dovevano essere garantiti dai deployment gate invece che dalla review: linee guida di sviluppo e un framework di data quality, non l’attenzione di qualcuno.',
     },
     stack: [
       'AWS', 'CloudFormation', 'AWS CDK', 'CodeCommit', 'CodeBuild', 'CodePipeline',
@@ -176,11 +176,11 @@ export const leadership: LeaderCell[] = [
     },
   },
   {
-    num: '5',
-    head: { en: 'Architects in training', it: 'Architetti in formazione' },
+    num: '23',
+    head: { en: 'Career reviews', it: 'Valutazioni' },
     body: {
-      en: 'People Quantyca is building into data architects. I am one of the architects who designed the programme, a theory session and a hands-on one. For two years now I have also been one of the three architects who, alongside three delivery managers, run the internal training for junior staff.',
-      it: 'Persone che Quantyca sta formando per il ruolo di data architect. Sono tra gli architetti che hanno progettato il percorso, una sessione teorica e una pratica. Da due anni sono anche uno dei tre architetti che, insieme a tre delivery manager, tengono la formazione interna delle figure junior.',
+      en: 'People whose review and growth path I have prepared since 2022, ahead of their one-to-one. Seven cycles, ten people in the latest.',
+      it: 'Persone di cui ho preparato valutazione e percorso di crescita dal 2022, in vista del loro 1:1. Sette cicli, dieci persone nell’ultimo.',
     },
   },
   {
@@ -192,11 +192,11 @@ export const leadership: LeaderCell[] = [
     },
   },
   {
-    num: '23',
-    head: { en: 'Career reviews', it: 'Valutazioni' },
+    num: '5',
+    head: { en: 'Architects in training', it: 'Architetti in formazione' },
     body: {
-      en: 'People whose review and growth path I have prepared since 2022, ahead of their one-to-one. Seven cycles, ten people in the latest.',
-      it: 'Persone di cui ho preparato valutazione e percorso di crescita dal 2022, in vista del loro 1:1. Sette cicli, dieci persone nell’ultimo.',
+      en: 'People Quantyca is building into data architects. I am one of the architects who designed the programme, a theory session and a hands-on one. For two years now I have also been one of the three architects who, alongside three delivery managers, run the internal training for junior staff.',
+      it: 'Persone che Quantyca sta formando per il ruolo di data architect. Sono tra gli architetti che hanno progettato il percorso, una sessione teorica e una pratica. Da due anni sono anche uno dei tre architetti che, insieme a tre delivery manager, tengono la formazione interna delle figure junior.',
     },
   },
 ];
@@ -206,8 +206,8 @@ export const leadership: LeaderCell[] = [
  * went through a review; it cannot show one of them moving.
  */
 export const leadershipStory: L = {
-  en: 'One of them, because a count cannot show this. Someone who had moved from project to project for years joined my team on the energy data mesh programme. Over the engagement they took on more and more of it, until they went in front of the promotion committee on a record of their own and came out a Senior Data Engineer.',
-  it: 'Una di loro, perché un numero non lo mostra. Una persona che per anni era passata di progetto in progetto è arrivata nel mio team sul programma data mesh in ambito energia. Nel corso del progetto se n’è presa pezzi sempre più grandi, fino a presentarsi al comitato di promozione con un percorso suo e uscirne Senior Data Engineer.',
+  en: 'One of them, because a number doesn’t show people. Someone who had spent years moving from project to project joined my team on the energy data mesh programme. Over the course of that programme they took on bigger and bigger pieces of it, until they stood in front of the promotion committee with a track record of their own: they came out a Senior Data Engineer.',
+  it: 'Una di loro, perché un numero non racconta le persone. Una persona che per anni era passata di progetto in progetto è entrata nel mio team sul programma data mesh in ambito energia. Nel corso di quel programma ha preso in carico pezzi sempre più grandi, fino a presentarsi al comitato di promozione con un percorso costruito da sé: ne è uscita Senior Data Engineer.',
 };
 
 /* --------------------------------------------------------------- writing */
@@ -323,7 +323,18 @@ export const writing: WritingItem[] = [
 
 /* ------------------------------------------------------------ experience */
 
-export type Job = { period: L; role: L; company: L; desc: L; todo?: Todo };
+export type Job = {
+  period: L;
+  role: L;
+  company: L;
+  desc: L;
+  /** First year of the period, for the "ls <year>-projects" hover on /about. */
+  startYear: number;
+  /** Project slugs this period produced, in the order they should list. Omit or
+   *  leave empty when nothing on /work covers it yet — the hover says so honestly. */
+  relatedProjects?: string[];
+  todo?: Todo;
+};
 
 export const experience: Job[] = [
   {
@@ -337,6 +348,8 @@ export const experience: Job[] = [
       en: 'Architecture lead for Data Mesh adoption in Energy (100+ users on the Experience Plane): data product discovery, observability, control plane. Owner of the client’s data strategy on a 3-5 year horizon. In Insurance, data strategy advisor: the Lean Value Tree, the metrics of success it is measured against, and the federated governance body that keeps it moving. I also coordinate two teams technically, ten developers between them. Since March 2026, also head of Quantyca’s international team, alongside the architecture work rather than in place of it.',
       it: 'Referente architetturale per l’adozione del Data Mesh in ambito Energy (oltre 100 utenti sull’Experience Plane): discovery dei data product, observability, control plane. Responsabile della data strategy del cliente su orizzonte 3-5 anni. In ambito Insurance, advisor di data strategy: il Lean Value Tree, le metriche di successo con cui si misura, e la Federated Governance Community che lo tiene in movimento. Coordino tecnicamente anche due team, dieci sviluppatori in tutto. Da marzo 2026 anche responsabile del team internazionale di Quantyca, in parallelo al lavoro architetturale e non al suo posto.',
     },
+    startYear: 2025,
+    relatedProjects: ['data-mesh-energy', 'brewery-us'],
   },
   {
     period: { en: 'March 2023 - June 2025', it: 'Marzo 2023 - Giugno 2025' },
@@ -346,6 +359,8 @@ export const experience: Job[] = [
       en: 'Technical reference for 19 developers across three clients (Appliances, Banking). Guidelines for a multi-supplier AWS platform, technical direction for CI/CD on AWS, and the upkeep and evolution of an MLOps platform used by 100+ data scientists.',
       it: 'Referente tecnico per 19 sviluppatori su tre clienti (Appliances, Banking). Linee guida per una piattaforma AWS multi-fornitore, guida tecnica per la CI/CD su AWS, manutenzione ed evoluzione di una piattaforma MLOps usata da oltre 100 data scientist.',
     },
+    startYear: 2023,
+    relatedProjects: ['cicd-appliances', 'mlops-banking'],
   },
   {
     period: { en: 'February 2022 - February 2023', it: 'Febbraio 2022 - Febbraio 2023' },
@@ -355,6 +370,8 @@ export const experience: Job[] = [
       en: 'Led a team of 7 across three Banking projects: taking over an MLOps platform used by 100+ data scientists, building a web app (React + Spring Boot), and migrating a blackbox ML solution to open source. Plus a data lake on AWS in Sport.',
       it: 'Guida di un team di 7 persone su tre progetti in ambito Banking: presa in carico di una piattaforma MLOps usata da oltre 100 data scientist, sviluppo di una web app (React + Spring Boot), migrazione di una soluzione ML blackbox verso open source. Più un datalake su AWS in ambito Sport.',
     },
+    startYear: 2022,
+    relatedProjects: ['mlops-banking', 'ml-blackbox-migration'],
   },
   {
     period: { en: 'July 2021 - January 2022', it: 'Luglio 2021 - Gennaio 2022' },
@@ -364,6 +381,7 @@ export const experience: Job[] = [
       en: 'Data governance and data catalog in Travel. ETL/ELT pipelines in Retail, offloading Oracle onto Vertica through Confluent Kafka.',
       it: 'Data governance e data catalog in ambito Travel. Pipeline ETL/ELT in ambito Retail, con off-loading di Oracle su Vertica tramite Confluent Kafka.',
     },
+    startYear: 2021,
   },
   {
     period: { en: 'December 2019 - June 2021', it: 'Dicembre 2019 - Giugno 2021' },
@@ -373,6 +391,7 @@ export const experience: Job[] = [
       en: 'Full-stack development on a SaaS data governance platform (Spring Boot + React). Before that, ETL flows and data models in Retail, and a Python crawler that filled a data catalog in Online Travel.',
       it: 'Sviluppo fullstack su una piattaforma SaaS di data governance (Spring Boot + React). Prima ancora, flussi ETL e data model in ambito Retail, e un crawler Python che popolava un data catalog in ambito Online Travel.',
     },
+    startYear: 2019,
   },
   {
     period: { en: 'January 2019 - November 2019', it: 'Gennaio 2019 - Novembre 2019' },
@@ -382,6 +401,7 @@ export const experience: Job[] = [
       en: 'Applied IoT research at the DEIB lab, on industrial and consumer devices.',
       it: 'Ricerca applicata sull’IoT al laboratorio DEIB, su dispositivi industriali e di consumo.',
     },
+    startYear: 2019,
   },
 ];
 

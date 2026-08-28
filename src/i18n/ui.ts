@@ -29,7 +29,7 @@ export const ui = {
     'kicker.about': 'About',
     'kicker.interests': 'Off the clock',
 
-    'cta.work': 'Selected work',
+    'cta.work': 'See the work',
     'cta.contact': 'Get in touch',
     'cta.cv': 'Download CV',
     'cta.all': 'All work',
@@ -43,6 +43,7 @@ export const ui = {
     'label.linkedin': 'LinkedIn',
     'label.github': 'GitHub',
     'label.todo': 'to be written',
+    'tl.empty': 'no case study published yet',
 
     'page.work.title': 'Work',
     'page.writing.title': 'Writing & Talks',
@@ -92,6 +93,7 @@ export const ui = {
     'label.linkedin': 'LinkedIn',
     'label.github': 'GitHub',
     'label.todo': 'da scrivere',
+    'tl.empty': 'nessun case study pubblicato',
 
     'page.work.title': 'Progetti',
     'page.writing.title': 'Pubblicazioni e talk',

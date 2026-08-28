@@ -1,26 +1,33 @@
 /* ============================================================
    Design system — "Editorial + technical"
    Locked in Fase 1, prototype C. See docs/redesign-plan.md.
+   Palette revised in Fase 2: the original warm-paper + terracotta
+   + espresso combination is the single most common "premium
+   portfolio" default, and the two surface tones sat too close in
+   lightness to read as separate without shadows. Replaced with a
+   neutral stone base (no yellow cast) and a petrol/teal signal
+   accent, tuned separately per theme so it carries the same
+   weight in light and dark rather than just being an inverted hue.
 
    Hard rules (these are why the old site looked generic):
      - no soft drop shadows          -> 1px crisp borders
      - no 12px radii everywhere      -> 2px, near-square
-     - no Tailwind blue #2563eb      -> warm terracotta accent
+     - no warm cream + terracotta    -> neutral stone + petrol accent
      - no cards translating on hover -> border colour change only
      - no emoji, anywhere
    ============================================================ */
 
 :root {
-  --bg: #faf8f4;
-  --surface: #fffefb;
-  --surface-2: #f3efe7;
-  --text: #1b1815;
-  --muted: #6a6156;
-  --faint: #948b7d;
-  --border: #e1dbd0;
-  --border-strong: #c8c0b1;
-  --accent: #9a4522;
-  --accent-bg: #f6ebe4;
+  --bg: #f2f3f1;
+  --surface: #ffffff;
+  --surface-2: #e7e8e3;
+  --text: #171a19;
+  --muted: #565a58;
+  --faint: #888c87;
+  --border: #d9dad5;
+  --border-strong: #b2b4ac;
+  --accent: #0d6e63;
+  --accent-bg: #e2f0ec;
   --warn: #8a6d1f;
   --warn-bg: #fbf3dc;
 
@@ -35,47 +42,47 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #121110;
-    --surface: #1a1816;
-    --surface-2: #221f1b;
-    --text: #ece7df;
-    --muted: #9c9384;
-    --faint: #776f63;
-    --border: #2c2823;
-    --border-strong: #443e35;
-    --accent: #e28a5c;
-    --accent-bg: #2a1d15;
-    --warn: #d9b95f;
-    --warn-bg: #2a2313;
+    --bg: #101312;
+    --surface: #171b1a;
+    --surface-2: #1f2422;
+    --text: #e7e9e6;
+    --muted: #99a19c;
+    --faint: #6c746f;
+    --border: #262b29;
+    --border-strong: #3a413d;
+    --accent: #45c7b8;
+    --accent-bg: #16302c;
+    --warn: #d7ab5a;
+    --warn-bg: #2b2313;
   }
 }
 
 /* The manual toggle must win over the system preference in both directions. */
 :root[data-theme='dark'] {
-  --bg: #121110;
-  --surface: #1a1816;
-  --surface-2: #221f1b;
-  --text: #ece7df;
-  --muted: #9c9384;
-  --faint: #776f63;
-  --border: #2c2823;
-  --border-strong: #443e35;
-  --accent: #e28a5c;
-  --accent-bg: #2a1d15;
-  --warn: #d9b95f;
-  --warn-bg: #2a2313;
+  --bg: #101312;
+  --surface: #171b1a;
+  --surface-2: #1f2422;
+  --text: #e7e9e6;
+  --muted: #99a19c;
+  --faint: #6c746f;
+  --border: #262b29;
+  --border-strong: #3a413d;
+  --accent: #45c7b8;
+  --accent-bg: #16302c;
+  --warn: #d7ab5a;
+  --warn-bg: #2b2313;
 }
 :root[data-theme='light'] {
-  --bg: #faf8f4;
-  --surface: #fffefb;
-  --surface-2: #f3efe7;
-  --text: #1b1815;
-  --muted: #6a6156;
-  --faint: #948b7d;
-  --border: #e1dbd0;
-  --border-strong: #c8c0b1;
-  --accent: #9a4522;
-  --accent-bg: #f6ebe4;
+  --bg: #f2f3f1;
+  --surface: #ffffff;
+  --surface-2: #e7e8e3;
+  --text: #171a19;
+  --muted: #565a58;
+  --faint: #888c87;
+  --border: #d9dad5;
+  --border-strong: #b2b4ac;
+  --accent: #0d6e63;
+  --accent-bg: #e2f0ec;
   --warn: #8a6d1f;
   --warn-bg: #fbf3dc;
 }
@@ -367,17 +374,6 @@ button {
 
 /* The stats were inside the hero, which made the opening a six-part stack.
    They are a band of their own now, directly below. */
-/* Long-form pages keep a reading measure. The container is capped so the
-   column sits in a page instead of hugging the left edge of a wide sheet. */
-.wrap.reading {
-  max-width: min(860px, 100%);
-}
-.reading .prose,
-.reading .tl-desc,
-.reading .lede {
-  max-width: 100%;
-}
-
 .stats-band {
   padding-bottom: clamp(2rem, 4vw, 3rem);
 }
@@ -526,8 +522,13 @@ h1 em {
 .card-period {
   margin-left: auto;
 }
+/* The one wide card is the featured project: same treatment .w-lead already
+   gives the featured writing item below, a stronger border and nothing else,
+   so the two "this one is the headline" signals in the site read as one
+   convention rather than two different ideas. */
 .card.wide {
   grid-column: 1 / -1;
+  border-color: var(--border-strong);
 }
 .card-meta {
   font-family: var(--mono);
@@ -626,15 +627,19 @@ h1 em {
   font-size: 0.9rem;
   color: var(--muted);
 }
-/* The episode below the grid. Same hairline vocabulary as the cells, so it
-   reads as part of the block rather than as a stray paragraph. */
+/* The episode below the grid. A hairline-and-run-on paragraph read as an
+   afterthought trailing off in the middle of a full-width grid; the same
+   boxed treatment as a case study's trade-off callout gives it a shape of
+   its own instead. */
 .lead-story {
   margin-top: 1.75rem;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--border);
-  max-width: 62ch;
+  padding: 1.15rem 1.4rem;
+  max-width: 68ch;
   font-size: 0.95rem;
-  color: var(--muted);
+  color: var(--text);
+  background: var(--accent-bg);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
 }
 
 /* -------------------------------------------------------------- writing */
@@ -838,6 +843,91 @@ h1 em {
   font-size: 0.94rem;
   color: var(--muted);
   max-width: 62ch;
+}
+
+/* A small easter egg for the one section that is a plain list of employers:
+   hovering (or tabbing into) a role opens a fake `ls` of the case studies
+   that period produced, real slugs, linked where a write-up exists. Styled
+   like a carbon.sh code shot — traffic-light chrome, soft shadow — on
+   purpose: it is a deliberate, contained exception to the no-shadow rule,
+   not a crack in it, and it is why the colours are fixed instead of
+   theme tokens: it reads as "a window", independent of the page's own
+   theme. The manga skin reskins it into a panel instead, in manga.css.
+   Hidden below 1100px: no room beside the text, and no real hover on touch. */
+.tl-term {
+  position: absolute;
+  top: -0.5rem;
+  right: 0;
+  width: 320px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1e1f29;
+  box-shadow: 0 22px 44px -16px rgba(0, 0, 0, 0.55), 0 6px 16px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+.tl-item:hover .tl-term,
+.tl-item:focus .tl-term,
+.tl-item:focus-within .tl-term {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.tl-term-bar {
+  display: flex;
+  gap: 6px;
+  padding: 0.7rem 0.85rem;
+  background: #14151d;
+}
+.tl-term-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.tl-term-dot:nth-child(1) { background: #ff5f56; }
+.tl-term-dot:nth-child(2) { background: #ffbd2e; }
+.tl-term-dot:nth-child(3) { background: #27c93f; }
+.tl-term-body {
+  padding: 1rem 1.15rem 1.15rem;
+  color: #cfd6d3;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  line-height: 1.75;
+}
+.tl-term-line {
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+}
+.tl-term-prompt {
+  color: var(--accent);
+  font-weight: 500;
+  margin-right: 0.4em;
+}
+.tl-term-entry {
+  display: block;
+  color: #8fe0d3;
+  text-decoration: none;
+}
+a.tl-term-entry:hover,
+a.tl-term-entry:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+}
+.tl-term-empty {
+  color: #6f7875;
+  font-style: italic;
+}
+@media (max-width: 1100px) {
+  .tl-term {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tl-term {
+    transition: none;
+  }
 }
 
 /* --------------------------------------------------------------- skills */
@@ -1204,6 +1294,19 @@ h1 em {
     padding-right: 1.5rem;
     margin-right: 1.5rem;
     margin-bottom: 1rem;
+  }
+  /* Four stats wrap 2-per-row here. :last-child only strips the divider off
+     item 4, leaving item 2's border-right dangling with nothing beside it.
+     Strip it from every row-end (even index) instead, and rule off the row
+     break so the wrap reads as two rows, not a ragged single one. */
+  .stat:nth-child(2n) {
+    border-right: 0;
+    margin-right: 0;
+    padding-right: 0;
+  }
+  .stat:nth-child(-n + 2) {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
   }
   .w-lead-head,
   .w-row-head {

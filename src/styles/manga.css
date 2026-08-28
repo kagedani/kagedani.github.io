@@ -485,7 +485,54 @@ html[data-mode='manga'] .lead-num {
   letter-spacing: 0.01em;
 }
 html[data-mode='manga'] .lead-story {
-  border-top-width: 3.5px;
+  border-left-width: 4px;
+}
+
+/* =========================================================== career =====
+   The `ls` panel drops its carbon.sh chrome for the comic's own vocabulary:
+   thick ink border, a halftone fill instead of flat dark, a drawn tail
+   instead of a title bar. Same construction as the hero balloon's tail
+   (two stacked triangles), just built as one flat outline this time
+   since it sits over a screentone fill rather than the bare page.       */
+html[data-mode='manga'] .tl-term-bar {
+  display: none;
+}
+html[data-mode='manga'] .tl-term {
+  top: -0.75rem;
+  right: -0.5rem;
+  overflow: visible;
+  border-radius: 4px;
+  border: 3px solid var(--text);
+  background: var(--bg);
+  box-shadow: 5px 5px 0 var(--text);
+}
+html[data-mode='manga'] .tl-term::before {
+  content: '';
+  position: absolute;
+  left: -13px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 13px 7px 0;
+  border-color: transparent var(--text) transparent transparent;
+}
+html[data-mode='manga'] .tl-term-body {
+  color: var(--text);
+  padding: 1.1rem 1.25rem;
+}
+html[data-mode='manga'] .tl-term-entry {
+  color: var(--text);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+html[data-mode='manga'] a.tl-term-entry:hover,
+html[data-mode='manga'] a.tl-term-entry:focus-visible {
+  color: var(--accent);
+}
+html[data-mode='manga'] .tl-term-empty {
+  color: var(--muted);
 }
 
 /* ============================================================ writing ====
@@ -518,10 +565,6 @@ html[data-mode='manga'] #contact .contact-link {
 }
 html[data-mode='manga'] #contact .contact-link span { color: var(--accent); }
 html[data-mode='manga'] #contact .contact-link:hover { color: var(--accent); }
-
-html[data-mode='manga'] .wrap.reading {
-  max-width: min(880px, 94vw);
-}
 
 /* ======================================================= case studies ====
    The chapter opens inked, and then gets out of the way. Fifteen hundred
