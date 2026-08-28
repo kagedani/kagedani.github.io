@@ -1,10 +1,11 @@
 ---
 import '../styles/global.css';
+import '../styles/manga.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { SITE, type Lang } from '../config';
 import { metaDescription } from '../data/content';
-import { localePath } from '../i18n/ui';
+import { t, localePath } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -16,6 +17,7 @@ interface Props {
 
 const { lang, path, title, description } = Astro.props;
 
+const tr = t(lang);
 const desc = description ?? metaDescription[lang];
 const canonical = new URL(localePath(lang, path), SITE.url).href;
 const enHref = new URL(localePath('en', path), SITE.url).href;
@@ -44,7 +46,7 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-mode="manga">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -73,7 +75,7 @@ const jsonLd = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;450;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;450;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&family=Noto+Sans+JP:wght@900&display=swap"
     />
 
     <script is:inline>
@@ -83,6 +85,11 @@ const jsonLd = {
         if (saved === 'dark' || saved === 'light') {
           document.documentElement.dataset.theme = saved;
         }
+        // Manga is the default; only a reader who asked for the plain
+        // version gets it, and they get it before first paint.
+        if (localStorage.getItem('mode') === 'boring') {
+          document.documentElement.dataset.mode = 'boring';
+        }
       } catch (_) {}
     </script>
 
@@ -91,11 +98,25 @@ const jsonLd = {
 
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <Nav lang={lang} path={path} />
-    <main id="main">
-      <slot />
-    </main>
-    <Footer lang={lang} />
+    <div class="sheet">
+      <Nav lang={lang} path={path} />
+      <main id="main">
+        <slot />
+      </main>
+      <Footer lang={lang} />
+    </div>
+
+    {/* The production slug narrates which pass the page is on, the way the
+        reference terminal site types its own commands. The folio counts
+        pages. Both are hidden outright in the plain version. */}
+    <p class="mg-slug" id="mg-slug" aria-hidden="true">
+      <span>&gt; {tr('mg.pencils')}</span>
+      <span>&gt; {tr('mg.inks')}</span>
+      <span>&gt; {tr('mg.tones')}</span>
+      <span>&gt; {tr('mg.letters')}</span>
+      <span>&gt; {tr('mg.ready')}</span>
+    </p>
+    <p class="mg-folio" aria-hidden="true">P. <b id="mg-folio">01</b></p>
 
     <script is:inline>
       const root = document.documentElement;
@@ -124,6 +145,147 @@ const jsonLd = {
           burger?.setAttribute('aria-expanded', 'false');
         })
       );
+
+      /* ================================================== the drawing ====
+         A page is made in four passes, and this one is made the same way:
+         pencils, inks, tones, letters. Frames are picked by selector, so
+         the page components stay unaware any of this exists. That is also
+         what keeps the plain version honest: same markup, no manga. */
+      (function () {
+        const NS = 'http://www.w3.org/2000/svg';
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const frames = [...document.querySelectorAll('.hero > .wrap, .card, .lead-cell, .w-lead')];
+
+        // Chapter numbers on the section headings.
+        document.querySelectorAll('.kicker').forEach((k, i) => {
+          k.dataset.ch = String(i + 1).padStart(2, '0');
+        });
+
+        frames.forEach((f) => {
+          f.classList.add('mg-frame');
+
+          const svg = document.createElementNS(NS, 'svg');
+          svg.setAttribute('class', 'mg-edge');
+          svg.setAttribute('viewBox', '0 0 100 100');
+          svg.setAttribute('preserveAspectRatio', 'none');
+          svg.setAttribute('aria-hidden', 'true');
+          // pathLength=1 spares the perimeter maths; non-scaling-stroke keeps
+          // the line weight constant while the box flexes.
+          const rect = (cls, jitter) => {
+            const r = document.createElementNS(NS, 'rect');
+            r.setAttribute('class', cls);
+            r.setAttribute('x', jitter ? 0.6 : 0);
+            r.setAttribute('y', jitter ? -0.5 : 0);
+            r.setAttribute('width', 100);
+            r.setAttribute('height', 100);
+            r.setAttribute('pathLength', 1);
+            return r;
+          };
+          svg.appendChild(rect('mg-pencil', true));
+          svg.appendChild(rect('mg-ink', false));
+          f.prepend(svg);
+
+          const tone = document.createElement('i');
+          tone.className = f.classList.contains('wide') ? 'mg-tone band' : 'mg-tone';
+          f.prepend(tone);
+
+          const isHero = f.matches('.hero > .wrap');
+          if (f.classList.contains('card') || isHero) {
+            const sp = document.createElement('i');
+            sp.className = 'mg-speed';
+            f.prepend(sp);
+          }
+
+          const latin = f.dataset.sfx || (isHero ? 'Don' : '');
+          const jp = f.dataset.sfxJp || (isHero ? '\u30c9\u30f3' : '');
+          if (latin) {
+            const s = document.createElement('i');
+            s.className = 'mg-sfx';
+            s.setAttribute('aria-hidden', 'true');
+            s.textContent = latin;
+            const kana = document.createElement('b');
+            kana.textContent = jp;
+            s.appendChild(kana);
+            f.appendChild(s);
+          }
+        });
+
+        const draw = (f, delay) => {
+          if (f.dataset.drawn) return;
+          f.dataset.drawn = '1';
+          const t = reduced ? 0 : 1;
+          setTimeout(() => f.classList.add('is-pencil'), delay);
+          setTimeout(() => f.classList.add('is-ink'), delay + 170 * t);
+          setTimeout(() => f.classList.add('is-tone'), delay + 640 * t);
+          setTimeout(() => f.classList.add('is-letter'), delay + 760 * t);
+        };
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries
+              .filter((e) => e.isIntersecting)
+              .forEach((e, i) => {
+                draw(e.target, i * 90);
+                io.unobserve(e.target);
+              });
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.1 }
+        );
+        frames.forEach((f) => io.observe(f));
+
+        const slug = document.getElementById('mg-slug');
+        const runSlug = () => {
+          const steps = [...slug.querySelectorAll('span')];
+          steps.forEach((s) => s.classList.remove('on'));
+          steps.forEach((s, n) =>
+            setTimeout(() => s.classList.add('on'), reduced ? 0 : 170 + n * 230)
+          );
+        };
+        runSlug();
+
+        const folio = document.getElementById('mg-folio');
+        addEventListener(
+          'scroll',
+          () => {
+            const y = innerHeight * 0.45;
+            let n = 1;
+            frames.forEach((f, i) => {
+              if (f.getBoundingClientRect().top < y) n = i + 1;
+            });
+            folio.textContent = String(n).padStart(2, '0');
+          },
+          { passive: true }
+        );
+
+        /* The escape hatch. Coming back to the manga redraws the page from
+           pencils, which is the only honest way to re-enter it. */
+        const btn = document.getElementById('mode-toggle');
+        btn?.addEventListener('click', () => {
+          if (root.dataset.mode === 'boring') {
+            root.dataset.mode = 'manga';
+            btn.textContent = btn.dataset.toBoring;
+            frames.forEach((f) => {
+              f.classList.remove('is-pencil', 'is-ink', 'is-tone', 'is-letter');
+              delete f.dataset.drawn;
+            });
+            runSlug();
+            requestAnimationFrame(() => {
+              frames.forEach((f, i) => {
+                const r = f.getBoundingClientRect();
+                if (r.top < innerHeight && r.bottom > 0) draw(f, i * 90);
+                else io.observe(f);
+              });
+            });
+          } else {
+            root.dataset.mode = 'boring';
+            btn.textContent = btn.dataset.toManga;
+            frames.forEach((f) => f.classList.add('is-pencil', 'is-ink', 'is-tone', 'is-letter'));
+          }
+          try {
+            localStorage.setItem('mode', root.dataset.mode);
+          } catch (_) {}
+        });
+      })();
     </script>
   </body>
 </html>

@@ -100,6 +100,237 @@ Base **Editorial** (prototipo B), con nav e sezione Leadership presi da **System
 
 File: `scratchpad/proto-c-merged.html` (fuori dal repo, throwaway).
 
+## Fase 1 bis — la veste manga, decisa il 2026-08-23
+
+Riapertura **richiesta dall'autore**: *"vista la passione per i manga, vorrei
+renderlo con un appearance tipo da fumetto, come se venisse disegnato o scritto
+da un mangaka"*. L'alternativa proposta da lui era un rimando al pane, **scartata**:
+il pane porta calore, colore e morbidezza, cioè le tre cose che la Fase 1 aveva
+escluso apposta, e come sistema visivo si riduce a una palette beige, che è il
+punto di partenza. Resta dov'era utile, negli interessi.
+
+### I vincoli di Fase 1 non sono stati riaperti
+
+Vale la pena scriverlo, perché era la domanda obbligatoria prima di toccare il CSS.
+**Nessuna delle quattro regole dure è stata derogata**: niente ombre morbide,
+niente angoli tondi, niente blu Tailwind, niente card che si sollevano, zero emoji.
+Un manga non fa nessuna di quelle cose. La veste non è una deroga al sistema
+editoriale: è lo stesso sistema portato all'estremo, più il tempo.
+
+### Il riferimento, e cosa insegna davvero
+
+L'autore ha indicato **antoniocali.github.io**, che sta al codice come questo deve
+stare al fumetto. È al 95% metafora: prompt `# Portfolio redesign — piano
+
+> Esito della sessione di grilling del 2026-08-02. Questo file è la fonte di verità
+> delle decisioni prese; se una decisione cambia, si aggiorna qui.
+
+## Obiettivo
+
+- **Primario — (c) autorità tecnica.** Pubblico: peer, community Data Mesh, organizzatori
+  di conferenze, potenziali clienti. Azione attesa: "leggi quello che scrive", "invitalo a parlare".
+- **Derivato — (b) opportunità inbound.** Recruiter e ruoli. Non richiede lavoro dedicato:
+  è un effetto collaterale di (c) fatto bene.
+- Esclusi: (a) biglietto da visita passivo, (d) acquisizione consulenziale in proprio
+  (incompatibile con il rapporto di lavoro).
+
+## Lingua
+
+| | |
+|---|---|
+| Default | **Inglese** |
+| Italiano | Via toggle, **solo sulle pagine statiche** |
+| Blog | **Solo inglese** |
+| CV | Versione EN da produrre a sito quasi pronto |
+
+Razionale: asimmetria di accesso. Un lettore italiano non è ostacolato dall'inglese;
+un peer internazionale è ostacolato dall'italiano. La lingua di default è una
+dichiarazione di posizionamento, non una feature.
+
+Il blog resta monolingua per non raddoppiare per sempre il costo di scrittura:
+una traduzione mancante è peggio di una lingua sola.
+
+## Stack tecnico
+
+- **Astro**, output statico, deploy con GitHub Actions su GitHub Pages
+  (sorgente Pages = "GitHub Actions", non un branch).
+- **Anti-rot, obbligatorio:** lockfile committato, versione di Node fissata in CI,
+  dependabot disattivato. Il sito si tocca 3 volte l'anno e la build deve reggere ferma
+  per anni. Non si inseguono gli aggiornamenti.
+- i18n con URL separati (`/en/`, `/it/`) e `hreflang` corretti. **Non** uno switch
+  client-side in JavaScript.
+- Nessun rilevamento automatico della lingua del browser (Pages non ha logica
+  server-side, e comunque è una pratica che confonde utenti e crawler).
+- `JSON-LD Person` con `knowsAbout` per il matching automatico di recruiter e agenti.
+
+### Struttura
+
+```
+/            home — posizionamento, highlight, anteprime. Si legge in 40 secondi
+/work        case study, ognuno con ancora linkabile
+/writing     podcast, Medium, intervista, materiale didattico, tesi, report IoT
+/about       bio estesa, Leadership & People, interessi
+/blog        NASCOSTO finché non contiene almeno 2 pezzi
+```
+
+Il motore del blog esiste dalla Fase 2, ma la sezione non è raggiungibile né linkata
+finché non ha contenuto. Una sezione "Blog" con un post di due anni fa fa più danno
+del sito attuale.
+
+## Design
+
+Direzione: **(d) SaaS moderno fatto bene + (b) vocabolario tecnico**.
+
+Vincoli verificabili — se ricompare una di queste, siamo tornati al punto di partenza:
+
+- ❌ ombre morbide sotto le card → bordi netti da 1px
+- ❌ `border-radius: 12px` ovunque → angoli quasi vivi
+- ❌ blu `#2563eb` (il blu di default di Tailwind, colore ufficiale dei siti generici)
+- ❌ card che si sollevano al passaggio del mouse
+
+Da rispettare:
+
+- **Doppia modalità.** Shell a card sugli indici (home, `/work`, `/writing`);
+  impaginazione editoriale con colonna di testo stretta sulle pagine di contenuto lungo
+  (case study, post, sezione leadership).
+- Mono per date, stack e label. Palette desaturata. Griglia percepibile.
+- **Dark mode che segue il sistema**, con toggle manuale. Entrambi i temi curati davvero,
+  non uno l'inversione dell'altro.
+- Icone monocrome e sobrie, **e corrette** — niente balena di Docker su Kubernetes.
+- **Zero emoji.** In nessun punto del sito.
+- Diagrammi solo **concettuali** (OpenDataMesh, Dehghani, letteratura pubblica).
+  Mai architetture di cliente, nemmeno anonimizzate.
+
+### Sistema visivo scelto (Fase 1, prototipo C)
+
+Base **Editorial** (prototipo B), con nav e sezione Leadership presi da **Systems** (prototipo A).
+
+- **Palette:** carta calda. Light `#faf8f4` / testo `#1b1815` / bordi `#e1dbd0`.
+  Dark `#121110` / testo `#ece7df` / bordi `#2c2823`.
+  **Accento terracotta** — light `#9a4522`, dark `#e28a5c`. (Deliberatamente non blu.)
+- **Font:** `Newsreader` (serif, display e titoli), `Inter` (corpo),
+  `IBM Plex Mono` (date, stack, label, kicker di sezione).
+  Da caricare davvero — l'errore del sito attuale era dichiarare Inter e non caricarlo mai.
+- **Nav:** quadrotto `DU` pieno, link mono uppercase con underline in accento all'hover,
+  toggle `EN|IT` in un box con bordo, bottone tema quadrato.
+- **Card:** bordo 1px, `border-radius: 2px`, hover = solo il bordo che passa in accento.
+  Nessuna ombra, nessuna traslazione.
+- **Leadership:** griglia 2×2 di celle a bordo condiviso, numero grande in accento,
+  intestazione mono, più **una riga di voce in serif sopra** (le celle da sole
+  non suonano come una persona).
+- **Kicker di sezione:** mono uppercase in accento, seguito da una riga orizzontale.
+
+File: `scratchpad/proto-c-merged.html` (fuori dal repo, throwaway).
+
+, `git log --graph` per il percorso,
+`ls -la ~/projects`, YAML per le skill, `curl -X POST` per i contatti.
+
+Quello che lo fa funzionare **non è il verde su nero**: è che ogni tipo di contenuto
+viene riespresso nell'**idioma nativo** della metafora. Una cronologia non è "una
+timeline in monospace", è un `git log`. La metafora non decora il contenuto, lo
+traduce.
+
+E soprattutto: **un terminale è fatto di tempo.** Il sito si esegue mentre lo guardi.
+
+Il primo prototipo ha sbagliato esattamente questo. Era **stampa**: pannelli, retino,
+gutter, tutto fermo. Giudizio dell'autore, testuale: *"terribile, è proprio brutto,
+non richiama minimamente il mondo dei fumetti"*. Aveva ragione, ed è la correzione
+più utile della sessione.
+
+### Il principio vigente
+
+**Il medium del manga è la tavola disegnata, quindi la pagina si disegna**, nell'ordine
+vero della lavorazione:
+
+> matite (blu non fotografabile) → chine → retini → lettering
+
+Ogni frame esegue le quattro passate quando ci scrolli sopra. In basso a sinistra un
+**foglio di produzione** dice a che passata sei — `> matite`, `> chine`, `> retini`,
+`> lettering`, `> tavola pronta` — ed è l'analogo esatto dei comandi che il sito di
+riferimento si scrive da solo: **racconta il processo invece di decorarlo**.
+
+### La regola del retino, imparata sbagliando
+
+Nel prototipo 2 il retino era un fondo sotto il testo, e l'autore ha segnalato che
+`SAY SOMETHING` e la card Data Mesh erano illeggibili. Aveva ragione, e la regola
+giusta è quella della stampa:
+
+> **Il retino sta nel negativo. Le parole stanno sempre su carta pulita o dentro una
+> nuvoletta, mai sui puntini.**
+
+In pratica: cuneo nell'angolo alto a destra o fascia sul bordo destro, con il testo
+tenuto fuori da un `max-width`, e retino spento sotto gli 820px. Il pannello dei
+contatti è passato a **inchiostro pieno**: carta su nero è il blocco più leggibile
+della pagina, non il meno.
+
+### Cosa c'è e cosa è stato escluso
+
+| Dentro | Fuori, e perché |
+|---|---|
+| Bordi che si tracciano da soli (SVG, `pathLength=1`) | Personaggi disegnati: è il cliché che riduce tutto a una fan page |
+| Matita blu sotto la china | Font "da fumetto": ucciderebbe la credibilità in due secondi |
+| Retino a punti visibile, nel negativo | Katakana come ornamento sparso |
+| **Onomatopee** latino + katakana su hover dei progetti | Lettura da destra a sinistra: fedele ma rompe la lettura, e il pubblico deve capire in 40 secondi |
+| Linee cinetiche su hover | Retino sotto il testo |
+| Nuvoletta ellittica con coda per la lede | |
+| **Furigana** su due prestiti tecnici | |
+| Capitoli numerati, contapagine, `to be continued` | |
+| Tema scuro come **inversione d'inchiostro** | |
+
+I katakana sono stati **prima sconsigliati e poi rimessi**, con l'assenso dell'autore:
+nelle onomatopee sono la lingua nativa del mezzo, come `$ ls -la` lo è del terminale.
+Ornamentali no, funzionali sì. Le onomatopee sono state approvate con la motivazione
+giusta: *"non è il cv, è il portfolio"*.
+
+### La versione noiosa
+
+Idea dell'autore, e migliore di quella che avevo proposto io. Il pulsante in nav dice
+**`Torna alla versione noiosa`** e spegne tutto: retino, onomatopee, linee cinetiche,
+furigana, nuvoletta, foglio di produzione, contapagine, Anton, nero pieno. Torna
+esattamente il sistema di Fase 1. Ripremendolo dice **`Torna al manga`** e la pagina
+**si ridisegna dalla matita**, che è l'unico modo onesto di rientrarci.
+
+**Default: manga**, scelta ricordata in `localStorage` e applicata prima del primo
+paint. Motivo: se il grigio è di default il manga non lo vede nessuno, e tanto vale
+non farlo; se un lettore vuole il grigio, ce l'ha a un clic.
+
+### Architettura, e perché non è un rifacimento
+
+Decisione che vale più della grafica: **`global.css` resta la base e non è stato
+toccato.** È già, per intero, la versione noiosa. Il manga è un **layer sopra**
+(`src/styles/manga.css`), tutto sotto `html[data-mode="manga"]`.
+
+Conseguenze, tutte volute:
+
+- la Fase 1 non diventa codice morto: diventa una delle due modalità, e viene
+  esercitata ogni volta che qualcuno preme il pulsante;
+- si può tornare indietro cambiando un attributo, non riscrivendo un sistema;
+- **i componenti non sanno che il manga esiste.** I frame vengono scelti per
+  selettore (`.hero > .wrap, .card, .lead-cell, .w-lead`) da uno script nel layout,
+  che inietta SVG, retino e onomatopee. L'unico contenuto nuovo nei componenti è
+  `data-sfx` sulla card;
+- nessuna dipendenza aggiunta, quindi la regola anti-rot regge. Due font in più da
+  Google Fonts, Anton e Noto Sans JP.
+
+**Costo accettato:** due sistemi visivi sullo stesso markup. Vale la pena solo se il
+pulsante è una funzione e non una demo, e lo è: dà al lettore serio una via d'uscita,
+e chi la usa ha comunque visto che il sito sa fare l'altra cosa.
+
+**Le onomatopee sono un dato**, non CSS: `sfx: { latin, jp }` su `Project` in
+`content.ts`, come tutto il resto del contenuto di questo sito.
+
+### Rimasto aperto
+
+- **I 179 trattini lunghi.** L'autore ha chiesto che il sito non sia riconducibile
+  alle rappresentazioni tipiche dell'intelligenza artificiale, citando proprio i
+  trattini lunghi. Ce ne sono **73 in `content.ts` e 106 nei case study**, messi
+  quasi tutti da Claude. **È il segnale più forte di tutti**, più di qualunque scelta
+  grafica: un lettore che sospetta il testo generato non cambia idea perché la
+  grafica è bella. Lavoro suo, separato dalla veste: in circa un terzo dei casi la
+  frase va rifatta e non solo ripunteggiata.
+- Case study: l'apertura di capitolo è inchiostrata, il corpo resta quieto. Millecinquecento
+  parole dentro una vignetta retinata non si leggono.
+
 ## Contenuto
 
 ### Home — H1

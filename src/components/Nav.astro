@@ -57,6 +57,14 @@ const isCurrent = (href: string) => href === path;
         }
       </div>
 
+      <button
+        class="mode-btn"
+        id="mode-toggle"
+        type="button"
+        data-to-boring={tr('mg.toBoring')}
+        data-to-manga={tr('mg.toManga')}
+      >{tr('mg.toBoring')}</button>
+
       <button class="icon-btn" id="theme-toggle" type="button" aria-label={tr('nav.theme')}>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>

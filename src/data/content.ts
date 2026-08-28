@@ -69,12 +69,19 @@ export type Project = {
   stack: string[];
   featured: boolean;
   ongoing?: boolean;
+  /**
+   * The sound the card makes when you hover it, in the manga skin: latin
+   * plus katakana, the way a translated volume letters it. It is content,
+   * not styling, so it lives here with the rest of the content.
+   */
+  sfx?: { latin: string; jp: string };
   todo?: Todo;
 };
 
 export const projects: Project[] = [
   {
     slug: 'data-mesh-energy',
+    sfx: { latin: 'Go', jp: 'ゴゴゴ' },
     title: { en: 'Data Mesh Platform', it: 'Piattaforma Data Mesh' },
     sector: { en: 'Energy', it: 'Energy' },
     role: { en: 'Architecture lead', it: 'Referente architetturale' },
@@ -88,6 +95,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'mlops-banking',
+    sfx: { latin: 'Zuun', jp: 'ズーン' },
     title: { en: 'MLOps Platform', it: 'Piattaforma MLOps' },
     sector: { en: 'Banking', it: 'Banking' },
     role: { en: 'Platform architect', it: 'Architetto di piattaforma' },
@@ -101,6 +109,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'ml-blackbox-migration',
+    sfx: { latin: 'Pan', jp: 'パン' },
     title: {
       en: 'From black box to shared knowledge',
       it: 'Dalla black box alla conoscenza condivisa',
@@ -117,6 +126,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'cicd-appliances',
+    sfx: { latin: 'Ka', jp: 'カッ' },
     title: { en: 'CI/CD Architecture', it: 'Architettura CI/CD' },
     sector: { en: 'Appliances', it: 'Appliances' },
     role: { en: 'DevOps architecture', it: 'Architettura DevOps' },
@@ -132,6 +142,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'brewery-us',
+    sfx: { latin: 'Fuwa', jp: 'フワ' },
     title: { en: 'Brewery platform', it: 'Piattaforma brewery' },
     sector: { en: 'Beverage · US', it: 'Beverage · USA' },
     role: { en: 'Assessment → pre-sales → technical lead', it: 'Assessment → pre-sales → guida tecnica' },

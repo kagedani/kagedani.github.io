@@ -12,6 +12,14 @@ export const ui = {
     'nav.menu': 'Open menu',
     'nav.theme': 'Switch theme',
 
+    'mg.pencils': 'pencils',
+    'mg.inks': 'inks',
+    'mg.tones': 'tones',
+    'mg.letters': 'letters',
+    'mg.ready': 'page ready',
+    'mg.toBoring': 'Back to boring version',
+    'mg.toManga': 'Back to the manga',
+
     'kicker.work': 'Selected work',
     'kicker.leadership': 'Leadership & People',
     'kicker.writing': 'Writing & Talks',
@@ -52,6 +60,14 @@ export const ui = {
     'nav.contact': 'Contatti',
     'nav.menu': 'Apri il menu',
     'nav.theme': 'Cambia tema',
+
+    'mg.pencils': 'matite',
+    'mg.inks': 'chine',
+    'mg.tones': 'retini',
+    'mg.letters': 'lettering',
+    'mg.ready': 'tavola pronta',
+    'mg.toBoring': 'Torna alla versione noiosa',
+    'mg.toManga': 'Torna al manga',
 
     'kicker.work': 'Progetti selezionati',
     'kicker.leadership': 'Leadership e persone',
