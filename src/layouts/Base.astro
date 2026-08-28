@@ -278,6 +278,7 @@ const jsonLd = {
         /* The escape hatch. Coming back to the manga redraws the page from
            pencils, which is the only honest way to re-enter it. */
         const btn = document.getElementById('mode-toggle');
+        if (btn && root.dataset.mode === 'boring') btn.textContent = btn.dataset.toManga;
         btn?.addEventListener('click', () => {
           if (root.dataset.mode === 'boring') {
             root.dataset.mode = 'manga';

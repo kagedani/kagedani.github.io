@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#2563eb"/>
-  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle"
-        font-family="system-ui, sans-serif" font-size="18" font-weight="800"
-        fill="#ffffff">D</text>
+  <rect width="32" height="32" fill="#0d0b09"/>
+  <rect y="27" width="32" height="5" fill="#d8452a"/>
+  <text x="16" y="14" dominant-baseline="central" text-anchor="middle"
+        font-family="'Arial Narrow', 'Helvetica Neue Condensed', Impact, system-ui, sans-serif"
+        font-size="17" font-weight="700" letter-spacing="0.5" fill="#fbf9f5">DU</text>
 </svg>

@@ -121,7 +121,8 @@ html[data-mode='manga'] .mg-edge {
   pointer-events: none;
   z-index: 2;
 }
-html[data-mode='manga'] .mg-edge rect {
+html[data-mode='manga'] .mg-edge rect,
+html[data-mode='manga'] .mg-edge circle {
   fill: none;
   vector-effect: non-scaling-stroke;
 }
@@ -367,20 +368,20 @@ html[data-mode='manga'] .hero .lede::before,
 html[data-mode='manga'] .hero .lede::after {
   content: '';
   position: absolute;
-  right: 56px;
+  right: 52px;
   width: 0;
   height: 0;
   border-style: solid;
 }
 html[data-mode='manga'] .hero .lede::before {
-  bottom: -25px;
-  border-width: 26px 0 0 20px;
-  border-color: var(--text) transparent transparent transparent;
+  top: -25px;
+  border-width: 0 0 26px 20px;
+  border-color: transparent transparent var(--text) transparent;
 }
 html[data-mode='manga'] .hero .lede::after {
-  bottom: -19px;
-  border-width: 21px 0 0 15px;
-  border-color: var(--bg) transparent transparent transparent;
+  top: -19px;
+  border-width: 0 0 21px 15px;
+  border-color: transparent transparent var(--bg) transparent;
 }
 html[data-mode='manga'] .hero-aside {
   font-family: var(--mono);
@@ -394,8 +395,8 @@ html[data-mode='manga'] .hero-aside {
    one. The drawn border comes from the frame machinery, so the img gives
    up its own. */
 html[data-mode='manga'] .portrait { position: relative; }
-html[data-mode='manga'] .p-drawn { display: block; }
-html[data-mode='manga'] .p-photo { display: none; }
+html[data-mode='manga'] .portrait .p-drawn { display: block; }
+html[data-mode='manga'] .portrait .p-photo { display: none; }
 html[data-mode='manga'] .portrait img { border: 0; }
 /* ============================================================== stats ====
    Four small panels. Numbers in impact lettering.                       */
@@ -448,6 +449,11 @@ html[data-mode='manga'] .kicker::after {
 /* ============================================================== cards ====
    Ink weight is the hierarchy: the wide card is drawn heavier.          */
 html[data-mode='manga'] .card.wide { --ink-w: 5px; }
+html[data-mode='manga'] .card.wide .mg-tone {
+  -webkit-clip-path: polygon(100% 44%, 100% 100%, 68% 100%);
+  clip-path: polygon(100% 44%, 100% 100%, 68% 100%);
+}
+html[data-mode='manga'] .card.wide .stack { max-width: 64%; }
 html[data-mode='manga'] .card-title {
   font-family: var(--serif);
   font-weight: 500;
@@ -514,7 +520,7 @@ html[data-mode='manga'] #contact .contact-link span { color: var(--accent); }
 html[data-mode='manga'] #contact .contact-link:hover { color: var(--accent); }
 
 html[data-mode='manga'] .wrap.reading {
-  max-width: min(960px, 94vw);
+  max-width: min(880px, 94vw);
 }
 
 /* ======================================================= case studies ====

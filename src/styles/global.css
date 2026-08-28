@@ -348,7 +348,6 @@ button {
   max-width: 240px;
 }
 .portrait img {
-  display: block;
   width: 100%;
   height: auto;
   /* Both files are circular crops on a white square: without this the white
@@ -356,7 +355,8 @@ button {
   border-radius: 50%;
   border: 1px solid var(--border);
 }
-.p-drawn { display: none; }
+.portrait .p-photo { display: block; }
+.portrait .p-drawn { display: none; }
 @media (min-width: 900px) {
   .hero-grid {
     grid-template-columns: minmax(0, 1fr) clamp(200px, 22vw, 280px);
@@ -370,7 +370,12 @@ button {
 /* Long-form pages keep a reading measure. The container is capped so the
    column sits in a page instead of hugging the left edge of a wide sheet. */
 .wrap.reading {
-  max-width: min(920px, 100%);
+  max-width: min(860px, 100%);
+}
+.reading .prose,
+.reading .tl-desc,
+.reading .lede {
+  max-width: 100%;
 }
 
 .stats-band {
