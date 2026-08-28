@@ -321,7 +321,7 @@ e chi la usa ha comunque visto che il sito sa fare l'altra cosa.
 
 ### Regola vigente: nessun trattino lungo
 
-**Chiusa il 2026-08-23.** Ne sono stati tolti **179**: 73 in , 106 nei
+**Chiusa il 2026-08-23.** Ne sono stati tolti **179**: 73 in `content.ts`, 106 nei
 sei case study, più titoli di pagina, footer, etichette del diagramma SVG e il
 badge TODO. Il sito costruito ne contiene **zero**, trattini a mezza lunghezza
 compresi.
@@ -334,24 +334,19 @@ compensa.** Un lettore che sospetta il testo generato non cambia idea perché la
 grafica è bella.
 
 Sostituzioni usate: due punti, virgola, parentesi, o due frasi. Gli intervalli
-prendono il trattino semplice (). I titoli di pagina usano la barra
+prendono il trattino semplice (`2022 - 2025`). I titoli di pagina usano la barra
 verticale. In circa un terzo dei casi la frase è stata **rifatta**, non solo
 ripunteggiata, perché il trattino teneva insieme due proposizioni che non
 reggevano da sole.
 
-Conseguenza operativa: il README in  **prescriveva**
-. Ora prescrive  e porta la regola
-scritta, altrimenti la prima sessione che scrive un case study li rimette.
+Conseguenza operativa: il README in `src/content/case-studies/` **prescriveva**
+la vecchia forma del blockquote col trattino. Ora prescrive i due punti e porta
+la regola scritta, altrimenti la prima sessione che scrive un case study li rimette.
 
 ### Rimasto aperto
 
-- **I 179 trattini lunghi.** L'autore ha chiesto che il sito non sia riconducibile
-  alle rappresentazioni tipiche dell'intelligenza artificiale, citando proprio i
-  trattini lunghi. Ce ne sono **73 in `content.ts` e 106 nei case study**, messi
-  quasi tutti da Claude. **È il segnale più forte di tutti**, più di qualunque scelta
-  grafica: un lettore che sospetta il testo generato non cambia idea perché la
-  grafica è bella. Lavoro suo, separato dalla veste: in circa un terzo dei casi la
-  frase va rifatta e non solo ripunteggiata.
+- **I trattini lunghi: chiusi.** Vedi "Regola vigente: nessun trattino lungo" qui
+  sopra. Zero nel sito costruito.
 - Case study: l'apertura di capitolo è inchiostrata, il corpo resta quieto. Millecinquecento
   parole dentro una vignetta retinata non si leggono.
 
