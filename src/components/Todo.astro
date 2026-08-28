@@ -1,0 +1,15 @@
+---
+/**
+ * Visible marker for content still waiting on material.
+ * Shown during `astro dev` and in preview builds; hidden in production so a
+ * half-filled page never ships a yellow box to a recruiter.
+ * Set PUBLIC_SHOW_TODOS=1 to force them on in a build.
+ */
+interface Props {
+  note?: string;
+}
+const { note } = Astro.props;
+const show = import.meta.env.DEV || import.meta.env.PUBLIC_SHOW_TODOS === '1';
+---
+
+{note && show && <span class="todo">{note}</span>}

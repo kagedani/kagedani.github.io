@@ -1,0 +1,44 @@
+---
+import type { Lang } from '../../config';
+import type { Project } from '../../data/content';
+import { t, localePath } from '../../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  project: Project;
+}
+const { lang, project: p } = Astro.props;
+const tr = t(lang);
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="hero-role">
+      {p.sector[lang]} &nbsp;·&nbsp; {p.role[lang]}
+      {p.period && <> &nbsp;·&nbsp; {p.period}</>}
+      {p.ongoing && <> &nbsp;·&nbsp; {tr('label.ongoing')}</>}
+    </p>
+    <h1>{p.title[lang]}</h1>
+    <p class="lede">{p.summary[lang]}</p>
+    {
+      p.stack.length > 0 && (
+        <div class="stack" style="margin-top:1.75rem">
+          {p.stack.map((s) => (
+            <span class="chip">{s}</span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <article class="prose study">
+      <slot />
+    </article>
+    <div class="cta">
+      <a href={localePath(lang, '/work/')} class="btn">← {tr('cta.all')}</a>
+    </div>
+  </div>
+</section>

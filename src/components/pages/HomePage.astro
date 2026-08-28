@@ -1,0 +1,133 @@
+---
+import { SITE, type Lang } from '../../config';
+import { t, localePath } from '../../i18n/ui';
+import {
+  hero, stats, projects, leadership, leadershipVoice, writing, contactCopy,
+} from '../../data/content';
+import ProjectCard from '../ProjectCard.astro';
+import Todo from '../Todo.astro';
+import { slugsWithStudy } from '../../lib/studies';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+
+const featured = projects.filter((p) => p.featured);
+const topWriting = writing.slice(0, 4);
+const withStudy = await slugsWithStudy(lang);
+const studyHref = (slug: string) =>
+  withStudy.has(slug) ? localePath(lang, `/work/${slug}/`) : undefined;
+---
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-role">{hero.role[lang]} <b>{SITE.company}</b></p>
+      <h1>{hero.headline[lang]} <em>{hero.headlineEm[lang]}</em></h1>
+      <p class="lede" set:html={hero.lede[lang]} />
+      <p class="hero-aside">{hero.aside[lang]}</p>
+
+      <div class="cta">
+        <a href={localePath(lang, '/work/')} class="btn btn-primary">{tr('cta.work')}</a>
+        <a href="#contact" class="btn">{tr('cta.contact')}</a>
+        <a href={SITE.cv} class="btn" download>{tr('cta.cv')}</a>
+      </div>
+    </div>
+
+    <figure class="portrait">
+      {/* The drawing carries the comic, the photograph carries the plain
+          version. The photograph is lazy so it is never fetched while the
+          comic is on, and vice versa by the drawing being display:none. */}
+      <img
+        class="p-drawn"
+        src={SITE.photoDrawn}
+        alt={SITE.name}
+        width="640"
+        height="640"
+        fetchpriority="high"
+      />
+      <img class="p-photo" src={SITE.photo} alt={SITE.name} width="389" height="389" loading="lazy" />
+    </figure>
+  </div>
+</section>
+
+<section class="stats-band">
+  <div class="wrap">
+    <div class="stats">
+      {
+        stats.map((s) => (
+          <div class="stat">
+            <div class="stat-n">{s.num}</div>
+            <div class="stat-l">{s.label[lang]}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <h2 class="kicker">{tr('kicker.work')}</h2>
+    <div class="grid">
+      {featured.map((p, i) => <ProjectCard project={p} lang={lang} wide={i === 0} href={studyHref(p.slug)} />)}
+    </div>
+    <div class="cta">
+      <a href={localePath(lang, '/work/')} class="btn">{tr('cta.all')}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="leadership">
+  <div class="wrap">
+    <h2 class="kicker">{tr('kicker.leadership')}</h2>
+    <p class="voice">{leadershipVoice[lang]}</p>
+    <div class="lead-grid">
+      {
+        leadership.map((c) => (
+          <div class="lead-cell">
+            {c.num !== '—' && <div class="lead-num">{c.num}</div>}
+            <div class="lead-head">{c.head[lang]}</div>
+            <p class="lead-body">{c.body[lang]}</p>
+            <Todo note={c.todo} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section" id="writing">
+  <div class="wrap">
+    <h2 class="kicker">{tr('kicker.writing')}</h2>
+    {
+      topWriting.map((w) => {
+        const Tag = w.href ? 'a' : 'div';
+        return (
+          <Tag class="wc-row" href={w.href} target={w.href ? '_blank' : undefined} rel={w.href ? 'noopener' : undefined}>
+            <span class="wc-kind">{w.kind[lang]}</span>
+            <span class="wc-title">{w.title[lang]}</span>
+            <span class="wc-meta">{w.year}</span>
+          </Tag>
+        );
+      })
+    }
+    <div class="cta">
+      <a href={localePath(lang, '/writing/')} class="btn">{tr('cta.allWriting')}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <h2 class="kicker">{tr('kicker.contact')}</h2>
+    <p class="voice">{contactCopy[lang]}</p>
+    <div class="contact-links">
+      <a class="contact-link" href={`mailto:${SITE.email}`}><span>{tr('label.email')}</span> {SITE.email}</a>
+      <a class="contact-link" href={SITE.linkedin} target="_blank" rel="noopener"><span>{tr('label.linkedin')}</span> /in/daniele-uboldi</a>
+      <a class="contact-link" href={SITE.github} target="_blank" rel="noopener"><span>{tr('label.github')}</span> {SITE.githubHandle}</a>
+    </div>
+  </div>
+</section>

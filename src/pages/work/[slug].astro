@@ -1,0 +1,30 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CaseStudyPage from '../../components/pages/CaseStudyPage.astro';
+import { projects } from '../../data/content';
+import { studiesFor } from '../../lib/studies';
+
+export async function getStaticPaths() {
+  const studies = await studiesFor('en');
+  return studies.flatMap(({ slug, entry }) => {
+    const project = projects.find((p) => p.slug === slug);
+    // A study whose slug has no project in content.ts is a typo, not a page.
+    return project ? [{ params: { slug }, props: { project, entry } }] : [];
+  });
+}
+
+const { project, entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Base
+  lang="en"
+  path={`/work/${project.slug}/`}
+  title={`${project.title.en} | Daniele Uboldi`}
+  description={project.summary.en}
+>
+  <CaseStudyPage lang="en" project={project}>
+    <Content />
+  </CaseStudyPage>
+</Base>

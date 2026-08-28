@@ -1,0 +1,64 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { BLOG_ENABLED } from '../../config';
+
+export async function getStaticPaths() {
+  // Gate: no routes at all until the blog has content worth showing.
+  if (!BLOG_ENABLED) return [];
+
+  const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+  return [
+    { params: { slug: undefined }, props: { posts } },
+    ...posts.map((post) => ({ params: { slug: post.id }, props: { post, posts } })),
+  ];
+}
+
+const { post, posts } = Astro.props;
+const { Content } = post ? await render(post) : { Content: null };
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+{
+  post ? (
+    <Base lang="en" path={`/blog/${post.id}/`} title={`${post.data.title} | Daniele Uboldi`} description={post.data.description}>
+      <section class="page-head">
+        <div class="wrap">
+          <p class="hero-role">{fmt(post.data.pubDate)}</p>
+          <h1>{post.data.title}</h1>
+          <p class="lede">{post.data.description}</p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap">
+          <article class="prose">
+            <Content />
+          </article>
+        </div>
+      </section>
+    </Base>
+  ) : (
+    <Base lang="en" path="/blog/" title="Blog | Daniele Uboldi" description="Notes on data architecture, Data Mesh and platform engineering.">
+      <section class="page-head">
+        <div class="wrap">
+          <h1>Blog</h1>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap">
+          {posts.map((p) => (
+            <a class="w-row" href={`/blog/${p.id}/`}>
+              <span class="w-kind">{fmt(p.data.pubDate)}</span>
+              <span class="w-title">{p.data.title}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    </Base>
+  )
+}

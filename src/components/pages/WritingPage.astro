@@ -1,0 +1,103 @@
+---
+import type { Lang } from '../../config';
+import { t } from '../../i18n/ui';
+import { writing } from '../../data/content';
+import Todo from '../Todo.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+
+/**
+ * Exactly one item is expected to be featured; it gets the block treatment and
+ * everything else falls into the ruled list below. Which item that is lives in
+ * the data, not here — moving the spotlight is a one-line edit in content.ts.
+ */
+const lead = writing.find((w) => w.featured);
+const rest = writing.filter((w) => w !== lead);
+
+/** 'Confluent Data in Motion · Milan · 2023' — venue is optional, the year never is. */
+const meta = (w: (typeof writing)[number]) =>
+  [w.venue?.[lang], w.year].filter(Boolean).join(' · ');
+---
+
+<section class="page-head">
+  <div class="wrap">
+    <h1>{tr('page.writing.title')}</h1>
+    <p class="lede">{tr('page.writing.lede')}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    {
+      lead && (
+        <>
+          <article class="w-lead">
+            <header class="w-lead-head">
+              <span class="w-kind">{lead.kind[lang]}</span>
+              <span class="w-meta">{meta(lead)}</span>
+            </header>
+            <h2 class="w-lead-title">
+              {lead.href ? (
+                <a href={lead.href} target="_blank" rel="noopener">
+                  {lead.title[lang]}
+                </a>
+              ) : (
+                lead.title[lang]
+              )}
+            </h2>
+            <p class="w-lead-desc">{lead.description[lang]}</p>
+            {lead.links && lead.links.length > 0 && (
+              <p class="w-links">
+                {lead.links.map((l) => (
+                  <a href={l.href} target="_blank" rel="noopener">
+                    {l.label}
+                  </a>
+                ))}
+              </p>
+            )}
+          </article>
+          <Todo note={lead.todo} />
+        </>
+      )
+    }
+
+    <div class="w-list">
+      {
+        rest.map((w) => (
+          <>
+            <article class="w-row">
+              <header class="w-row-head">
+                <span class="w-kind">{w.kind[lang]}</span>
+                <span class="w-meta">{meta(w)}</span>
+              </header>
+              <h3 class="w-title">
+                {w.href ? (
+                  <a href={w.href} target="_blank" rel="noopener">
+                    {w.title[lang]}
+                  </a>
+                ) : (
+                  w.title[lang]
+                )}
+              </h3>
+              <p class="w-desc">{w.description[lang]}</p>
+              {w.links && w.links.length > 0 && (
+                <p class="w-links">
+                  {w.links.map((l) => (
+                    <a href={l.href} target="_blank" rel="noopener">
+                      {l.label}
+                    </a>
+                  ))}
+                </p>
+              )}
+            </article>
+            <Todo note={w.todo} />
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>

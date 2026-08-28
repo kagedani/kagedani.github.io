@@ -1,0 +1,53 @@
+---
+import type { Lang } from '../config';
+import type { Project } from '../data/content';
+import { t } from '../i18n/ui';
+import Todo from './Todo.astro';
+
+interface Props {
+  project: Project;
+  lang: Lang;
+  wide?: boolean;
+  /** Set only when a case study exists for this project in this language. */
+  href?: string;
+}
+const { project: p, lang, wide = false, href } = Astro.props;
+const tr = t(lang);
+
+// A card is only clickable when there is something to click through to.
+const Tag = href ? 'a' : 'article';
+---
+
+<Tag class:list={['card', wide && 'wide']} href={href} data-sfx={p.sfx?.latin} data-sfx-jp={p.sfx?.jp}>
+  <div class="card-meta">
+    <span>{p.sector[lang]}</span>·<span>{p.role[lang]}</span>
+    {p.ongoing && <span class="pill-ongoing">{tr('label.ongoing')}</span>}
+    {p.period && <span class="card-period">{p.period}</span>}
+  </div>
+
+  <h3 class="card-title">{p.title[lang]}</h3>
+  <p class="card-desc">{p.summary[lang]}</p>
+
+  {
+    href && (
+      <span class="card-more">
+        {tr('cta.more')}
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </span>
+    )
+  }
+
+  {
+    p.stack.length > 0 && (
+      <div class="stack">
+        {p.stack.map((s) => (
+          <span class="chip">{s}</span>
+        ))}
+      </div>
+    )
+  }
+
+  <Todo note={p.todo} />
+</Tag>

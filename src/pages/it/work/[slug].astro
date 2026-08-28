@@ -1,0 +1,29 @@
+---
+import { render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import CaseStudyPage from '../../../components/pages/CaseStudyPage.astro';
+import { projects } from '../../../data/content';
+import { studiesFor } from '../../../lib/studies';
+
+export async function getStaticPaths() {
+  const studies = await studiesFor('it');
+  return studies.flatMap(({ slug, entry }) => {
+    const project = projects.find((p) => p.slug === slug);
+    return project ? [{ params: { slug }, props: { project, entry } }] : [];
+  });
+}
+
+const { project, entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Base
+  lang="it"
+  path={`/work/${project.slug}/`}
+  title={`${project.title.it} | Daniele Uboldi`}
+  description={project.summary.it}
+>
+  <CaseStudyPage lang="it" project={project}>
+    <Content />
+  </CaseStudyPage>
+</Base>

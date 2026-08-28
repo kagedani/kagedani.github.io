@@ -1,0 +1,310 @@
+---
+import '../styles/global.css';
+import '../styles/manga.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { SITE, type Lang } from '../config';
+import { metaDescription } from '../data/content';
+import { t, localePath } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** Locale-less path, e.g. '/' or '/work/'. Drives hreflang and the EN|IT switch. */
+  path: string;
+  title: string;
+  description?: string;
+}
+
+const { lang, path, title, description } = Astro.props;
+
+const tr = t(lang);
+const desc = description ?? metaDescription[lang];
+const canonical = new URL(localePath(lang, path), SITE.url).href;
+const enHref = new URL(localePath('en', path), SITE.url).href;
+const itHref = new URL(localePath('it', path), SITE.url).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  url: SITE.url,
+  jobTitle: SITE.role,
+  email: `mailto:${SITE.email}`,
+  image: new URL(SITE.photo, SITE.url).href,
+  worksFor: { '@type': 'Organization', name: SITE.company, url: 'https://quantyca.it' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Monza', addressCountry: 'IT' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Politecnico di Milano' },
+  sameAs: [SITE.linkedin, SITE.github],
+  knowsLanguage: ['en', 'it'],
+  knowsAbout: [
+    'Data Mesh', 'Data Architecture', 'Data Strategy', 'Data Governance', 'Data Products',
+    'MLOps', 'Data Platforms', 'Apache Kafka', 'Apache Spark', 'Apache Iceberg',
+    'Kubernetes', 'Docker', 'AWS', 'Microsoft Azure', 'MLflow', 'Python', 'SQL',
+    'OpenDataMesh', 'OpenTelemetry', 'Solution Architecture',
+  ],
+};
+---
+
+<!doctype html>
+<html lang={lang} data-mode="manga">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={desc} />
+    <meta name="author" content={SITE.name} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="it" href={itHref} />
+    <link rel="alternate" hreflang="x-default" href={enHref} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:locale" content={lang === 'it' ? 'it_IT' : 'en_GB'} />
+    {/* No og:image on purpose: the old site pointed at a file that did not exist,
+        so every share rendered an empty card. A real 1200x630 asset is on the TODO list;
+        until it exists, a small summary card is better than a broken large one. */}
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;450;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&display=swap"
+    />
+    {/* Noto Sans JP, subset to the ten katakana the sound effects use.
+        The unsubset family ships ~100 KB of @font-face declarations for a
+        full Japanese set; this is 483 bytes. */}
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=%E3%82%B4%E3%82%BA%E3%83%BC%E3%83%B3%E3%83%91%E3%82%AB%E3%83%83%E3%83%95%E3%83%AF%E3%83%89&display=swap"
+    />
+
+    <script is:inline>
+      // Applied before first paint so the manual choice never flashes the wrong theme.
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'dark' || saved === 'light') {
+          document.documentElement.dataset.theme = saved;
+        }
+        // Manga is the default; only a reader who asked for the plain
+        // version gets it, and they get it before first paint.
+        if (localStorage.getItem('mode') === 'boring') {
+          document.documentElement.dataset.mode = 'boring';
+        }
+      } catch (_) {}
+    </script>
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="sheet">
+      <Nav lang={lang} path={path} />
+      <main id="main">
+        <slot />
+      </main>
+      <Footer lang={lang} />
+    </div>
+
+    {/* The production slug narrates which pass the page is on, the way the
+        reference terminal site types its own commands. The folio counts
+        pages. Both are hidden outright in the plain version. */}
+    <p class="mg-slug" id="mg-slug" aria-hidden="true">
+      <span>&gt; {tr('mg.pencils')}</span>
+      <span>&gt; {tr('mg.inks')}</span>
+      <span>&gt; {tr('mg.tones')}</span>
+      <span>&gt; {tr('mg.letters')}</span>
+      <span>&gt; {tr('mg.ready')}</span>
+    </p>
+    <p class="mg-folio" aria-hidden="true">P. <b id="mg-folio">01</b></p>
+
+    <script is:inline>
+      const root = document.documentElement;
+      const current = () =>
+        root.dataset.theme ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const next = current() === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        try {
+          localStorage.setItem('theme', next);
+        } catch (_) {}
+      });
+
+      const burger = document.getElementById('burger');
+      const menu = document.getElementById('mobile-menu');
+      burger?.addEventListener('click', () => {
+        const open = menu.dataset.open === 'true';
+        menu.dataset.open = String(!open);
+        burger.setAttribute('aria-expanded', String(!open));
+      });
+      menu?.querySelectorAll('a').forEach((a) =>
+        a.addEventListener('click', () => {
+          menu.dataset.open = 'false';
+          burger?.setAttribute('aria-expanded', 'false');
+        })
+      );
+
+      /* ================================================== the drawing ====
+         A page is made in four passes, and this one is made the same way:
+         pencils, inks, tones, letters. Frames are picked by selector, so
+         the page components stay unaware any of this exists. That is also
+         what keeps the plain version honest: same markup, no manga. */
+      (function () {
+        const NS = 'http://www.w3.org/2000/svg';
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const frames = [...document.querySelectorAll('.hero > .wrap, .portrait, .card, .lead-cell, .w-lead')];
+
+        // Chapter numbers on the section headings.
+        document.querySelectorAll('.kicker').forEach((k, i) => {
+          k.dataset.ch = String(i + 1).padStart(2, '0');
+        });
+
+        frames.forEach((f) => {
+          f.classList.add('mg-frame');
+
+          const svg = document.createElementNS(NS, 'svg');
+          svg.setAttribute('class', 'mg-edge');
+          svg.setAttribute('viewBox', '0 0 100 100');
+          svg.setAttribute('preserveAspectRatio', 'none');
+          svg.setAttribute('aria-hidden', 'true');
+          // pathLength=1 spares the perimeter maths; non-scaling-stroke keeps
+          // the line weight constant while the box flexes.
+          const round = f.classList.contains('portrait');
+          const edge = (cls, jitter) => {
+            const el = document.createElementNS(NS, round ? 'circle' : 'rect');
+            el.setAttribute('class', cls);
+            if (round) {
+              el.setAttribute('cx', 50);
+              el.setAttribute('cy', jitter ? 50.4 : 50);
+              el.setAttribute('r', 49);
+            } else {
+              el.setAttribute('x', jitter ? 0.6 : 0);
+              el.setAttribute('y', jitter ? -0.5 : 0);
+              el.setAttribute('width', 100);
+              el.setAttribute('height', 100);
+            }
+            el.setAttribute('pathLength', 1);
+            return el;
+          };
+          svg.appendChild(edge('mg-pencil', true));
+          svg.appendChild(edge('mg-ink', false));
+          f.prepend(svg);
+
+          const tone = document.createElement('i');
+          tone.className = f.classList.contains('wide') ? 'mg-tone band' : 'mg-tone';
+          f.prepend(tone);
+
+          const isHero = f.matches('.hero > .wrap');
+          if (f.classList.contains('card')) {
+            const sp = document.createElement('i');
+            sp.className = 'mg-speed';
+            f.prepend(sp);
+          }
+
+          const latin = f.dataset.sfx || (isHero ? 'Don' : '');
+          const jp = f.dataset.sfxJp || (isHero ? '\u30c9\u30f3' : '');
+          if (latin) {
+            const s = document.createElement('i');
+            s.className = 'mg-sfx';
+            s.setAttribute('aria-hidden', 'true');
+            s.textContent = latin;
+            const kana = document.createElement('b');
+            kana.textContent = jp;
+            s.appendChild(kana);
+            f.appendChild(s);
+          }
+        });
+
+        const draw = (f, delay) => {
+          if (f.dataset.drawn) return;
+          f.dataset.drawn = '1';
+          const t = reduced ? 0 : 1;
+          setTimeout(() => f.classList.add('is-pencil'), delay);
+          setTimeout(() => f.classList.add('is-ink'), delay + 90 * t);
+          setTimeout(() => f.classList.add('is-tone'), delay + 330 * t);
+          setTimeout(() => f.classList.add('is-letter'), delay + 400 * t);
+        };
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries
+              .filter((e) => e.isIntersecting)
+              .forEach((e, i) => {
+                draw(e.target, i * 55);
+                io.unobserve(e.target);
+              });
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.1 }
+        );
+        frames.forEach((f, i) => {
+          const r = f.getBoundingClientRect();
+          if (r.top < innerHeight && r.bottom > 0) draw(f, i * 55);
+          else io.observe(f);
+        });
+
+        const slug = document.getElementById('mg-slug');
+        const runSlug = () => {
+          const steps = [...slug.querySelectorAll('span')];
+          steps.forEach((s) => s.classList.remove('on'));
+          steps.forEach((s, n) =>
+            setTimeout(() => s.classList.add('on'), reduced ? 0 : 170 + n * 230)
+          );
+        };
+        runSlug();
+
+        const folio = document.getElementById('mg-folio');
+        addEventListener(
+          'scroll',
+          () => {
+            const y = innerHeight * 0.45;
+            let n = 1;
+            frames.forEach((f, i) => {
+              if (f.getBoundingClientRect().top < y) n = i + 1;
+            });
+            folio.textContent = String(n).padStart(2, '0');
+          },
+          { passive: true }
+        );
+
+        /* The escape hatch. Coming back to the manga redraws the page from
+           pencils, which is the only honest way to re-enter it. */
+        const btn = document.getElementById('mode-toggle');
+        if (btn && root.dataset.mode === 'boring') btn.textContent = btn.dataset.toManga;
+        btn?.addEventListener('click', () => {
+          if (root.dataset.mode === 'boring') {
+            root.dataset.mode = 'manga';
+            btn.textContent = btn.dataset.toBoring;
+            frames.forEach((f) => {
+              f.classList.remove('is-pencil', 'is-ink', 'is-tone', 'is-letter');
+              delete f.dataset.drawn;
+            });
+            runSlug();
+            requestAnimationFrame(() => {
+              frames.forEach((f, i) => {
+                const r = f.getBoundingClientRect();
+                if (r.top < innerHeight && r.bottom > 0) draw(f, i * 90);
+                else io.observe(f);
+              });
+            });
+          } else {
+            root.dataset.mode = 'boring';
+            btn.textContent = btn.dataset.toManga;
+            frames.forEach((f) => f.classList.add('is-pencil', 'is-ink', 'is-tone', 'is-letter'));
+          }
+          try {
+            localStorage.setItem('mode', root.dataset.mode);
+          } catch (_) {}
+        });
+      })();
+    </script>
+  </body>
+</html>
