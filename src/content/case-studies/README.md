@@ -15,7 +15,7 @@ Section order is fixed, per `docs/redesign-plan.md`:
    Inline SVG using the `.dg-*` classes, never an image: it reads the CSS
    variables, so it works in both themes and its labels stay selectable.
 4. `## The decisions` — `###` per decision, each closing with a
-   `> **Trade-off** — …` blockquote. **A case study with no discussable
+   `> **Trade-off:** …` blockquote. **A case study with no discussable
    decision and no admitted cost is a press release.**
 5. `## What went wrong` — **mandatory.** A failure told precisely is worth more
    than three decisions told well: it is the part nobody can invent. It is also
@@ -35,3 +35,15 @@ public artifact — a conference talk title, an article byline — on `/writing`
 where the name is the publisher's act and not ours. That exception does not
 reach into these files. Revenue figures are out too, where the sector is small
 enough that revenue plus geography identifies one company.
+
+## No em dashes
+
+Not one, anywhere a reader can see it: headings, prose, blockquotes, table
+cells, diagram labels. The author asked for this directly, on the grounds that
+the long dash is the most recognisable signature of generated text, and he is
+right that no amount of good design argues a reader out of that suspicion.
+
+Use a colon, a comma, parentheses, or two sentences. A range takes a plain
+hyphen (2022 - 2025). The en dash is out on the same grounds.
+
+The whole site was cleaned of 179 of them on 2026-08-23. Do not put them back.

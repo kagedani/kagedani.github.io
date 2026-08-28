@@ -26,7 +26,7 @@ const fmt = (d: Date) =>
 
 {
   post ? (
-    <Base lang="en" path={`/blog/${post.id}/`} title={`${post.data.title} — Daniele Uboldi`} description={post.data.description}>
+    <Base lang="en" path={`/blog/${post.id}/`} title={`${post.data.title} | Daniele Uboldi`} description={post.data.description}>
       <section class="page-head">
         <div class="wrap">
           <p class="hero-role">{fmt(post.data.pubDate)}</p>
@@ -43,7 +43,7 @@ const fmt = (d: Date) =>
       </section>
     </Base>
   ) : (
-    <Base lang="en" path="/blog/" title="Blog — Daniele Uboldi" description="Notes on data architecture, Data Mesh and platform engineering.">
+    <Base lang="en" path="/blog/" title="Blog | Daniele Uboldi" description="Notes on data architecture, Data Mesh and platform engineering.">
       <section class="page-head">
         <div class="wrap">
           <h1>Blog</h1>

@@ -1164,7 +1164,7 @@ h1 em {
   padding: 0.55rem 0.7rem;
 }
 .todo::before {
-  content: 'TODO — ';
+  content: 'TODO: ';
   font-weight: 500;
 }
 

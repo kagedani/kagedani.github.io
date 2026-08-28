@@ -9,11 +9,11 @@ The platform produced results. That was never the problem.
 Everything the platform learned stayed inside it. Models, data and logic were sealed in a closed system, which is not one problem but four at once:
 
 - **No exit.** Leaving meant rebuilding from scratch, so the bank had no leverage in any conversation with the vendor.
-- **No explainability.** Decisions could not be inspected or justified to risk, to audit, or to the regulator — in a bank, on a workflow that touches wire transfers.
+- **No explainability.** Decisions could not be inspected or justified to risk, to audit, or to the regulator. In a bank, on a workflow that touches wire transfers.
 - **Cost that scaled with usage, not with value.** Licensing was per use case and grew as the bank used it more, which means automating *more* work made the economics worse. The ceiling was commercial, not technical.
 - **No accumulation.** Every change routed through the vendor, so the bank's own people got no better at this over time.
 
-The last two are the pair that explains why the project existed. The bank had already identified a large body of manual work these models could absorb — it put the figure at **45 FTE across the four use cases** — and the licence structure made capturing it uneconomical. So the cost had to be solved either way. The only open question was whether solving it would also buy ownership.
+The last two are the pair that explains why the project existed. The bank had already identified a large body of manual work these models could absorb (it put the figure at **45 FTE across the four use cases**), and the licence structure made capturing it uneconomical. So the cost had to be solved either way. The only open question was whether solving it would also buy ownership.
 
 ## The architecture
 
@@ -39,7 +39,7 @@ The last two are the pair that explains why the project existed. The bank had al
 
   <text class="dg-l" x="112" y="116">INTEGRATION</text>
   <rect class="dg-box-a" x="130" y="92" width="618" height="44" />
-  <text class="dg-t2" x="145" y="118">Single secure entry point — every request authenticated and authorized here</text>
+  <text class="dg-t2" x="145" y="118">Single secure entry point: every request authenticated and authorized here</text>
   <text class="dg-p" x="655" y="118">AUTHN · AUTHZ</text>
 
   <path class="dg-arrow" d="M439 140 V162" marker-end="url(#dgArrow)" />
@@ -57,9 +57,9 @@ The last two are the pair that explains why the project existed. The bank had al
   <text class="dg-t" x="663" y="211">Documents</text>
   <text class="dg-s" x="144" y="242">DATA LAYER &amp; MODEL REGISTRY</text>
   <rect class="dg-box" x="142" y="248" width="293" height="30" />
-  <text class="dg-t" x="288" y="267">SQL Server — shared data</text>
+  <text class="dg-t" x="288" y="267">SQL Server: shared data</text>
   <rect class="dg-box" x="443" y="248" width="291" height="30" />
-  <text class="dg-t" x="588" y="267">MLflow — tracking &amp; versioned models</text>
+  <text class="dg-t" x="588" y="267">MLflow: tracking &amp; versioned models</text>
 
   <text class="dg-l" x="112" y="327">FOUNDATION</text>
   <rect class="dg-band" x="130" y="296" width="618" height="58" />
@@ -86,49 +86,49 @@ End to end, on the ticketing and email channels, in about fifteen seconds:
 
 ### Rebuild the models rather than change vendor
 
-Moving to a different vendor would have solved the licence cost and nothing else — same sealed box, new logo. Rebuilding was the only option that addressed explainability and ownership at the same time.
+Moving to a different vendor would have solved the licence cost and nothing else: same sealed box, new logo. Rebuilding was the only option that addressed explainability and ownership at the same time.
 
-> **Trade-off** — you are betting you can match a system that already works, with none of the credit for doing so. Parity is invisible; only a shortfall gets noticed. It is the highest-risk option on the table and the only one worth taking here.
+> **Trade-off:** you are betting you can match a system that already works, with none of the credit for doing so. Parity is invisible; only a shortfall gets noticed. It is the highest-risk option on the table and the only one worth taking here.
 
 ### Batch inference, not event-driven invocation
 
 The AI service polls for pending work at short intervals rather than being invoked per event. Simpler to operate, simpler to reason about under failure, and trivially resilient to a downstream service being briefly unavailable.
 
-> **Trade-off** — gives up sub-second latency. That was affordable: fifteen seconds end to end is well inside what a support ticket or an inbound email needs, so we spent latency we did not need to buy operational simplicity we did.
+> **Trade-off:** gives up sub-second latency. That was affordable: fifteen seconds end to end is well inside what a support ticket or an inbound email needs, so we spent latency we did not need to buy operational simplicity we did.
 
-### A single authenticated entry point — not my call
+### A single authenticated entry point: not my call
 
 Every request is authenticated and authorized at one central layer before it reaches the AI environment. It is good for governance and it gives audit a single place to look.
 
 It is also, by construction, a bottleneck and a single point of failure. I should be straight about this one: the shape came from the bank's security team as a requirement, not from me. On this project my hands were tied on several infrastructure choices, and this was one of them.
 
-> **Trade-off** — centralised control in exchange for a chokepoint. Worth naming honestly rather than presented as a design win, because it was not mine to trade.
+> **Trade-off:** centralised control in exchange for a chokepoint. Worth naming honestly rather than presented as a design win, because it was not mine to trade.
 
 ### Kubernetes, because the bank already had one
 
 The requirement was portable, cloud-agnostic infrastructure, and the bank already ran a Kubernetes cluster that Quantyca managed. Inheriting a platform that an in-house team already knew how to run mattered more than any comparison between orchestrators.
 
-> **Trade-off** — no managed ML service, so the operational burden stays in-house forever. Portability and a running cluster in exchange for owning the plumbing.
+> **Trade-off:** no managed ML service, so the operational burden stays in-house forever. Portability and a running cluster in exchange for owning the plumbing.
 
 ## What went wrong
 
 ### A Windows antimalware on a RedHat cluster
 
-The servers came from the client: RedHat, as specified — with a Windows antimalware agent installed on them. It broke the Kubernetes cluster during setup, and then intermittently broke pod-to-pod communication.
+The servers came from the client: RedHat, as specified. With a Windows antimalware agent installed on them. It broke the Kubernetes cluster during setup, and then intermittently broke pod-to-pod communication.
 
 Diagnosing it took a long time, because nothing in the symptom pointed anywhere near the cause. And then it had to be *proved*: I reproduced it live, in a meeting, because a claim that implicates another team's mandated security tooling does not get accepted on assertion.
 
-The lesson generalises. On infrastructure you do not control, the security baseline is part of the architecture whether anyone tells you about it or not — and the time to discover it is not during cluster setup.
+The lesson generalises. On infrastructure you do not control, the security baseline is part of the architecture whether anyone tells you about it or not, and the time to discover it is not during cluster setup.
 
 ### Staffing, and a plan resequenced around licence cost
 
 Staffing worked well on two of the four use cases and considerably less well on the other two. The options were to let all four slip together or to resequence.
 
-We resequenced: the two healthy use cases were brought forward, the other two pushed back. That was not a neutral scheduling choice — releasing two of them early started retiring licence cost sooner, and that saving partly paid for the delay on the rest. It is the kind of decision that only looks obvious once you accept that a delivery plan is a financial instrument as much as a schedule.
+We resequenced: the two healthy use cases were brought forward, the other two pushed back. That was not a neutral scheduling choice: releasing two of them early started retiring licence cost sooner, and that saving partly paid for the delay on the rest. It is the kind of decision that only looks obvious once you accept that a delivery plan is a financial instrument as much as a schedule.
 
 ## My role
 
-Data Architect and technical lead. Delivery team of six: a project manager, me, and four data engineers and scientists, across three workstreams — DevOps for the environments, Kubernetes, CI/CD and secure networking; software engineering for the listener and workflow applications around each use case; data science for the models themselves.
+Data Architect and technical lead. Delivery team of six: a project manager, me, and four data engineers and scientists, across three workstreams: DevOps for the environments, Kubernetes, CI/CD and secure networking; software engineering for the listener and workflow applications around each use case; data science for the models themselves.
 
 I owned the architecture and every technical decision above, negotiated the ones that were imposed, and did the diagnosis work when the infrastructure fought back.
 
@@ -136,6 +136,6 @@ I owned the architecture and every technical decision above, negotiated the ones
 
 **Four out of four use cases migrated, zero downtime.** Each switched independently: the new implementation went live a few days ahead of its official release date and ran in shadow against the real end-to-end flow first, so every cutover was a decision rather than a leap.
 
-Model performance came out in line with the vendor's. That was the bar — the point was never to build better models, it was to own the ones that already worked. What ownership then bought is the part worth underlining: with the training pipeline in-house and inspectable, the bank went on to improve performance itself, after we left. Before, that was not a hard thing to do; it was a structurally impossible one.
+Model performance came out in line with the vendor's. That was the bar. The point was never to build better models, it was to own the ones that already worked. What ownership then bought is the part worth underlining: with the training pipeline in-house and inspectable, the bank went on to improve performance itself, after we left. Before, that was not a hard thing to do; it was a structurally impossible one.
 
 And the audit answer changed. Today the bank can reach the logs, the rules, the measured performance and the model output behind any decision the system makes. On a workflow that touches wire transfers, that is not a nice-to-have.

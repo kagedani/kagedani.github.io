@@ -319,6 +319,30 @@ e chi la usa ha comunque visto che il sito sa fare l'altra cosa.
 **Le onomatopee sono un dato**, non CSS: `sfx: { latin, jp }` su `Project` in
 `content.ts`, come tutto il resto del contenuto di questo sito.
 
+### Regola vigente: nessun trattino lungo
+
+**Chiusa il 2026-08-23.** Ne sono stati tolti **179**: 73 in , 106 nei
+sei case study, più titoli di pagina, footer, etichette del diagramma SVG e il
+badge TODO. Il sito costruito ne contiene **zero**, trattini a mezza lunghezza
+compresi.
+
+Richiesta dell'autore, in coda alla direzione manga: *"non voglio che sia
+riconducibile alle classiche rappresentazioni da intelligenza artificiale, ad
+esempio i - lunghi"*. Aveva ragione, ed è la voce più importante di tutte:
+**è il segnale più riconoscibile del testo generato, e nessuna scelta grafica lo
+compensa.** Un lettore che sospetta il testo generato non cambia idea perché la
+grafica è bella.
+
+Sostituzioni usate: due punti, virgola, parentesi, o due frasi. Gli intervalli
+prendono il trattino semplice (). I titoli di pagina usano la barra
+verticale. In circa un terzo dei casi la frase è stata **rifatta**, non solo
+ripunteggiata, perché il trattino teneva insieme due proposizioni che non
+reggevano da sole.
+
+Conseguenza operativa: il README in  **prescriveva**
+. Ora prescrive  e porta la regola
+scritta, altrimenti la prima sessione che scrive un case study li rimette.
+
 ### Rimasto aperto
 
 - **I 179 trattini lunghi.** L'autore ha chiesto che il sito non sia riconducibile
