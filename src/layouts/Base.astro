@@ -75,7 +75,14 @@ const jsonLd = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;450;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&family=Noto+Sans+JP:wght@900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;450;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&display=swap"
+    />
+    {/* Noto Sans JP, subset to the ten katakana the sound effects use.
+        The unsubset family ships ~100 KB of @font-face declarations for a
+        full Japanese set; this is 483 bytes. */}
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&text=%E3%82%B4%E3%82%BA%E3%83%BC%E3%83%B3%E3%83%91%E3%82%AB%E3%83%83%E3%83%95%E3%83%AF%E3%83%89&display=swap"
     />
 
     <script is:inline>
@@ -171,18 +178,25 @@ const jsonLd = {
           svg.setAttribute('aria-hidden', 'true');
           // pathLength=1 spares the perimeter maths; non-scaling-stroke keeps
           // the line weight constant while the box flexes.
-          const rect = (cls, jitter) => {
-            const r = document.createElementNS(NS, 'rect');
-            r.setAttribute('class', cls);
-            r.setAttribute('x', jitter ? 0.6 : 0);
-            r.setAttribute('y', jitter ? -0.5 : 0);
-            r.setAttribute('width', 100);
-            r.setAttribute('height', 100);
-            r.setAttribute('pathLength', 1);
-            return r;
+          const round = f.classList.contains('portrait');
+          const edge = (cls, jitter) => {
+            const el = document.createElementNS(NS, round ? 'circle' : 'rect');
+            el.setAttribute('class', cls);
+            if (round) {
+              el.setAttribute('cx', 50);
+              el.setAttribute('cy', jitter ? 50.4 : 50);
+              el.setAttribute('r', 49);
+            } else {
+              el.setAttribute('x', jitter ? 0.6 : 0);
+              el.setAttribute('y', jitter ? -0.5 : 0);
+              el.setAttribute('width', 100);
+              el.setAttribute('height', 100);
+            }
+            el.setAttribute('pathLength', 1);
+            return el;
           };
-          svg.appendChild(rect('mg-pencil', true));
-          svg.appendChild(rect('mg-ink', false));
+          svg.appendChild(edge('mg-pencil', true));
+          svg.appendChild(edge('mg-ink', false));
           f.prepend(svg);
 
           const tone = document.createElement('i');
@@ -190,7 +204,7 @@ const jsonLd = {
           f.prepend(tone);
 
           const isHero = f.matches('.hero > .wrap');
-          if (f.classList.contains('card') || isHero) {
+          if (f.classList.contains('card')) {
             const sp = document.createElement('i');
             sp.className = 'mg-speed';
             f.prepend(sp);
@@ -215,9 +229,9 @@ const jsonLd = {
           f.dataset.drawn = '1';
           const t = reduced ? 0 : 1;
           setTimeout(() => f.classList.add('is-pencil'), delay);
-          setTimeout(() => f.classList.add('is-ink'), delay + 170 * t);
-          setTimeout(() => f.classList.add('is-tone'), delay + 640 * t);
-          setTimeout(() => f.classList.add('is-letter'), delay + 760 * t);
+          setTimeout(() => f.classList.add('is-ink'), delay + 90 * t);
+          setTimeout(() => f.classList.add('is-tone'), delay + 330 * t);
+          setTimeout(() => f.classList.add('is-letter'), delay + 400 * t);
         };
 
         const io = new IntersectionObserver(
@@ -225,13 +239,17 @@ const jsonLd = {
             entries
               .filter((e) => e.isIntersecting)
               .forEach((e, i) => {
-                draw(e.target, i * 90);
+                draw(e.target, i * 55);
                 io.unobserve(e.target);
               });
           },
           { rootMargin: '0px 0px -12% 0px', threshold: 0.1 }
         );
-        frames.forEach((f) => io.observe(f));
+        frames.forEach((f, i) => {
+          const r = f.getBoundingClientRect();
+          if (r.top < innerHeight && r.bottom > 0) draw(f, i * 55);
+          else io.observe(f);
+        });
 
         const slug = document.getElementById('mg-slug');
         const runSlug = () => {

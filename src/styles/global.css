@@ -351,8 +351,10 @@ button {
   display: block;
   width: 100%;
   height: auto;
+  /* The file is already a circular crop on a white square: without this the
+     white corners show. */
+  border-radius: 50%;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
 }
 @media (min-width: 900px) {
   .hero-grid {
