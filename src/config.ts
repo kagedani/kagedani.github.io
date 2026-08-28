@@ -21,6 +21,8 @@ export const SITE = {
   githubHandle: '@kagedani',
   cv: '/assets/cv.pdf',
   photo: '/assets/foto.jpg',
+  /** Used in the manga skin, where a photograph would be the odd one out. */
+  photoDrawn: '/assets/foto-drawn.webp',
 } as const;
 
 export const LOCALES = ['en', 'it'] as const;

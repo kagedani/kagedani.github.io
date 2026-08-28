@@ -193,10 +193,7 @@ html[data-mode='manga'] .mg-tone.band {
   clip-path: polygon(74% 0, 100% 0, 100% 100%, 84% 100%);
 }
 /* Only some frames carry tone, or the page turns grey. */
-html[data-mode='manga'] .card:nth-of-type(even) .mg-tone,
-html[data-mode='manga'] .lead-cell:nth-child(2) .mg-tone,
-html[data-mode='manga'] .lead-cell:nth-child(3) .mg-tone,
-html[data-mode='manga'] .stat:nth-child(even) .mg-tone,
+html[data-mode='manga'] .card.wide .mg-tone,
 html[data-mode='manga'] .w-lead .mg-tone,
 html[data-mode='manga'] .hero .wrap .mg-tone {
   display: block;
@@ -370,19 +367,19 @@ html[data-mode='manga'] .hero .lede::before,
 html[data-mode='manga'] .hero .lede::after {
   content: '';
   position: absolute;
-  left: 62px;
+  right: 56px;
   width: 0;
   height: 0;
   border-style: solid;
 }
 html[data-mode='manga'] .hero .lede::before {
   bottom: -25px;
-  border-width: 26px 20px 0 0;
+  border-width: 26px 0 0 20px;
   border-color: var(--text) transparent transparent transparent;
 }
 html[data-mode='manga'] .hero .lede::after {
   bottom: -19px;
-  border-width: 21px 15px 0 0;
+  border-width: 21px 0 0 15px;
   border-color: var(--bg) transparent transparent transparent;
 }
 html[data-mode='manga'] .hero-aside {
@@ -397,49 +394,23 @@ html[data-mode='manga'] .hero-aside {
    one. The drawn border comes from the frame machinery, so the img gives
    up its own. */
 html[data-mode='manga'] .portrait { position: relative; }
-html[data-mode='manga'] .portrait img {
-  border: 0;
-  filter: grayscale(1) contrast(1.3) brightness(1.03);
-}
-/* The source image is a circular crop sitting on white, so a square frame
-   showed its corners. The mask follows the crop that is actually there. */
-html[data-mode='manga'] .portrait::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  border-radius: 50%;
-  background-image: radial-gradient(rgba(13, 11, 9, 0.9) 1.5px, transparent 1.6px);
-  background-size: 4px 4px;
-  mix-blend-mode: multiply;
-  opacity: 0.5;
-}
-@media (prefers-color-scheme: dark) {
-  html[data-mode='manga']:not([data-theme='light']) .portrait img {
-    filter: grayscale(1) contrast(1.2) brightness(0.92);
-  }
-  html[data-mode='manga']:not([data-theme='light']) .portrait::after {
-    background-image: radial-gradient(rgba(244, 239, 230, 0.75) 1.5px, transparent 1.6px);
-    mix-blend-mode: screen;
-    opacity: 0.34;
-  }
-}
-html[data-mode='manga'][data-theme='dark'] .portrait img {
-  filter: grayscale(1) contrast(1.2) brightness(0.92);
-}
-html[data-mode='manga'][data-theme='dark'] .portrait::after {
-  background-image: radial-gradient(rgba(244, 239, 230, 0.75) 1.5px, transparent 1.6px);
-  mix-blend-mode: screen;
-  opacity: 0.34;
-}
-
+html[data-mode='manga'] .p-drawn { display: block; }
+html[data-mode='manga'] .p-photo { display: none; }
+html[data-mode='manga'] .portrait img { border: 0; }
 /* ============================================================== stats ====
    Four small panels. Numbers in impact lettering.                       */
 html[data-mode='manga'] .stat-n {
   font-family: var(--display);
   font-weight: 400;
   letter-spacing: 0.01em;
+}
+html[data-mode='manga'] .stats-band .stats {
+  border-top: 3.5px solid var(--border);
+  border-bottom: 3.5px solid var(--border);
+  padding: 1.1rem 0;
+}
+html[data-mode='manga'] .stats-band {
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
 /* =========================================================== chapters ====
@@ -541,6 +512,10 @@ html[data-mode='manga'] #contact .contact-link {
 }
 html[data-mode='manga'] #contact .contact-link span { color: var(--accent); }
 html[data-mode='manga'] #contact .contact-link:hover { color: var(--accent); }
+
+html[data-mode='manga'] .wrap.reading {
+  max-width: min(960px, 94vw);
+}
 
 /* ======================================================= case studies ====
    The chapter opens inked, and then gets out of the way. Fifteen hundred

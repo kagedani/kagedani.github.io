@@ -37,7 +37,18 @@ const studyHref = (slug: string) =>
     </div>
 
     <figure class="portrait">
-      <img src={SITE.photo} alt={SITE.name} width="389" height="389" fetchpriority="high" />
+      {/* The drawing carries the comic, the photograph carries the plain
+          version. The photograph is lazy so it is never fetched while the
+          comic is on, and vice versa by the drawing being display:none. */}
+      <img
+        class="p-drawn"
+        src={SITE.photoDrawn}
+        alt={SITE.name}
+        width="640"
+        height="640"
+        fetchpriority="high"
+      />
+      <img class="p-photo" src={SITE.photo} alt={SITE.name} width="389" height="389" loading="lazy" />
     </figure>
   </div>
 </section>

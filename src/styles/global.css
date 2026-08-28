@@ -351,11 +351,12 @@ button {
   display: block;
   width: 100%;
   height: auto;
-  /* The file is already a circular crop on a white square: without this the
-     white corners show. */
+  /* Both files are circular crops on a white square: without this the white
+     corners show. */
   border-radius: 50%;
   border: 1px solid var(--border);
 }
+.p-drawn { display: none; }
 @media (min-width: 900px) {
   .hero-grid {
     grid-template-columns: minmax(0, 1fr) clamp(200px, 22vw, 280px);
@@ -366,6 +367,12 @@ button {
 
 /* The stats were inside the hero, which made the opening a six-part stack.
    They are a band of their own now, directly below. */
+/* Long-form pages keep a reading measure. The container is capped so the
+   column sits in a page instead of hugging the left edge of a wide sheet. */
+.wrap.reading {
+  max-width: min(920px, 100%);
+}
+
 .stats-band {
   padding-bottom: clamp(2rem, 4vw, 3rem);
 }
@@ -506,11 +513,13 @@ h1 em {
 .card:hover {
   border-color: var(--accent);
 }
-.card:hover /* A date, not a third list item, so it sits at the far end of the line. */
-.card-period { margin-left: auto; }
-
-.card-title {
+.card:hover .card-title {
   color: var(--accent);
+}
+
+/* A date, not a third list item, so it sits at the far end of the line. */
+.card-period {
+  margin-left: auto;
 }
 .card.wide {
   grid-column: 1 / -1;
