@@ -276,34 +276,45 @@ const jsonLd = {
         );
 
         /* The escape hatch. Coming back to the manga redraws the page from
-           pencils, which is the only honest way to re-enter it. */
-        const btn = document.getElementById('mode-toggle');
-        if (btn && root.dataset.mode === 'boring') btn.textContent = btn.dataset.toManga;
-        btn?.addEventListener('click', () => {
-          if (root.dataset.mode === 'boring') {
-            root.dataset.mode = 'manga';
-            btn.textContent = btn.dataset.toBoring;
-            frames.forEach((f) => {
-              f.classList.remove('is-pencil', 'is-ink', 'is-tone', 'is-letter');
-              delete f.dataset.drawn;
-            });
-            runSlug();
-            requestAnimationFrame(() => {
-              frames.forEach((f, i) => {
-                const r = f.getBoundingClientRect();
-                if (r.top < innerHeight && r.bottom > 0) draw(f, i * 90);
-                else io.observe(f);
+           pencils, which is the only honest way to re-enter it. There are two
+           of these buttons — one in the header, one in the mobile menu — kept
+           in sync off the same data-to-boring/data-to-manga attributes. */
+        const btns = [...document.querySelectorAll('[data-to-boring]')];
+        const setLabel = () =>
+          btns.forEach((b) => {
+            b.textContent = root.dataset.mode === 'boring' ? b.dataset.toManga : b.dataset.toBoring;
+          });
+        setLabel();
+        btns.forEach((btn) =>
+          btn.addEventListener('click', () => {
+            if (root.dataset.mode === 'boring') {
+              root.dataset.mode = 'manga';
+              frames.forEach((f) => {
+                f.classList.remove('is-pencil', 'is-ink', 'is-tone', 'is-letter');
+                delete f.dataset.drawn;
               });
-            });
-          } else {
-            root.dataset.mode = 'boring';
-            btn.textContent = btn.dataset.toManga;
-            frames.forEach((f) => f.classList.add('is-pencil', 'is-ink', 'is-tone', 'is-letter'));
-          }
-          try {
-            localStorage.setItem('mode', root.dataset.mode);
-          } catch (_) {}
-        });
+              runSlug();
+              requestAnimationFrame(() => {
+                frames.forEach((f, i) => {
+                  const r = f.getBoundingClientRect();
+                  if (r.top < innerHeight && r.bottom > 0) draw(f, i * 90);
+                  else io.observe(f);
+                });
+              });
+            } else {
+              root.dataset.mode = 'boring';
+              frames.forEach((f) => f.classList.add('is-pencil', 'is-ink', 'is-tone', 'is-letter'));
+            }
+            setLabel();
+            try {
+              localStorage.setItem('mode', root.dataset.mode);
+            } catch (_) {}
+            if (btn.closest('#mobile-menu')) {
+              menu.dataset.open = 'false';
+              burger?.setAttribute('aria-expanded', 'false');
+            }
+          })
+        );
       })();
     </script>
   </body>

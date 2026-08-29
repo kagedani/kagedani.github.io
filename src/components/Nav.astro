@@ -84,6 +84,14 @@ const isCurrent = (href: string) => href === path;
   <div class="wrap">
     <ul>
       {links.map((l) => <li><a href={localePath(lang, l.href)}>{tr(l.key)}</a></li>)}
+      <li>
+        <button
+          class="mobile-menu-btn"
+          type="button"
+          data-to-boring={tr('mg.toBoring')}
+          data-to-manga={tr('mg.toManga')}
+        >{tr('mg.toBoring')}</button>
+      </li>
       <li><a href={SITE.cv} download>{tr('cta.cv')}</a></li>
     </ul>
   </div>
