@@ -297,6 +297,23 @@ button {
 .mobile-menu a:hover {
   color: var(--accent);
 }
+.mobile-menu-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.mobile-menu-btn:hover {
+  color: var(--accent);
+}
 
 /* -------------------------------------------------------- section chrome */
 
@@ -843,6 +860,9 @@ h1 em {
   font-size: 0.94rem;
   color: var(--muted);
   max-width: 62ch;
+}
+.tl-desc + .tl-desc {
+  margin-top: 0.55rem;
 }
 
 /* A small easter egg for the one section that is a plain list of employers:

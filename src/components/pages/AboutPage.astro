@@ -69,7 +69,7 @@ const projectsFor = (job: (typeof experience)[number]) =>
               <div class="tl-date">{j.period[lang]}</div>
               <h3 class="tl-role">{j.role[lang]}</h3>
               <div class="tl-company">{j.company[lang]}</div>
-              <p class="tl-desc">{j.desc[lang]}</p>
+              {j.desc && j.desc[lang].split('\n\n').map((para) => <p class="tl-desc">{para}</p>)}
               <Todo note={j.todo} />
 
               <div class="tl-term">
