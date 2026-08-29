@@ -145,15 +145,14 @@ export const projects: Project[] = [
     sfx: { latin: 'Fuwa', jp: 'フワ' },
     title: { en: 'Brewery platform', it: 'Piattaforma brewery' },
     sector: { en: 'Beverage, US', it: 'Beverage, USA' },
-    role: { en: 'Assessment → pre-sales → technical lead', it: 'Assessment → pre-sales → guida tecnica' },
+    role: { en: 'Data Strategy Assessment and Execution', it: 'Assessment ed execution della data strategy' },
     summary: {
-      en: "First engagement led end to end as head of Quantyca's international team, from assessment through pre-sales to technical leadership.",
-      it: 'Primo progetto condotto end to end come responsabile del team internazionale di Quantyca, dall’assessment alla pre-sales alla guida tecnica.',
+      en: 'A US craft brewery is replacing its CRM with Dynamics 365, and asked for a data strategy assessment first. I proposed moving from point-to-point integrations to a Digital Integration Hub pattern, with Azure Event Hub as the backbone event bus and three read channels: direct, pulled via API, or pushed once reconciled.',
+      it: 'Un birrificio artigianale statunitense sta sostituendo il proprio CRM con Dynamics 365, e ha chiesto prima un assessment di data strategy. Ho proposto di passare da integrazioni point-to-point a un pattern simile a un Digital Integration Hub, con Azure Event Hub come event bus centrale e tre canali di lettura: diretto, via API, o push dopo la riconciliazione.',
     },
-    stack: [],
+    stack: ['Azure Event Hub', 'Azure Functions', 'Dynamics 365'],
     featured: false,
     ongoing: true,
-    todo: 'Testo breve e stack. Resta marcato "ongoing" finché non ci sono esiti.',
   },
 ];
 
@@ -327,7 +326,8 @@ export type Job = {
   period: L;
   role: L;
   company: L;
-  desc: L;
+  /** Omit for periods too old to be worth a writeup on the current portfolio. */
+  desc?: L;
   /** First year of the period, for the "ls <year>-projects" hover on /about. */
   startYear: number;
   /** Project slugs this period produced, in the order they should list. Omit or
@@ -345,8 +345,8 @@ export const experience: Job[] = [
     role: { en: 'Solutions Architect', it: 'Solutions Architect' },
     company: { en: 'Quantyca / Data@Core, Monza', it: 'Quantyca / Data@Core, Monza' },
     desc: {
-      en: 'Architecture lead for Data Mesh adoption in Energy (100+ users on the Experience Plane): data product discovery, observability, control plane. Owner of the client’s data strategy on a 3-5 year horizon. In Insurance, data strategy advisor: the Lean Value Tree, the metrics of success it is measured against, and the federated governance body that keeps it moving. I also coordinate two teams technically, ten developers between them. Since March 2026, also head of Quantyca’s international team, alongside the architecture work rather than in place of it.',
-      it: 'Referente architetturale per l’adozione del Data Mesh in ambito Energy (oltre 100 utenti sull’Experience Plane): discovery dei data product, observability, control plane. Responsabile della data strategy del cliente su orizzonte 3-5 anni. In ambito Insurance, advisor di data strategy: il Lean Value Tree, le metriche di successo con cui si misura, e la Federated Governance Community che lo tiene in movimento. Coordino tecnicamente anche due team, dieci sviluppatori in tutto. Da marzo 2026 anche responsabile del team internazionale di Quantyca, in parallelo al lavoro architetturale e non al suo posto.',
+      en: 'Architecture lead for Data Mesh adoption in Energy (100+ users on the Experience Plane): data product discovery, observability, control plane. Owner of the client’s data strategy on a 3-5 year horizon. In Insurance, data strategy advisor: the Lean Value Tree, the metrics of success it is measured against, and the federated governance body that keeps it moving.\n\nI coordinate two teams technically, ten developers between them, and designed the data quality frameworks and deployment gates that now guard their releases. A technical assessment on a US brewery client grew into an implementation project for an Event Hub-based data platform. On the side, I wrote three org-wide Claude-based automation skills for architecture diagrams, PR review and repository documentation, cutting diagram time by 70% and PR-review time by 50%. Since March 2026, also head of Quantyca’s international team, alongside the architecture work rather than in place of it.',
+      it: 'Referente architetturale per l’adozione del Data Mesh in ambito Energy (oltre 100 utenti sull’Experience Plane): discovery dei data product, observability, control plane. Responsabile della data strategy del cliente su orizzonte 3-5 anni. In ambito Insurance, advisor di data strategy: il Lean Value Tree, le metriche di successo con cui si misura, e la Federated Governance Community che lo tiene in movimento.\n\nCoordino tecnicamente due team, dieci sviluppatori in tutto, e ho disegnato i framework di data quality e i deployment gate che ora sorvegliano i loro rilasci. Un assessment tecnico su un cliente USA del settore birrario è diventato un progetto di implementazione per una piattaforma dati basata su Event Hub. In parallelo, ho scritto tre skill di automazione Claude a livello aziendale per diagrammi di architettura, revisione delle PR e documentazione dei repository, tagliando i tempi dei diagrammi del 70% e quelli di revisione del 50%. Da marzo 2026 sono anche responsabile del team internazionale di Quantyca, in parallelo al lavoro architetturale e non al suo posto.',
     },
     startYear: 2025,
     relatedProjects: ['data-mesh-energy', 'brewery-us'],
@@ -356,8 +356,8 @@ export const experience: Job[] = [
     role: { en: 'Data Architect', it: 'Data Architect' },
     company: { en: 'Quantyca / Data@Core, Monza', it: 'Quantyca / Data@Core, Monza' },
     desc: {
-      en: 'Technical reference for 19 developers across three clients (Appliances, Banking). Guidelines for a multi-supplier AWS platform, technical direction for CI/CD on AWS, and the upkeep and evolution of an MLOps platform used by 100+ data scientists.',
-      it: 'Referente tecnico per 19 sviluppatori su tre clienti (Appliances, Banking). Linee guida per una piattaforma AWS multi-fornitore, guida tecnica per la CI/CD su AWS, manutenzione ed evoluzione di una piattaforma MLOps usata da oltre 100 data scientist.',
+      en: 'Technical reference for 19 developers across three clients (Appliances, Banking).\n\nIn Banking, architected and delivered a Data Hub for the Save & Invest domain on Medallion Architecture and Data Mesh principles, running on Kafka, Spark and Apache Iceberg, and kept an MLOps platform serving 100+ data scientists in shape (JupyterHub, Kubernetes, MLflow, GitLab, ELK) through hardening, upgrades and online model serving.\n\nIn Appliances, wrote the guidelines for a multi-supplier AWS platform, guided CI/CD onto AWS, and led an assessment to help the client define its data strategy. A set of dashboards I steered technically now reaches 40 business users, and I set up Lake Formation with TBAC on AWS for centralised access management.',
+      it: 'Referente tecnico per 19 sviluppatori su tre clienti (Appliances, Banking).\n\nIn ambito Banking, ho progettato e realizzato un Data Hub per il dominio Save & Invest secondo i principi di Medallion Architecture e Data Mesh, su Kafka, Spark e Apache Iceberg, e ho mantenuto in salute una piattaforma MLOps usata da oltre 100 data scientist (JupyterHub, Kubernetes, MLflow, GitLab, ELK) tra hardening, upgrade e model serving online.\n\nIn ambito Appliances, ho scritto le linee guida per una piattaforma AWS multi-fornitore, guidato la CI/CD su AWS e condotto un assessment per aiutare il cliente a definire la propria data strategy. Un set di dashboard che ho seguito tecnicamente raggiunge oggi 40 utenti business, e ho impostato Lake Formation con TBAC su AWS per la gestione centralizzata degli accessi.',
     },
     startYear: 2023,
     relatedProjects: ['cicd-appliances', 'mlops-banking'],
@@ -367,8 +367,8 @@ export const experience: Job[] = [
     role: { en: 'Senior Data Engineer & Team Leader', it: 'Senior Data Engineer e Team Leader' },
     company: { en: 'Quantyca / Data@Core', it: 'Quantyca / Data@Core' },
     desc: {
-      en: 'Led a team of 7 across three Banking projects: taking over an MLOps platform used by 100+ data scientists, building a web app (React + Spring Boot), and migrating a blackbox ML solution to open source. Plus a data lake on AWS in Sport.',
-      it: 'Guida di un team di 7 persone su tre progetti in ambito Banking: presa in carico di una piattaforma MLOps usata da oltre 100 data scientist, sviluppo di una web app (React + Spring Boot), migrazione di una soluzione ML blackbox verso open source. Più un datalake su AWS in ambito Sport.',
+      en: 'Led a team of 7 across three Banking projects: took over an MLOps platform serving 100+ data scientists and pushed it through HA hardening, a proper test environment and online model serving; built a web app (React + Spring Boot); and migrated a third-party blackbox ML solution (4 use cases) onto the bank’s own infrastructure, freeing up 45 FTEs for higher-value work.\n\nPlus a multi-supplier data lake on AWS (S3, Glue, Athena, Step Functions) in Sport.',
+      it: 'Guida di un team di 7 persone su tre progetti in ambito Banking: presa in carico di una piattaforma MLOps usata da oltre 100 data scientist, portata avanti tra hardening HA, un vero ambiente di test e model serving online; sviluppo di una web app (React + Spring Boot); e migrazione di una soluzione ML blackbox di terze parti (4 casi d’uso) sull’infrastruttura della banca, liberando 45 FTE per attività a maggior valore.\n\nPiù un datalake multi-fornitore su AWS (S3, Glue, Athena, Step Functions) in ambito Sport.',
     },
     startYear: 2022,
     relatedProjects: ['mlops-banking', 'ml-blackbox-migration'],
@@ -378,8 +378,8 @@ export const experience: Job[] = [
     role: { en: 'Data Engineer', it: 'Data Engineer' },
     company: { en: 'Quantyca / Data@Core', it: 'Quantyca / Data@Core' },
     desc: {
-      en: 'Data governance and data catalog in Travel. ETL/ELT pipelines in Retail, offloading Oracle onto Vertica through Confluent Kafka.',
-      it: 'Data governance e data catalog in ambito Travel. Pipeline ETL/ELT in ambito Retail, con off-loading di Oracle su Vertica tramite Confluent Kafka.',
+      en: 'Data governance and data catalog in Travel: set up the business glossary and an automatic data catalog population process.\n\nIn Retail, offloaded Oracle onto Vertica through Confluent Kafka as the data bus, building both Kafka Connect and custom producers/consumers, ETL/ELT pipelines on Talend DI, and a star-schema data warehouse model.',
+      it: 'Data governance e data catalog in ambito Travel: impostazione del business glossary e di un processo di popolamento automatico del data catalog.\n\nIn ambito Retail, off-loading di Oracle su Vertica passando per Confluent Kafka come data bus, con producer e consumer sia via Kafka Connect sia custom, pipeline ETL/ELT su Talend DI e un modello di data warehouse a schema a stella.',
     },
     startYear: 2021,
   },
@@ -388,8 +388,8 @@ export const experience: Job[] = [
     role: { en: 'Junior Data Engineer', it: 'Junior Data Engineer' },
     company: { en: 'Quantyca / Data@Core', it: 'Quantyca / Data@Core' },
     desc: {
-      en: 'Full-stack development on a SaaS data governance platform (Spring Boot + React). Before that, ETL flows and data models in Retail, and a Python crawler that filled a data catalog in Online Travel.',
-      it: 'Sviluppo fullstack su una piattaforma SaaS di data governance (Spring Boot + React). Prima ancora, flussi ETL e data model in ambito Retail, e un crawler Python che popolava un data catalog in ambito Online Travel.',
+      en: 'Full-stack development (Spring Boot + React) on a SaaS data governance platform: business glossary, data catalog, and a prototype that populated it automatically.\n\nBefore that, ETL flows and data models in Retail, and a Python crawler that filled a data catalog in Online Travel.',
+      it: 'Sviluppo fullstack (Spring Boot + React) su una piattaforma SaaS di data governance: business glossary, data catalog e un prototipo che lo popolava in automatico.\n\nPrima ancora, flussi ETL e data model in ambito Retail, e un crawler Python che popolava un data catalog in ambito Online Travel.',
     },
     startYear: 2019,
   },
@@ -397,10 +397,6 @@ export const experience: Job[] = [
     period: { en: 'January 2019 - November 2019', it: 'Gennaio 2019 - Novembre 2019' },
     role: { en: 'Research Fellow', it: 'Assegnista di ricerca' },
     company: { en: 'IoTLab (DEIB), Politecnico di Milano', it: 'IoTLab (DEIB), Politecnico di Milano' },
-    desc: {
-      en: 'Applied IoT research at the DEIB lab, on industrial and consumer devices.',
-      it: 'Ricerca applicata sull’IoT al laboratorio DEIB, su dispositivi industriali e di consumo.',
-    },
     startYear: 2019,
   },
 ];

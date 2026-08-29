@@ -861,6 +861,9 @@ h1 em {
   color: var(--muted);
   max-width: 62ch;
 }
+.tl-desc + .tl-desc {
+  margin-top: 0.55rem;
+}
 
 /* A small easter egg for the one section that is a plain list of employers:
    hovering (or tabbing into) a role opens a fake `ls` of the case studies
